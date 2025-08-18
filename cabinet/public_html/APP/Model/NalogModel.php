@@ -20,14 +20,14 @@ class NalogModel extends Model
             }
         }
 
-        if (NalogStatus::WORKING == $nalog->status) {
+        if (in_array($nalog->status, [NalogStatus::WORKING, NalogStatus::READY])) {
             $isReady = true;
             foreach ($nalogC as $cl) {
                 if ($cl->status != NalogStatus::READY) {
                     $isReady = false;
                 }
             }
-            if ($isReady) $nalog->status = NalogStatus::READY;
+            $isReady ? $nalog->status = NalogStatus::READY : $nalog->status = NalogStatus::WORKING;
         }
     }
 }

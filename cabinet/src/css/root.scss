@@ -80,4 +80,12 @@
     color: white;
     font-weight: 600;
     width: max-content;
+    &-green{
+        @extend .tab;
+        background: var(--green);
+    }
+    &-red{
+        @extend .tab;
+        background: var(--red);
+    }
 }

@@ -6,6 +6,11 @@
         border-top: 1px solid var(--line-2);
     }
 }
+.request-column{
+    p{
+        margin: 3px 0px;
+    }
+}
 .clinic-row{
     display: inline-grid;
     grid-auto-flow: column;
@@ -115,5 +120,16 @@ table{
     }
     tr:hover{
         background-color: var(--blue);
+    }
+}
+.btn-content-message-circle{
+    position: relative;
+    .tab{
+        position: absolute;
+        top: -10px;
+        right: -18px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: var(--dark-blue);
     }
 }

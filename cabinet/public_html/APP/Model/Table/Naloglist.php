@@ -6,6 +6,7 @@ use APP\Enum\NalogStatus;
 use APP\Enum\VariableType;
 use APP\Form\Form;
 use APP\Model\NalogClinicModel;
+use APP\Model\NalogCommentModel;
 use APP\Model\NalogModel;
 use APP\Model\Table;
 use APP\Module\Auth;
@@ -64,10 +65,19 @@ class Naloglist extends NalogModel implements Table
     {
         foreach ($items as $k => &$rows) {
             foreach ($rows as $name => &$row) {
-                $rows['comment'] = View::getTemplate('template.nalog.btnComment', ['request_id' => $rows['id']]);
+                $rows['comment'] = View::getTemplate('template.nalog.btnComment', [
+                    'request_id' => $rows['id'],
+                    'count' => count((new NalogCommentModel())->find(['nalog_id' => $rows['id']]))
+                ]);
                 if ($name == 'request') {
-                    $status = NalogStatus::get($rows['status']);
-                    $row = "<div clas='flex-column'>$row<br/>Статус: <p class=\"tab\">$status</p></div>";
+                    $endDate = strtotime('+15 day ' . $rows['cdate']);
+                    $row = View::getTemplate('template.nalog.request_column', [
+                        'requestId' => $rows['id'],
+                        'days' => ceil(($endDate - time()) / (60 * 60 * 24)),
+                        'endDate' => date('d.m.Y', $endDate),
+                        'status' => $rows['status'],
+                        'statusText' => NalogStatus::get($rows['status'])
+                    ]);
                 }
                 if ($name == 'contact') {
                     $phone = Form::unsaitazePhone($row);
