@@ -6,6 +6,7 @@ use APP\Form\Form;
 use APP\Model\NalogClinicFilesModel;
 use APP\Model\NalogClinicModel;
 use APP\Model\NalogCommentModel;
+use APP\Model\NalogModel;
 use APP\Module\Auth;
 use APP\Module\Tool;
 use Pet\Model\Model;
@@ -24,11 +25,12 @@ class Add extends Form
         $nalogClinic = new NalogClinicModel(['nalog_id' => $nalogId, 'clinic_id' => $clinic_id]);
         $nalogClinicFiles = (new NalogClinicFilesModel())->find(['nalog_clinic_id' => $nalogClinic->id]);
         $this->complectFile($nalogClinicFiles, $nalogClinic->id);
+
         $nalogClinic->set([
             'status' => $status,
             'user_id' => Auth::$profile['id']
         ]);
-
+        NalogModel::checkRequestStatus((int)$nalogId);
         return [
             'type' => 'reload'
         ];
