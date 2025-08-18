@@ -37,11 +37,10 @@ class FormSetController extends Controller
             'nalog_year' => $form['period'],
             'inn' => $form['taxpayer_inn'],
             'taxpayer_type_id' => $form['taxpayer_type_id'],
-            'taxpayer_fio' => $form['taxpayer_fio']
+            'taxpayer_fio' => $form['taxpayer_fio'],
+            'hash' => $form['hash'] ?? ''
         ];
         $nalogId = (new NalogModel())->create($data);
-        $hash =  hash('sha256', $nalogId . implode('', $data)); // создаем hash
-        (new NalogModel($nalogId))->set('hash', $hash);
 
         foreach ($form['clinic_service'] as $bitrixId) {
             (new NalogClinicModel([

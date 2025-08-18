@@ -15,6 +15,11 @@ class StatusCheckController extends Controller
     {
         $hash = attr('hash');
         $nalog = (new NalogModel(['hash' => $hash]));
+        if (!$nalog->exist()) {
+            View::open('template.nalog.status_error');
+            exit;
+        }
+
         $endDate = strtotime('+15 day ' . $nalog->get('cdate'));
         $days = ceil(($endDate - time()) / (60 * 60 * 24));
         $new = $nalog->status == NS::NEW ? 'green-st-1' : 'green-st-2' ;
@@ -30,9 +35,6 @@ class StatusCheckController extends Controller
             'new' => $new,
             'name' => Tool::strHidden($nalog->taxpayer_fio)
         ];
-
-        !$nalog->exist() ?
-            View::open('template.nalog.status_error') :
-            View::open('template.nalog.status_check', $data);
+        View::open('template.nalog.status_check', $data);
     }
 }
