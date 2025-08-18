@@ -110,7 +110,8 @@ class Naloglist extends NalogModel implements Table
                     $row = View::getTemplate('template.nalog.clinic', [
                         'clinics' => $clinics,
                         'auth_user_id' => Auth::$profile['id'],
-                        'request_id' => $rows['id']
+                        'request_id' => $rows['id'],
+                        'utype' => Auth::$profile['type']
                         ]);
                 }
                 $row = $row ?: "-";

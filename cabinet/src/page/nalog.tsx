@@ -69,3 +69,7 @@ $('[evt="add-field"]').on('click', function () {
     $items.add($clone);
 });
 
+window['reloadTable'] = () => { 
+    $table.reload();
+}
+

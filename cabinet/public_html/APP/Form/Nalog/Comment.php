@@ -25,6 +25,7 @@ class Comment extends Form
             'header' => 'Комментарии к заявки #' . $id,
             'id' => $id,
             'form_name' => 'nalog/Comment',
+            'callbackClose' => 'reloadTable'
         ];
     }
 }
