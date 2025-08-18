@@ -1,0 +1,127 @@
+import '../css/page/home.scss'
+import { $, Rocet } from '@rocet/rocet';
+import '../event/menu'
+import { integ } from "@rocet/integration";
+import { Datatable } from "@tools/Datatable";
+import { ajax } from '@tools/ajax';
+import { DateF } from '@src/Tools/DateF';
+import { Cookie } from '@src/Tools/Cookie';
+
+const $table = Datatable.get('buttonmessanangelist');
+if ($table) {
+
+    $table.rerender = (item: any, alias: any) => {
+        const result: Array<JSX.Element> = [];
+        const grouping: any = {};
+        const resutGroping: any = {};
+
+        item.forEach((el: any) => {
+            if (!Object.keys(grouping).includes(String(el.group_type))) {
+                grouping[String(el.group_type)] = [
+                    <h5>{el.gname}</h5>
+                ]
+                resutGroping[String(el.group_type)] = [];
+            }
+            
+            resutGroping[String(el.group_type)].push(<span
+                className={"btn btn-submit-blue "}
+                data-tab-btn="btn"
+                data-id={el.id}>{el.name}
+            </span>)
+        });
+
+        Object.keys(grouping).forEach((gn: any) => {
+            result.push(<tr>
+                {...grouping[gn]}
+                <div className='line-span'>
+                    {...resutGroping[gn]}
+                </div>
+            </tr>)
+        })
+
+        return result;
+    }
+
+    // После постраения таблицы выполнить код
+    $table.initCallback = ((table: Datatable) => {
+        const $btns = $(table.table).find("[data-tab-btn=btn]");
+        const $btn = $($btns.item(0));
+        $btn .classAdd('sample-active');
+        $btns.on('click', function () {
+
+            $btns.classRemove('sample-active');
+            $(this).classAdd('sample-active');
+            const id = $(this).data('id');
+            $('input[name=id]').val(id)
+            ajax.send('sample_get', { id: id }).then((data) => {
+                buildFilds(data);
+            })
+        })
+        $btn.trigger('click');
+
+    });
+
+    $('[data-clinic]').on('change', function () {
+        let clinicId = $(this).val();
+        const $searhInput = $('input[name=clinic_id]');
+        Cookie.set('select_clinic_id', clinicId);
+        $searhInput.val(clinicId);
+        $searhInput.trigger('change');
+        evenSelect();
+    })
+}
+
+function buildFilds(data: any) {
+
+    const $dynamic = $('[data-dynamic]');
+    const $messange = $('[data-message]');
+     const $button = $('[data-button]');
+    $messange.html(' ');
+    $dynamic.html(data.html.join(' '))
+    const mess = $(<div class="pannel-message"></div>);
+    mess.html(data.message);
+    $messange.add(mess);
+    $button.html(data.button.join(' '));
+    eventMessange($messange, $dynamic);
+    evenSelect();
+}
+
+function eventMessange($messange: Rocet, $dynamic: Rocet) {
+
+    const $variable = $dynamic.find('[data-variable]');
+    $variable.on('input', function () { 
+        const $inputCahnge = $(this);
+        const count = Number($inputCahnge.data('count'));
+        $messange.find('[data-messange]').each(($span: Rocet, i: number) => { 
+            if (Number(i + 1) == count) { 
+                if ($inputCahnge.val()) {
+                    $span.classRemove('btn-green');
+                    $span.classRemove('btn');
+                    let val = $inputCahnge.val()
+                    if ($inputCahnge.data('format')) { 
+                       val = (new DateF(val+"T00:00:00")).format($inputCahnge.data('format'))
+                    }
+                    $span.text(val);
+                } else {
+                    $span.classAdd('btn');
+                    $span.classAdd('btn-green');
+                    $span.text($span.data('content'));
+                }
+            }
+        })
+    })
+}
+function evenSelect() { 
+    const $select = $('select[data-clinic]');
+    let nameClinic = '';
+    let address = '';
+    $select.find('option').each(($opt: Rocet) => { 
+        if (Number($opt.attr('value')) == Number($select.val())){ 
+            nameClinic = $opt.text();
+            address = $opt.data('address');
+        }
+       
+    })
+    $("[data-messange=clinic]").text(nameClinic);
+    $("[data-messange=address]").text(address);
+}

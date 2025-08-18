@@ -1,0 +1,77 @@
+
+
+.billet-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: start;
+    overflow-x: auto;
+
+    .table-page {
+        width: 100%;
+        min-width: 1200px;
+        [data-link]{
+            cursor: pointer;
+        }
+    }
+    
+}
+
+@media screen and (max-width: 850px) {
+    .billet-main {
+        .table-page {
+            width: 100%;
+            min-width: max-content;
+
+            .datatable-wrapper {
+                .info-footer-table {
+                    flex-direction: column;
+
+                    .pagination {
+                        border-radius: 0px;
+                    }
+
+                    .status {
+                        padding-top: 7px;
+                        padding-bottom: 7px;
+                    }
+                }
+
+                table {
+
+                    th:nth-child(n+2),
+                    td:nth-child(n+2) {
+                        display: none;
+                    }
+
+                    thead {
+                        tr {
+                            th {
+                                font-size: 13px;
+                                font-weight: 500;
+                            }
+                        }
+                    }
+
+                    td,
+                    th {
+                        padding: 5px;
+                        border-radius: 5px 5px 0px 0px;
+                    }
+                }
+            }
+        }
+
+        .billet-form{
+            .form-row{
+                input{
+                    flex: 1;
+                }
+                label{
+                    width: auto;
+                    min-width: 30%;
+                }
+            }
+        }
+    }
+}

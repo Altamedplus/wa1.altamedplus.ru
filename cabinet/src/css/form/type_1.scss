@@ -1,0 +1,47 @@
+.form-type-1 {
+    display: flex;
+    max-width: min-content;
+    min-width: 350px;
+    flex-direction: column;
+
+    input[type=text], select, textarea{
+        outline: none;
+        padding: 7px 15px;
+        font-size: 16px;
+        border: 1px solid var(--line-2);
+        border-radius: 10px;
+        margin-top: 5px;
+    }
+    textarea{
+        min-height: 200px;
+    }
+    label{
+        margin-top: 15px;
+        margin-left: 13px;
+        color: var(--dark-blue);
+    }
+    .select{
+        &-small{
+            width: 100%;
+            font-size: 13px;
+            padding: 3px 8px;
+        }
+    }
+    .btn{
+        &-plus{
+            position: relative;
+            margin-top: 5px;
+            margin-left: 5px;
+            width: 23px;
+            height: 23px;
+            &::before, &::after{
+                width: 13px;
+            }
+        }
+    }
+    .form-row{
+        display: flex;
+        flex-direction: row;
+        margin: 10px 0px;
+    }
+}

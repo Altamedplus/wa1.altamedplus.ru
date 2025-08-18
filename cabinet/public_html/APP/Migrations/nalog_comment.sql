@@ -1,0 +1,12 @@
+CREATE TABLE `nalog_comment`
+(
+    `id` INT NOT NULL AUTO_INCREMENT ,
+    `nalog_id` INT,
+    `user_id` INT,
+    `clinic_id` INT DEFAULT NULL,
+    `comment` VARCHAR(800),
+    `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;

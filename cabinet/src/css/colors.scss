@@ -1,0 +1,20 @@
+:root{
+    --max-width: 1200px;
+    --blue: #B7E5F9;
+    --average-blue: #009ADD;
+    --dark-blue:#0D4568;
+    --tone: #F0F4F8;
+    --line: #BDBDBD;
+    --line-2:#BFBFBF;
+    --footer-old: #A8A8A8;
+    --footer-background: rgb(5 85 148);
+    --red: #D80000;
+    --green: #0fa15e;
+    --colors-theme-table-line:white;
+    --colors-theme-table-font-invert: var(--dark-blue);
+    --colors-theme-table: var(--average-blue);
+    --colors-theme-table-hover: var(--blue);
+    --colors-theme-table-font-invert: white;
+    --colors-theme-table-font: var(--dark-blue);
+    --colors-theme-table-line-hover: var(--line-2);
+}

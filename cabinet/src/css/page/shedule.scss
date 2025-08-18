@@ -1,0 +1,138 @@
+.desktop-wrapper {
+    overflow: auto; // не удалять
+
+    .billet {
+
+        &-main {
+            overflow: visible;
+        }
+    }
+}
+
+.desktop-wrapper .billet-main {
+    flex-direction: row;
+
+    .edit-shedule {
+        align-items: center;
+
+        p {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-row {
+            justify-content: center;
+            min-width: max-content;
+            width: max-content;
+
+            label {
+                min-width: max-content;
+            }
+        }
+
+        .break {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            .btn-round {
+                width: 30px;
+                height: 30px;
+            }
+
+            .btn-content-trash {
+                background-size: 16px 21px;
+            }
+
+        }
+
+        .btn-plus {
+            position: relative;
+            margin-bottom: 15px;
+        }
+    }
+
+    #calendar {
+        display: flex;
+        height: max-content;
+        padding: 20px;
+    }
+
+    #record {
+        display: flex;
+        width: 100%;
+        padding: 20px;
+
+        .table-record {
+            width: 100%;
+            border-collapse: collapse;
+
+            td {
+                border-bottom: 1px solid var(--line);
+                font-size: 13px;
+                padding: 3px;
+
+            }
+            .td{
+                &-time{
+                    min-width: 100px;
+
+                }
+            }
+
+            tr {
+                padding: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background: var(--blue);
+
+                }
+            }
+        }
+    }
+    .calendar{
+        &-shedule{
+            &-open{
+                border: 1px solid var(--line);
+            }
+        }
+        &-select{
+            background: var(--blue);
+            color:black;
+        }
+        &-record{
+            &::after{
+                position: absolute;
+                right: 3px;
+                top: 3px;
+                content: ' ';
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--average-blue);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .desktop-wrapper .billet .billet-main {
+        display: flex;
+        flex-direction: column;
+         #record {
+            padding: 10px;
+         }
+         #calendar{
+            padding: 10px;
+            justify-content: center;
+
+         }
+        .mobail{
+            width: 100%;
+        }
+    }
+}

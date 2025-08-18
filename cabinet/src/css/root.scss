@@ -1,0 +1,82 @@
+@use "./loader" as *;
+@use "./fonts" as *;
+@use "./colors" as *;
+@use "./body" as *;
+@use "./header" as *;
+@use "./menu" as *;
+@use "./footer" as *;
+@use "./common_page" as *;
+@use "./modal" as *;
+@use "./elements/UI" as *;
+@use "./form/type_1" as *;
+@use "./open_message" as *;
+
+* {
+    box-sizing: border-box;
+
+    &:hover,
+    &:focus,
+    &:focus-visible,
+    &:target,
+    &:focus-within,
+    &:active {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+.block-header {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark-blue);
+}
+.desktop-wrapper{
+    overflow-y: auto;
+}
+
+.datatable-wrapper{
+    display: flex;
+    flex-direction: column;
+    table{
+        tbody{
+            height: 200px;
+        }
+        [name=filter] {
+            th{
+                input, select{
+                    outline: none;
+                    padding: 5px 10px;
+                    font-size: 14px;
+                    border: 1px solid var(--line-2);
+                    border-radius: 10px;
+                    margin-top: 5px;
+                }
+                .row{
+                    display: flex;
+                    flex-direction: row;
+                    min-width: max-content;
+                    width: 100%;
+                    justify-content: space-between;
+                    b{
+                         display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        margin-right: 5px;
+                        padding-top: 5px;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.tab{
+    display: flex;
+    flex-direction: row;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: var(--dark-blue);
+    color: white;
+    font-weight: 600;
+}

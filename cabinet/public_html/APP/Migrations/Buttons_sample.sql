@@ -1,0 +1,12 @@
+CREATE TABLE `buttons_sample`
+(
+    `id` INT NOT NULL AUTO_INCREMENT ,
+    `sample_id` INT NOT NULL,
+    `buttons_id` INT DEFAULT 1,
+    `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`sample_id`) REFERENCES sample_messange_wa(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`buttons_id`) REFERENCES buttons(`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;

@@ -1,0 +1,17 @@
+{
+    "name":"service/live",
+    "require":{
+        "php":">=8.0",
+        "pet/framework":"dev-main",
+         "phpmailer/phpmailer": "^6.5"
+    }, 
+    "autoload": {
+        "psr-4": {
+          "Pet\\": "vendor/pet/framework/"
+        }
+    },
+  "files":[
+    "/vendor/pet/framework/function.php"
+  ]
+
+}

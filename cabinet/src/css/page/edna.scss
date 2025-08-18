@@ -1,0 +1,12 @@
+.channel-infornation{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: -8px 18px 16px -1px rgba(8, 57, 13, 0.37);
+    background: #e5e5e5;
+    color: var(--dark-blue);
+    --bagrond-color-loader: #e5e5e5;
+    max-width: 380px;
+}

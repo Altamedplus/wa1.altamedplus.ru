@@ -1,0 +1,94 @@
+CREATE TABLE `variable` 
+(
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(50) NOT NULL,
+  `name_uniq` VARCHAR(200) ,
+  `description` VARCHAR(1200) DEFAULT NULL,
+  `type` INT DEFAULT 1,
+  `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE (name_uniq),
+  PRIMARY KEY (`id`)
+  )
+ENGINE = InnoDB;
+
+CREATE TABLE `buttons`
+(
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `text` VARCHAR(500) NOT NULL ,
+  `url` VARCHAR(1000) DEFAULT NULL,
+  `url_postfix` VARCHAR(1000) DEFAULT NULL,
+  `phone` VARCHAR(20) DEFAULT NULL,
+  `payload` VARCHAR(500) DEFAULT NULL,
+  `type` VARCHAR(100) DEFAULT NULL,
+  `otp_type` VARCHAR(100) DEFAULT NULL,
+  `color` VARCHAR(100) DEFAULT NULL,
+  `request_contact` TINYINT(1) DEFAULT 0,
+  `request_location` TINYINT(1) DEFAULT 0,
+  `autofill_text` VARCHAR(1000) DEFAULT NULL,
+  `package_name` VARCHAR(100)  DEFAULT NULL,
+  `hash` VARCHAR(500) DEFAULT NULL,
+  `app_id` TINYINT(1) DEFAULT 0,
+  `owner_id` TINYINT(1) DEFAULT 0,
+  `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE `sample_messange_wa`
+(
+    `id` INT NOT NULL AUTO_INCREMENT ,
+    `content_type` VARCHAR(100) DEFAULT 'TEXT',
+    `text` TEXT DEFAULT NULL,
+    `role_id` INT,
+    `comment` VARCHAR(1000) DEFAULT NULL,
+    `check number` TINYINT(1) DEFAULT 0,
+    `footer` VARCHAR(300),
+    `footer_type` VARCHAR(50) DEFAULT 'TEXT',
+    `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE `role`
+(
+    `id` INT NOT NULL AUTO_INCREMENT ,
+    `sample_id` INT NOT NULL,
+    `user_type` INT DEFAULT 1,
+    `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`sample_id`) REFERENCES sample_messange_wa(`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE `clinics_sample`
+(
+    `id` INT NOT NULL AUTO_INCREMENT ,
+    `sample_id` INT NOT NULL,
+    `clinic_id` INT DEFAULT 1,
+    `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`sample_id`) REFERENCES sample_messange_wa(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`clinic_id`) REFERENCES clinic(`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE `header`
+(
+    `id` INT NOT NULL AUTO_INCREMENT ,
+    `text` VARCHAR(500) DEFAULT NULL,
+    `sample_id` INT NOT NULL,
+    `img_url` VARCHAR(500)  DEFAULT NULL,
+    `document_url` VARCHAR(500)  DEFAULT NULL,
+    `document_name` VARCHAR(500)  DEFAULT NULL,
+    `video_url` VARCHAR(500)  DEFAULT NULL,
+    `video_name` VARCHAR(500) DEFAULT NULL,
+
+    FOREIGN KEY (`sample_id`) REFERENCES sample_messange_wa(`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;

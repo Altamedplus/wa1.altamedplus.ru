@@ -1,0 +1,179 @@
+.desktop-wrapper {
+    flex-direction: row;
+    padding: 0px;
+}
+
+.pannel {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    flex-direction: column;
+    height: 100%;
+
+    &-left {
+        display: flex;
+        flex: 0.2;
+        flex-direction: column;
+        max-width: 300px;
+        min-width: 280px;
+        border-right: 1px solid var(--line-2);
+
+        form {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+
+            input[type=text],
+            input[type=phone],
+            input[type=date],
+            input[type=time],
+            input[type=datetime-local],
+            input[type=datetime-local],
+            select,
+            textarea {
+                outline: none;
+                padding: 5px 12px;
+                font-size: 16px;
+                border: 1px solid var(--line-2);
+                border-radius: 10px;
+                margin-top: 5px;
+                font-size: 13px;
+            }
+
+            label {
+                margin-top: 15px;
+                margin-left: 13px;
+                color: var(--dark-blue);
+            }
+        }
+
+        .dynamic{
+            display: flex;
+            padding: 10px 0px;
+            width: 100%;
+            flex-direction: column;
+        }
+        .button{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+        }
+
+        .btn-content-message-circle {
+            background-color: var(--average-blue);
+            color: white;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            padding-right: 40px;
+            background-position: right 27% top 7px;
+            width: 100% ;
+            &:hover {
+                background-color: var(--dark-blue);
+            }
+        }
+    }
+    
+
+    &-message {
+        padding: 18px;
+        font-size: 12px;
+        border-radius: 20px;
+        background: #e5e5e5;
+        color: #454545;
+        margin: 18px 3px;
+        position: relative;
+        margin-bottom: 40px;
+        box-shadow: -8px 18px 16px -1px rgb(8 57 13 / 37%);
+        overflow-y: auto;
+        max-height: 400px;
+
+        .btn-green {
+            padding: 3px 8px;
+            font-weight: 400;
+            background: #c8dce5;
+            color: #454545;
+        }
+        
+
+        .message-btn{
+            &-quick, &-phone, &-url{
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                border: none ;
+                cursor: pointer;
+                background: white;
+                padding: 8px;
+                margin-top: 3px;
+                color: #454545;
+                font-weight: 700;
+                border-radius: 0px 0px 5px 5px;
+                &:hover{
+                    background: var(--dark-blue);
+                    color: white;
+                }
+            }
+        }
+        .messange-header-img{
+            display: flex;
+            width: 100%;
+            position: relative;
+            border-radius: 10px 10px 0px 0px ;
+            img{
+                border-radius: 10px 10px 0px 0px ;
+                width: 100%;
+            }
+        }
+    }
+
+    &-right {
+        display: flex;
+        flex: 1;
+        border-right: 1px solid var(--line-2);
+        padding: 20px 15px;
+
+        [name=buttonmessanangelist] {
+            thead {
+                display: none;
+            }
+
+            tbody tr {
+                &:hover {
+                    background: none;
+                }
+            }
+        }
+
+        .line-span {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .sample {
+            &-active {
+                position: relative;
+                padding-right: 40px;
+
+                &::after {
+                    position: absolute;
+                    content: "\2713";
+                    color: white;
+                    font-size: 30px;
+                    top: 2px;
+                    right: 7px;
+                }
+            }
+        }
+
+        [data-tab-btn=btn] {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 147px;
+            min-height: 66px;
+            font-weight: 700;
+        }
+    }
+}

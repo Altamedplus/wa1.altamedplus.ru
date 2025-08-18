@@ -1,0 +1,12 @@
+ALTER TABLE `sample_messange_wa` ADD `group_type` INT NULL DEFAULT NULL AFTER `text`;
+ALTER TABLE `sample_messange_wa` ADD `name` VARCHAR(200) NULL DEFAULT NULL AFTER `id`;
+ALTER TABLE `header` ADD `type` VARCHAR(50) NULL DEFAULT NULL AFTER `text`;
+ALTER TABLE `buttons` ADD `is_url_postfix` TINYINT(1) NOT NULL DEFAULT '0' AFTER `url_postfix`;
+ALTER TABLE `variable` ADD `format` VARCHAR(100) NULL DEFAULT NULL AFTER `type`;
+ALTER TABLE `users` ADD `temporary_password` TINYINT(1) NOT NULL DEFAULT '0' AFTER `type`;
+ALTER TABLE `nalog` ADD `taxpayer_type_id` INT DEFAULT NULL;
+ALTER TABLE `nalog` ADD `taxpayer_fio` VARCHAR(300) DEFAULT NULL;
+ALTER TABLE `nalog_clinic_files` ADD `relat` VARCHAR(500) NULL DEFAULT NULL AFTER `url_file`;
+ALTER TABLE `nalog_clinic_files` ADD `origin` VARCHAR(100) NULL DEFAULT NULL AFTER `url_file`;
+ALTER TABLE `nalog_clinic_files` ADD `name` VARCHAR(100) NULL DEFAULT NULL AFTER `url_file`;
+ALTER TABLE `nalog_clinic_files` ADD `path` VARCHAR(100) NULL DEFAULT NULL AFTER `url_file`;

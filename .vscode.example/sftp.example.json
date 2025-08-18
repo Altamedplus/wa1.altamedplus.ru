@@ -1,0 +1,31 @@
+{
+    "name": "Altamed",
+    "host": "",
+    "protocol": "ftp",
+    "port": 21,
+    "username": "",
+    "password": "",
+    "remotePath": "/wa1.altamedplus.ru",
+    "uploadOnSave": false,
+    "useTempFile": false,
+    "openSsh": false,
+    "ignore": [
+        ".vscode",
+        "/public_html/.htaccess",
+        ".git",
+        ".DS_Store", 
+        "node_modules", 
+        "composer.json", 
+        "package-lock.json",
+        ".gitignore", 
+        "tsconfig.json", 
+        "package.json",
+        "webpack.config.js", 
+        "*.lock", 
+        "/cabinet/src", 
+        "/cabinet/vendor/pet/framework/Frontend", 
+        "*.md", 
+        "/cabinet/public_html/view/uploads", 
+        ".env"
+    ]
+}

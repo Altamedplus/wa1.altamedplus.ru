@@ -1,0 +1,51 @@
+<?php
+namespace APP\Enum;
+
+use APP\Enum\UsersType as UT;
+use APP\Module\Auth;
+use Pet\View\View;
+
+class Menu
+{
+    const HOME = 1;
+    const CLINIC = 2;
+    const USERS = 3;
+    const BUTTONS = 4;
+    const VARIABLE = 5;
+    const SAMPLE = 6;
+    const GROUP_SAMPLE = 7;
+    const EDNA = 8;
+    const MESSAGE = 9;
+    const NALOG = 10;
+    const LICENSE = 11;
+
+    public static function data($UT = UT::SYSADMIN): array
+    {
+        $page = [
+            self::HOME => (object)['url' => '/', 'name' => 'Сообщения', 'icon' => 'menu.message'],
+            self::MESSAGE => (object)['url' => '/message', 'name' => 'Отправленные', 'icon' => 'menu.message'],
+            self::CLINIC => (object)['url' => '/clinic', 'name' => 'Клиники', 'icon' => 'menu.home'],
+            self::USERS => (object)['url' => '/users', 'name' => 'Пользователи', 'icon' => 'menu.users'],
+            self::BUTTONS => (object)['url' => '/buttons', 'name' => 'Кнопки', 'icon' => 'menu.service'],
+            self::VARIABLE => (object)['url' => '/variable', 'name' => 'Переменные', 'icon' => 'menu.post'],
+            self::SAMPLE => (object)['url' => '/sample', 'name' => 'Шаблоны', 'icon' => 'menu.post'],
+            self::GROUP_SAMPLE => (object)['url' => '/group_sample', 'name' => 'Группы Шаблонов', 'icon' => 'menu.post'],
+            self::EDNA => (object)['url' => '/edna', 'name' => 'Edna api', 'icon' => 'menu.post'],
+            self::NALOG => (object)['url' => '/nalog', 'name' => 'Налоговый вычет', 'icon' => 'menu.service'],
+            self::LICENSE => (object)['url' => '/license', 'name' => 'Лицензии', 'icon' => 'menu.service']
+        ];
+        if (Auth::$profile['type'] == UT::ADMIN) {
+            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE]);
+        }
+        if (Auth::$profile['type'] == UT::SENIOR_ADMIN) {
+            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::VARIABLE]);
+        }
+        if (Auth::$profile['type'] == UT::MARKETING) {
+            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE]);
+        }
+        if (Auth::$profile['type'] == UT::DOCTOR) {
+            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE]);
+        }
+        return $page;
+    }
+}

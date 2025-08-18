@@ -1,0 +1,59 @@
+CREATE TABLE `nalog`
+(
+    `id` INT NOT NULL AUTO_INCREMENT ,
+    `email` VARCHAR(300) DEFAULT NULL,
+    `name` VARCHAR(500) DEFAULT NULL,
+    `date_birth` DATE DEFAULT NULL,
+    `phone` VARCHAR(20) DEFAULT NULL,
+    `status` INT(1) DEFAULT 1,
+    `nalog_year` VARCHAR(200) DEFAULT NULL,
+    `inn` VARCHAR(100) DEFAULT NULL,
+    `is_send` TINYINT(1) DEFAULT NULL,
+    `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE `nalog_clinic`
+(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nalog_id` INT,
+    `clinic_id` INT,
+    `user_id` INT DEFAULT NULL,
+    `status` INT(2) DEFAULT 1,
+    `is_place` TINYINT(1) DEFAULT 0 COMMENT "Клиника сбора документов",
+    `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`nalog_id`) REFERENCES nalog(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`clinic_id`) REFERENCES clinic(`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE `nalog_clinic_files`
+(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nalog_clinic_id` INT,
+    `url_file` VARCHAR(700) DEFAULT NULL,
+    `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`nalog_clinic_id`) REFERENCES nalog_clinic(`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;
+
+
+CREATE TABLE `license_clinic`
+(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `clinic_id` INT,
+    `url_file` VARCHAR(700) DEFAULT NULL,
+    `name` VARCHAR(300) DEFAULT NULL,
+    `is_actual` TINYINT(1) DEFAULT 0,
+    `update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `cdate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`clinic_id`) REFERENCES clinic(`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;
