@@ -22,7 +22,7 @@ class Naloglist extends NalogModel implements Table
     public function renameFilter(string &$k, array|string &$v): bool
     {
 
-        if (in_array($k, ['nc.clinic_id', 'nc.user_id' , 'nc.status']) && empty($v[0])) {
+        if (in_array($k, ['nc.clinic_id', 'nc.user_id' , 'nalog.status']) && empty($v[0])) {
             return false;
         }
 

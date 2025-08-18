@@ -32,6 +32,12 @@ class NalogController extends PageController
         $nalogClinic = new NalogClinicModel(['nalog_id' => $nalogId, 'clinic_id' => $clinic->id]);
         $nalogClinicFiles = (new NalogClinicFilesModel())->findM(['nalog_clinic_id' => $nalogClinic->id]);
 
+        if (!$clinic->exist() || !$nalogClinic->exist() || empty($nalogId)) {
+            NotFound::code404([
+                'header' => 'Не верные параметры запроса заявки или заявка не найдена'
+            ]);
+        }
+
         if (empty($nalogClinicFiles)) {
             $nalogClinicFiles[] = (object)[
                 'nalog_clinic_id' => '',
