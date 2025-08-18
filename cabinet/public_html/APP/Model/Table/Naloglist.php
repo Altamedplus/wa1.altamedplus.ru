@@ -51,6 +51,7 @@ class Naloglist extends NalogModel implements Table
         // file_put_contents('data.sql', $this->toString());
         $this->st = (clone $this)->select("COUNT(*) as st")->fetch(false)['st'];
         $this->groupBy('nalog.id');
+        $this->orderBy('nalog.id', "DESC");
     }
 
     /**
