@@ -10,3 +10,4 @@ ALTER TABLE `nalog_clinic_files` ADD `relat` VARCHAR(500) NULL DEFAULT NULL AFTE
 ALTER TABLE `nalog_clinic_files` ADD `origin` VARCHAR(100) NULL DEFAULT NULL AFTER `url_file`;
 ALTER TABLE `nalog_clinic_files` ADD `name` VARCHAR(100) NULL DEFAULT NULL AFTER `url_file`;
 ALTER TABLE `nalog_clinic_files` ADD `path` VARCHAR(100) NULL DEFAULT NULL AFTER `url_file`;
+ALTER TABLE `nalog` ADD `hash` VARCHAR(100) DEFAULT NULL;

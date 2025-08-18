@@ -38,4 +38,25 @@ class Tool
         }
         return null;
     }
+
+    /**
+     * strHidden
+     *
+     * @param  mixed $string
+     * @param  mixed $factor
+     * @return string
+     */
+    public static function strHidden(string $string, string $factor = '*'): string
+    {
+        $ex = explode(' ', $string);
+        $result = '';
+        foreach ($ex as $str) {
+            foreach (mb_str_split($str, 1, "UTF-8") as $i => $b) {
+                if ($i == 0) $result .= strtoupper($b);
+                $result .= $factor;
+            }
+            $result .= ' ';
+        }
+        return $result;
+    }
 }
