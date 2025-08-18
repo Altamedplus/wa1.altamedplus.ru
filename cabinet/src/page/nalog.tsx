@@ -4,8 +4,16 @@ import './../css/page/nalog.scss'
 import { initBtnModal } from '@src/event/modal';
 import { $, Rocet } from '@rocet/rocet';
 import { ajax } from '@tools/ajax';
+import { integ } from '@rocet/integration';
 const $table = Datatable.get('naloglist');
 if ($table) {
+
+    $table.buildCells = (row:any, alias:string, indexRow:number, indexElem:number) => {
+        if (alias == 'clinic') { 
+            return <td className='td-clinic'>{String(row[alias])}</td>
+        }
+    }
+
     $table.initCallback = () => { 
         initBtnModal();
     }

@@ -1,12 +1,23 @@
-.clinic-row{
+.clinic-column{
+    position: relative;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    div:nth-child(2n){
+        border-top: 1px solid var(--line-2);
+    }
+}
+.clinic-row{
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-template-columns: 300px 130px 120px 70px;
+    justify-items: start;
     align-items: center;
-    justify-content: space-between;
+    padding: 10px;
+
     p{
         margin-right: 10px;
     }
-    border-bottom: 1px solid var(--line-2);
+    // border-bottom: 1px solid var(--line-2);
     &-name{
         margin-left: 2px;
     }
@@ -91,5 +102,18 @@ textarea[name="comment"]{
     }
     &-btn{
         margin-top: 10px;
+    }
+}
+table{
+    td{
+        border-bottom:1px solid var(--line-2) ;
+        position: relative;
+    }
+    .td-clinic{
+        padding: 0px !important;
+        border-left: 1px solid var(--line-2);
+    }
+    tr:hover{
+        background-color: var(--blue);
     }
 }
