@@ -41,7 +41,6 @@
         "less": "^4.2.0",
         "less-loader": "^12.1.0",
         "mini-css-extract-plugin": "^2.9.2",
-        "node-sass": "^9.0.0",
         "postcss-loader": "^8.0.0",
         "preact": "^10.19.3",
         "react": "^18.2.0",
