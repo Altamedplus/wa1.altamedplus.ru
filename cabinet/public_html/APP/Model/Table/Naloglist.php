@@ -65,10 +65,16 @@ class Naloglist extends NalogModel implements Table
     {
         foreach ($items as $k => &$rows) {
             foreach ($rows as $name => &$row) {
+
                 $rows['comment'] = View::getTemplate('template.nalog.btnComment', [
                     'request_id' => $rows['id'],
                     'count' => count((new NalogCommentModel())->find(['nalog_id' => $rows['id']]))
                 ]);
+
+                $rows['tools'] = View::getTemplate('template.nalog.btnTools', [
+                    'nalog_id' => $rows['id']
+                ]);
+
                 if ($name == 'request') {
                     $endDate = strtotime('+15 day ' . $rows['cdate']);
                     $row = View::getTemplate('template.nalog.request_column', [

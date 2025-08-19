@@ -5,6 +5,8 @@ import { initBtnModal } from '@src/event/modal';
 import { $, Rocet } from '@rocet/rocet';
 import { ajax } from '@tools/ajax';
 import { integ } from '@rocet/integration';
+import './../module/Page/Nalog/Preview';
+
 const $table = Datatable.get('naloglist');
 if ($table) {
 
@@ -72,4 +74,5 @@ $('[evt="add-field"]').on('click', function () {
 window['reloadTable'] = () => { 
     $table.reload();
 }
+
 

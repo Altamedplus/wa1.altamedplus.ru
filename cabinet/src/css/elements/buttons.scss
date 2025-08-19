@@ -50,6 +50,9 @@
             }
         }
     }
+        &-disabled {
+            background-color: var(--disabled)
+        }
 
     &-plus {
         @extend .btn;
@@ -194,9 +197,22 @@
            background-image: url('./img/icons/eye-fff.svg');
            background-repeat: no-repeat;
            background-size: 13px 13px;
-           background-position: end;
            background-position-x: 4px;
            background-position-y: 3px;
+       }
+       &-print {
+        background-image: url('./img/icons/print_3.svg');
+        background-repeat: no-repeat;
+        background-size: 26px 33px;
+        background-position-x: 7px;
+        background-position-y: 3px;
+       }
+       &-wa {
+        background-image: url('./img/icons/wa.svg');
+        background-repeat: no-repeat;
+        background-size: 21px 29px;
+        background-position-x: 9px;
+        background-position-y: 4px;
        }
     }
 

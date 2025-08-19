@@ -133,3 +133,52 @@ table{
         color: var(--dark-blue);
     }
 }
+.content-pdf{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+    width: 100%;
+    .pdf-list{
+        border: 1px solid var(--line);
+        margin-top: 10px;
+    }
+    height: 90vh;
+
+}
+h3{
+    position: relative;
+    color: var(--dark-blue);
+    margin: 5px;
+    &::before{
+        position: absolute;
+        content: ' ';
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        left: -25px;
+        top: 3px;
+        background: var(--color-clinic);
+    }
+}
+
+iframe{
+    width: 100%;
+    height: 100%;
+    &::-webkit-scrollbar {
+        width: 7px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: #cfcfcf;
+        border-radius: 10px;
+      }
+      
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+}

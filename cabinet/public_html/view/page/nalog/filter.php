@@ -33,6 +33,7 @@
         </div>
     </th>
     <th></th>
+    <th></th>
     <th>
         <div class="flex-row">
             <div class="flex-colum m-10">

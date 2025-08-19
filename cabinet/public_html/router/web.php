@@ -46,7 +46,6 @@ Router::middleware(
 )->set(
     Router::get('/', [HomeController::class, 'index']),
     Router::get('/login', [LoginController::class, 'index']),
-    Router::get('/nalog/edit/{id}/{clinic}', [NalogController::class, 'edit']),
     Router::get('/clinic', [ClinicController::class, 'index']),
     Router::get('/users', [UsersController::class, 'index']),
     Router::get('/buttons', [ButtonsController::class, 'index']),
@@ -57,7 +56,7 @@ Router::middleware(
     Router::get('/message', [MessageController::class, 'index']),
     Router::get('/nalog', [NalogController::class, 'index']),
     Router::get('/license', [LicenseController::class, 'index']),
-
+    
     Router::get('/clinic/edit/{id}', [ClinicController::class, 'edit']),
     Router::get('/users/edit/{id}', [UsersController::class, 'edit']),
     Router::get('/buttons/edit/{id}', [ButtonsController::class, 'edit']),
@@ -66,6 +65,7 @@ Router::middleware(
     Router::get('/variable/edit/{id}', [VariableController::class, 'edit']),
     Router::get('/edna/edit/{id}', [EdnaController::class, 'edit']),
     Router::get('/license/edit/{id}', [LicenseController::class, 'edit']),
+    Router::get('/nalog/edit/{id}/{clinic}', [NalogController::class, 'edit']),
 
     Router::get('/users/add', [UsersController::class, 'add']),
     Router::get('/clinic/add', [ClinicController::class, 'add']),
@@ -75,6 +75,8 @@ Router::middleware(
     Router::get('/variable/add', [VariableController::class, 'add']),
     Router::get('/edna/add', [EdnaController::class, 'add']),
     Router::get('/license/add', [LicenseController::class, 'add']),
+
+    Router::get('/nalog/downloand/{id}', [NalogController::class, 'downloand']),
 
     Router::post('/ajax/{name}', [AjaxController::class, 'index'])
 );
