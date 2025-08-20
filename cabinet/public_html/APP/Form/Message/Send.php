@@ -31,7 +31,7 @@ class Send extends Form
                 unset($fields[$name]);
             }
         }
-        $data = (new SampleModel)->complectWhatsApp($sample_id, $variables, $buttons, $clinicId);
+        $data = (new SampleModel())->complectWhatsApp($sample_id, $variables, $buttons, $clinicId);
         // $request = [];
         // $result =  (new WhatsApp())->sendWhatsapp($phone, $data, $request);
         $messangeId = (new MessageModel())->create([

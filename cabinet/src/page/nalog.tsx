@@ -18,6 +18,9 @@ if ($table) {
 
     $table.initCallback = () => { 
         initBtnModal();
+        $('[evt="sendNalog"]').on('click', function () {
+            ajax.send('nalog_send', { id: $(this).data('id') }).then(() => $table.reload());
+        });
     }
 }
 
@@ -70,6 +73,7 @@ $('[evt="add-field"]').on('click', function () {
     $clone.find('[name="file-label"]').text('');
     $items.add($clone);
 });
+
 
 window['reloadTable'] = () => { 
     $table.reload();

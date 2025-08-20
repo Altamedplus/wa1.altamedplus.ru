@@ -24,7 +24,7 @@ use APP\Form\Form; ?>
             <th alias="cascade_id">Каскад</th>
             <th alias="api">Ключ Api</th>
             <th alias="is_actual">Используется</th>
-            <th alias="chanal">Используется</th>
+            <!-- <th alias="chanal">Используется</th> -->
             <th style="width: 20px;"></th>
         </tr>
 

@@ -10,9 +10,6 @@ if ($prewContaner.length != 0) {
          console.log(glueUrl)
         const iframe = $(<iframe src={glueUrl}></iframe>);
         $prewContaner.add(iframe);
-        // const targetDoc = iframe.contentDocument || iframeContainer.contentWindow.document;
-    
-        // iframe.attr('src', glueUrl);
     })
 }
 

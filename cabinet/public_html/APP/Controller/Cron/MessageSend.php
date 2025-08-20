@@ -20,7 +20,7 @@ class MessageSend extends Controller
 
     public function index()
     {
-        $messanges = (new MessageModel())->find(['status'=> StatusMessage::QUEUE]);
+        $messanges = (new MessageModel())->find(['status' => StatusMessage::QUEUE]);
         $resultControl = [];
         foreach ($messanges as $m) {
             $request = [];
@@ -28,7 +28,7 @@ class MessageSend extends Controller
             $data = json_decode($m['data_request'], true);
             $result = (new WhatsApp())->sendWhatsapp($phone, $data, $request);
             $resultControl[] = [$request, $result];
-            $mess = new MessageModel(['id'=> $m['id']]);
+            $mess = new MessageModel(['id' => $m['id']]);
             $mess->set([
                 'send_date' => date('Y-m-d'),
                 'send_time' => date('h:i:s'),

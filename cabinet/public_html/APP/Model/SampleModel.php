@@ -46,9 +46,11 @@ class SampleModel extends Model
         foreach ($variables as $name => $values) {
             foreach ($values as $value) {
                 $var = new VariableModel(['name_uniq' => $name]);
+
                 if ($var->exist() && !empty($var->get('format'))) {
                     $value = date($var->format, strtotime($value));
                 }
+
                 $s->text = str_replace('{{' . $name . '}}', $value, $s->text);
             }
         }
@@ -72,10 +74,8 @@ class SampleModel extends Model
         if (($header = (new HeaderSampleModel(['sample_id' => $s->id]))->headerComplect())) {
             $data['header'] = $header;
         }
-        $sampleButtons =  (new ButtonsSampleModel())->findM(['sample_id'=> $s->id], callback:function (Model $m) {
-            $m->select(
-                'b.*'
-            );
+        $sampleButtons =  (new ButtonsSampleModel())->findM(['sample_id' => $s->id], callback:function (Model $m) {
+            $m->select('b.*');
             $m->join('buttons b')->on(['b.id', 'buttons_sample.buttons_id']);
         });
 
