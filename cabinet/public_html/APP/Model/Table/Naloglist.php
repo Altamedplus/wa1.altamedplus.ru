@@ -72,7 +72,9 @@ class Naloglist extends NalogModel implements Table
                 ]);
 
                 $rows['tools'] = View::getTemplate('template.nalog.btnTools', [
-                    'nalog_id' => $rows['id']
+                    'nalog_id' => $rows['id'],
+                    'isPrint' => $rows['status'] == NalogStatus::READY,
+                    'isWa' =>  $rows['status'] == NalogStatus::READY  && (int)$rows['is_send'] != 1
                 ]);
 
                 if ($name == 'request') {

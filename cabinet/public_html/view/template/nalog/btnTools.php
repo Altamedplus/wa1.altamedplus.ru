@@ -1,4 +1,5 @@
 <div clas='flex-column'>
-<a class='btn-round btn-content-print' href="/nalog/downloand/<?=$nalog_id?>"></a>
-<a class='btn-round btn-content-wa btn-disabled'></a>
+    <? $url = ($isPrint ? "/nalog/downloand/$nalog_id" : "/nalog") ?>
+    <a class='btn-round btn-content-print <?= !$isPrint ? 'btn-disabled' : '' ?>'  href="<?=$url?>"></a>
+    <button data-id="<?=$nalog_id ?>" class='btn-round btn-content-wa <?= !$isWa ? 'btn-disabled' : '' ?>'   <?= !$isWa ? 'disabled' : '' ?>></button>
 </div>
