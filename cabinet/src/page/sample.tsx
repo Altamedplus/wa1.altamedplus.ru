@@ -9,8 +9,10 @@ if ($('[name="sample/Add"]').length >= 1) {
     $btn.on('click', function () { 
         const $textarea = $('textarea[name="text"]');
         const $variable = $('[data-variable]');
-        const val = $textarea.val() ?? '';
-        $textarea.val(val + `{{${$variable.val()}}}`)
+        let val = $textarea.val() ?? '';
+        const pos = ($textarea.Elements[0] as any).selectionStart;
+        val = val.substring(0, pos) +  `{{${$variable.val()}}}` +  val.substring(pos);
+        $textarea.val(val);
     })
 
     const $headerType = $form.find('select[name=header_type]');
@@ -20,6 +22,7 @@ if ($('[name="sample/Add"]').length >= 1) {
         $ht.each(($el: Rocet) => $el.find('input').each(($elm:Rocet)=> $elm.val('')));
         $(`[data-header-type=${$(this).val()}]`).classRemove('d-none');
     })
+    initCreateSample();
 }
 
 const $table = Datatable.get('samplelist');
@@ -34,4 +37,29 @@ if ($table) {
             return <td innerHTML={row[alias]}></td>
         }
     }
+}
+
+function initCreateSample()
+{
+
+        const text = localStorage.getItem('text');
+        if (text) $('textarea[name=text]').html(text)
+        localStorage.removeItem('text');
+        
+        const footer = localStorage.getItem('footer');
+        if (footer) $('input[name=footer]').val(footer);
+        localStorage.removeItem('footer');
+    
+    
+        const HeaderType = localStorage.getItem('headerType');
+        if (HeaderType) {
+            $('[name="header_type"]').val(HeaderType);
+            $('[name="header_type"]').trigger('change');
+        }
+        localStorage.removeItem('headerType');
+    
+        const HeaderText = localStorage.getItem('headerText');
+        if (HeaderType == 'IMAGE') $('[name="img_url"]').val(HeaderText)
+        if (HeaderType == 'TEXT') $('[name="header_text"]').val(HeaderText)
+        localStorage.removeItem('headerText');
 }

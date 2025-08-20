@@ -5,9 +5,9 @@ use APP\Model\EdnaModel;
 
 class WhatsApp
 {
-    const URL_EDNA_CASCADE_SCHEDULE = URL_EDNA_CASCADE_SCHEDULE;
-    const URL_EDNA_CHANNEL_PROFILE  = URL_EDNA_CHANNEL_PROFILE;
-
+    private const URL_EDNA_CASCADE_SCHEDULE = URL_EDNA_CASCADE_SCHEDULE;
+    private const URL_EDNA_CHANNEL_PROFILE  = URL_EDNA_CHANNEL_PROFILE;
+    private const URL_EDNA_SAMPLE  = URL_EDNA_SAMPLE;
     public array $headers = ['Content-Type: application/json'];
     public $cascadeId = '';
     public $ednaType = 'PHONE';
@@ -85,6 +85,11 @@ class WhatsApp
         return [ 'response' => $result ];
     }
 
+    public function getSample($data): array
+    {
+        return $this->send($data, self::URL_EDNA_SAMPLE);
+    }
+
     public function sendSMS(string $phone, array $body, mixed &$request): array
     {
         $data = [
@@ -101,4 +106,6 @@ class WhatsApp
         $request = $data;
         return $this->send($data, self::URL_EDNA_CASCADE_SCHEDULE);
     }
+
+
 }

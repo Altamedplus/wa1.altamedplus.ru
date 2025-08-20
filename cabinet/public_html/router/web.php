@@ -8,6 +8,7 @@ use APP\Controller\ModalController;
 use APP\Controller\Page\ButtonsController;
 use APP\Controller\Page\ClinicController;
 use APP\Controller\Page\EdnaController;
+use APP\Controller\Page\EdnaSampleController;
 use APP\Controller\Page\GroupSampleController;
 use APP\Controller\Page\HomeController;
 use APP\Controller\Page\LicenseController;
@@ -56,6 +57,7 @@ Router::middleware(
     Router::get('/message', [MessageController::class, 'index']),
     Router::get('/nalog', [NalogController::class, 'index']),
     Router::get('/license', [LicenseController::class, 'index']),
+    Router::get('/edna_sample', [EdnaSampleController::class, 'index']),
     
     Router::get('/clinic/edit/{id}', [ClinicController::class, 'edit']),
     Router::get('/users/edit/{id}', [UsersController::class, 'edit']),

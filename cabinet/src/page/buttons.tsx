@@ -15,6 +15,8 @@ if ($('form[name="buttons/Add"]').length != 0) {
             }
         });
     })
+
+    initCreateButton()
 }
 const $table = Datatable.get('buttonslist');
 if ($table) {
@@ -22,4 +24,38 @@ if ($table) {
         TR.push(<td><a href={'/buttons/edit/' + row['id']} className="btn-round btn-content-edit"></a></td>);
         return <tr>{...TR}</tr>;
     }
+}
+function initCreateButton() {
+    const type = localStorage.getItem('type');
+    if (type) {
+        $('[name=type]').val(type);
+        $('[name=type]').trigger('change');
+    }
+    localStorage.removeItem('type');
+
+    let url = localStorage.getItem('url');
+    if (url) {
+        if (url.match(/\{\{[^}]*\}\}/g).length != 0) {
+            url = url.replace(/\{\{[^}]*\}\}/g, '')
+            $('[name="is_url_postfix"]').attr('checked', '');
+        }
+        $('[name="url"]').val(url);
+    }
+
+    localStorage.removeItem('url')
+
+    const phone = localStorage.getItem('phone');
+    if (phone) $('[name="phone"]').val(phone);
+    localStorage.removeItem('phone');
+
+    const payload = localStorage.getItem('payload');
+    if (payload) $('[name="payload"]').val(payload);
+    localStorage.removeItem('payload');
+
+    const text = localStorage.getItem('text');
+
+    if (text) $('[name="text"]').val(text);
+    localStorage.removeItem('text');
+
+
 }

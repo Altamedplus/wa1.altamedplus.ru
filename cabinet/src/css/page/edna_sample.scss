@@ -1,0 +1,27 @@
+img{
+    width: 100px;
+}
+.oferflow{
+    display: flex;
+    overflow: auto;
+    width: 100vw;
+    height:70vh;
+}
+table{
+    border-collapse: collapse;
+    position: relative;
+    thead{
+        background: var(--blue);
+        color: var(--dark-blue);
+        position: sticky;
+        top: 0; /* закрепляем у верхней границы контейнера */
+        z-index: 1; /* чтобы заголовок был поверх других элементов */
+    }
+    td{
+        border-bottom:1px solid var(--line) ;
+        padding: 5px;
+    }
+    th{
+        padding: 10px;
+    }
+}
