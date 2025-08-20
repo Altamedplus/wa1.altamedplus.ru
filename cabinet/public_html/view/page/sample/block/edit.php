@@ -119,9 +119,9 @@ use APP\Form\Form; ?>
         </div>
         <div class="flex-column ">
             <label>Параметры </label>
-            <select>
+            <select name="check_number">
                 <? foreach (CheckNumber::data() as $id => $name) : ?>
-                    <option value="<?= $id ?>"><?= $name ?></option>
+                    <option value="<?= $id ?>" <?= $id == $formInfo['check_number'] ? 'selected' : ''?>><?= $name ?></option>
                 <? endforeach; ?>
             </select>
         </div>
