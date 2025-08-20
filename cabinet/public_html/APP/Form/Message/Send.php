@@ -2,6 +2,7 @@
 
 namespace APP\Form\Message;
 
+use APP\Enum\CheckNumber;
 use APP\Enum\StatusMessage;
 use APP\Form\Form;
 use APP\Model\ButtonsModel;
@@ -25,6 +26,11 @@ class Send extends Form
         $variables = [];
         $result = [];
         $buttons = attr('button');
+        $sample = new SampleModel($sample_id);
+        if ($sample->check_number == CheckNumber::NO_REQUEST && (new MessageModel(['phone' => $phone]))->exist()) {
+            return new Fire('Запрещена повторная отправка', Fire::ERROR);
+        }
+
         foreach ($fields as $name => $field) {
             if (preg_match('/var_([A-Za-z0-9]{1,})/', $name, $m)) {
                 $variables[$m[1]] = $field;

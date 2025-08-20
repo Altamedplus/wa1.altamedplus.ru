@@ -126,5 +126,4 @@ class Add extends Form {
 
         return $fields;
     }
-
 }
