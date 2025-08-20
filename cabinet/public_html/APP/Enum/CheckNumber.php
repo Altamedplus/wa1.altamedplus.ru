@@ -5,7 +5,7 @@ class CheckNumber
 {
     const NO_REQUEST = 1;
     const ASK = 2;
-    const CHECK = 3;
+    const CHECK = 0;
 
     public static function data(): array
     {
