@@ -12,3 +12,4 @@ ALTER TABLE `nalog_clinic_files` ADD `name` VARCHAR(100) NULL DEFAULT NULL AFTER
 ALTER TABLE `nalog_clinic_files` ADD `path` VARCHAR(100) NULL DEFAULT NULL AFTER `url_file`;
 ALTER TABLE `nalog` ADD `hash` VARCHAR(100) DEFAULT NULL;
 ALTER TABLE `sample_messange_wa` CHANGE `check number` `check_number` INT NULL DEFAULT '0';
+ALTER TABLE `nalog_clinic` ADD `license_id` INT NULL DEFAULT NULL AFTER `clinic_id`;

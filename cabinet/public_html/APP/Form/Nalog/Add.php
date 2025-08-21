@@ -28,7 +28,8 @@ class Add extends Form
 
         $nalogClinic->set([
             'status' => $status,
-            'user_id' => Auth::$profile['id']
+            'user_id' => Auth::$profile['id'],
+            'license_id' => attr('licence'),
         ]);
         NalogModel::checkRequestStatus((int)$nalogId);
         return [

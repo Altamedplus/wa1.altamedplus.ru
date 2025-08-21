@@ -5,7 +5,12 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 const $prewContaner = $('[data-prev-pdf]');
 if ($prewContaner.length != 0) { 
     const urls: string[] = [];
-    $('[data-prev-url]').each((e: Rocet) => urls.push(e.data('prevUrl')));
+    $('[data-prev-url]').each((e: Rocet) => {
+        let pdf = e.data('prevUrl')
+        if (pdf) { 
+            urls.push(pdf);
+        }
+    });
     gluePdf(urls).then((glueUrl) => { 
          console.log(glueUrl)
         const iframe = $(<iframe src={glueUrl}></iframe>);

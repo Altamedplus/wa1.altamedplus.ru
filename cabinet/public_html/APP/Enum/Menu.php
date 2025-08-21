@@ -37,16 +37,16 @@ class Menu
             self::EDNA_SAPMLE => (object)['url' => '/edna_sample', 'name' => 'Edna Шаблоны', 'icon' => 'menu.service']
         ];
         if (Auth::$profile['type'] == UT::ADMIN) {
-            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE]);
+            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE], $page[self::EDNA_SAPMLE]);
         }
         if (Auth::$profile['type'] == UT::SENIOR_ADMIN) {
-            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::VARIABLE]);
+            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::VARIABLE],$page[self::EDNA_SAPMLE]);
         }
         if (Auth::$profile['type'] == UT::MARKETING) {
-            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE]);
+            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE], $page[self::EDNA_SAPMLE]);
         }
         if (Auth::$profile['type'] == UT::DOCTOR) {
-            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE]);
+            unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE], $page[self::EDNA_SAPMLE]);
         }
         return $page;
     }

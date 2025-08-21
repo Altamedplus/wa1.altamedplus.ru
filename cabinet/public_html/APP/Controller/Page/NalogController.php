@@ -84,7 +84,8 @@ class NalogController extends PageController
             $nalogClinicFiles = (new NalogClinicFilesModel())->findM(['nalog_clinic_id' => $cl->id]);
             if (!isset($filsUrl[$cl->clinic_id])) $filsUrl[$cl->clinic_id] = [
                 'clinic' => $cl,
-                'files' => []
+                'files' => [],
+                'license' => new LicenseModel($cl->license_id)
             ];
             foreach ($nalogClinicFiles as $file) {
                 $filsUrl[$cl->clinic_id]['files'][] = $file;

@@ -8,12 +8,7 @@ use Pet\Cookie\Cookie;
         <li style="padding-bottom: 5px; padding-top:5px;" evt="btn-roll-up-li">
             <button class="btn btn-roll-up <?=(Cookie::get('menu') == '1' ? "": "btn-roll-up-close")?>"></button>
         </li>
-        <?
-
-        use APP\Module\Auth;
-        use Enum\UsersType;
-
-        foreach ($menu as $category): ?>
+        <? foreach ($menu as $category): ?>
 
             <a class="link" href="<?= $category->url ?>">
                 <li class="">

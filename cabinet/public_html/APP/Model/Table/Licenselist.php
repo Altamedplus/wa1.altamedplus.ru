@@ -33,7 +33,7 @@ class Licenselist extends LicenseModel implements Table
                     $row = $row == 1 ? 'Да': 'Нет';
                 }
                 if ($col == 'url_file') {
-                    $row = '<div class="flex-column" style="width: 200px;"><img src=' . $row . ' /></div>';
+                    $row = '<div class="flex-column" style="width: 190px; height:245px"><embed  style="height:100%" src=' . $row . ' ></embed></div>';
                 }
                 $row = $row ?: "-";
             }
