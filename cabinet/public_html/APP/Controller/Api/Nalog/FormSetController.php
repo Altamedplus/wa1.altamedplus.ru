@@ -49,6 +49,15 @@ class FormSetController extends Controller
                 'is_place' =>  (int)$bitrixId == (int)$form['clinic_receive'] ? 1 : 0
             ], isNotExistCreate: true));
         }
+        // клиника без оформления
+        if (!in_array((int)$form['clinic_receive'], $form['clinic_service'])) {
+            (new NalogClinicModel([
+                'nalog_id' => $nalogId,
+                'clinic_id' => (new Cliniclist(['bitrix_id' => $form['clinic_receive']]))->id,
+                'is_place' => 1,
+                'no_doc' => 1,
+            ], isNotExistCreate: true));
+        }
         return ["ok"];
     }
 }

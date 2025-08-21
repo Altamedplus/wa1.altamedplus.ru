@@ -110,6 +110,7 @@ class Naloglist extends NalogModel implements Table
                             "nalog_clinic.status",
                             "nalog_clinic.user_id",
                             "nalog_clinic.clinic_id",
+                            "nalog_clinic.no_doc",
                             "CONCAT(users.name, ' ', users.surname) as uname"
                         );
                         $m->join('clinic')->on('clinic.id = nalog_clinic.clinic_id');

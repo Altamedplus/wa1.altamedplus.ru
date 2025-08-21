@@ -11,7 +11,9 @@ class NalogModel extends Model
 
     public static function checkRequestStatus(int $nalogId) {
         $nalog = new self($nalogId);
-        $nalogC = (new NalogClinicModel())->findM(['nalog_id' => $nalogId]);
+        $nalogC = (new NalogClinicModel())->findM(callback: function (Model $m) use ($nalogId) {
+            $m->where("no_doc = 0 or no_doc = NULL AND nalog_id = $nalogId");
+        });
         if (NalogStatus::NEW == $nalog->status) {
             foreach ($nalogC as $cl) {
                 if ($cl->status == NalogStatus::WORKING) {

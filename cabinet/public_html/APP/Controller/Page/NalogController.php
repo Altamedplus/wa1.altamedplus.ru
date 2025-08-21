@@ -80,6 +80,7 @@ class NalogController extends PageController
                 'c.*'
             );
             $m->join('clinic c')->on('nalog_clinic.clinic_id = c.id');
+            $m->where('no_doc = 0 or no_doc = NULL');
         });
 
         $filsUrl = [];
