@@ -9,6 +9,7 @@ use APP\Model\NalogCommentModel;
 use APP\Model\NalogModel;
 use APP\Module\Auth;
 use APP\Module\Tool;
+use APP\Module\UI\Fire;
 use Pet\Model\Model;
 use Pet\Request\Request;
 use Pet\Tools\Tools;
@@ -21,7 +22,10 @@ class Add extends Form
         $nalogId = attr('id');
         $clinic_id = supple('clinic');
         $status = attr('status');
-
+        $license = Request::$attribute['licence'] ?? null;
+        if (empty($license)) {
+            return new Fire('Добавьте лицензию для клиники в раздел лицензий', Fire::ERROR);
+        }
         $nalogClinic = new NalogClinicModel(['nalog_id' => $nalogId, 'clinic_id' => $clinic_id]);
         $nalogClinicFiles = (new NalogClinicFilesModel())->find(['nalog_clinic_id' => $nalogClinic->id]);
         $this->complectFile($nalogClinicFiles, $nalogClinic->id);
@@ -29,7 +33,7 @@ class Add extends Form
         $nalogClinic->set([
             'status' => $status,
             'user_id' => Auth::$profile['id'],
-            'license_id' => attr('licence'),
+            'license_id' => $license,
         ]);
         NalogModel::checkRequestStatus((int)$nalogId);
         return [
