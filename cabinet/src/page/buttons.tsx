@@ -35,7 +35,8 @@ function initCreateButton() {
 
     let url = localStorage.getItem('url');
     if (url) {
-        if (url.match(/\{\{[^}]*\}\}/g).length != 0) {
+        const math = url.match(/\{\{[^}]*\}\}/g);
+        if (math && math.length != 0) {
             url = url.replace(/\{\{[^}]*\}\}/g, '')
             $('[name="is_url_postfix"]').attr('checked', '');
         }

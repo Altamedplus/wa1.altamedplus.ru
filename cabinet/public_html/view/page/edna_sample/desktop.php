@@ -39,7 +39,7 @@
                     <p class="m-0" data-url="<?=$b['url']?>">Url: <?=$b['url']?></p>
                     <p class="m-0" data-phone="<?=$b['phone']?>">Phone: <?=$b['phone']?></p>
                     <p class="m-0" data-payload="<?=$b['payload]']?>">Payload: <?=$b['payload]']?></p>
-                    <button class="btn-round btn-content-edit" evt="create-btn"></button>
+                    <button class="btn-round btn-content-edit m-15" evt="create-btn"></button>
                 <?endforeach?>
             </div>
         </td>
