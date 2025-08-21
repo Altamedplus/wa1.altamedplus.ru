@@ -1,6 +1,7 @@
 <?php
 
 use APP\Controller\AjaxController;
+use APP\Controller\Cron\AuthReset;
 use APP\Controller\Cron\MessageSend;
 use APP\Controller\ForgotController;
 use APP\Controller\LoginController;
@@ -84,3 +85,4 @@ Router::middleware(
 );
 Router::post('/modal', [ModalController::class, 'index']);
 Router::get('/cron/message/send', [MessageSend::class, 'index']);
+Router::get('/cron/auth/reset', [AuthReset::class, 'index']);

@@ -34,9 +34,6 @@ use Pet\Cookie\Cookie;
     </ul>
     <div class="block-button">
         <div class="flex-row">
-            <? //if //(Auth::$profile['type'] == UsersType::CLIENT): ?>
-                <!-- <button class="btn-submit-blue" evt="btn-sit-master">Стать Мастером</button> -->
-            <?// endif; ?>
         </div>
     </div>
 </div>
