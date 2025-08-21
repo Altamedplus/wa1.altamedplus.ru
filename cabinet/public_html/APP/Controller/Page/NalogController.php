@@ -3,6 +3,7 @@
 namespace APP\Controller\Page;
 
 use APP\Controller\PageController;
+use APP\Enum\NalogStatus;
 use APP\Model\ClinicModel;
 use APP\Model\LicenseModel;
 use APP\Model\NalogClinicFilesModel;
@@ -71,6 +72,8 @@ class NalogController extends PageController
             ]);
         }
 
+        $nalog->status = NalogStatus::ISSUED;
+
         $nalogClinic = (new NalogClinicModel())->findM(['nalog_id' => $nalog->id], function (Model $m){
             $m->select(
                 'nalog_clinic.*',
@@ -81,6 +84,8 @@ class NalogController extends PageController
 
         $filsUrl = [];
         foreach ($nalogClinic as $cl) {
+
+            $cl->status = NalogStatus::ISSUED;
             $nalogClinicFiles = (new NalogClinicFilesModel())->findM(['nalog_clinic_id' => $cl->id]);
             if (!isset($filsUrl[$cl->clinic_id])) $filsUrl[$cl->clinic_id] = [
                 'clinic' => $cl,

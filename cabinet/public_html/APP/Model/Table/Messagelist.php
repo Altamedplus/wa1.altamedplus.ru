@@ -56,6 +56,7 @@ class Messagelist extends MessageModel implements Table
         $this->join('sample_messange_wa smw')->on(['smw.id', 'message.sample_id']);
         $this->where($where);
         $this->dateTimeFilter();
+        // file_put_contents('data.sql',$this->toString());
         $this->st = (clone $this)->select("COUNT(*) as st")->fetch(false)['st'];
     }
 

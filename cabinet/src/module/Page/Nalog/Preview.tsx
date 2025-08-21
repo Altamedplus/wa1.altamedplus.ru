@@ -13,7 +13,7 @@ if ($prewContaner.length != 0) {
     });
     gluePdf(urls).then((glueUrl) => { 
          console.log(glueUrl)
-        const iframe = $(<iframe src={glueUrl}></iframe>);
+        const iframe = $(<embed src={glueUrl} ></embed>);
         $prewContaner.add(iframe);
     })
 }

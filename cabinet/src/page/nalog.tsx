@@ -75,8 +75,9 @@ $('[evt="add-field"]').on('click', function () {
 });
 
 
-window['reloadTable'] = () => { 
+window['reloadTable'] = () => {
     $table.reload();
 }
+
 
 

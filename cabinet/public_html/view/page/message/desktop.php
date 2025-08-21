@@ -81,7 +81,7 @@ use APP\Model\UsersModel;
                     <input type="text" name="message.request_id" placeholder="request_id" value="" />
                 </th>
                 <th alias="clinic_name">
-                     <select name="nc.clinic_id" >
+                     <select name="message.clinic_id" >
                         <option value="">-</option>
                         <? foreach ((new ClinicModel())->findM() as $clinic) : ?>
                             <option value="<?= $clinic->id ?>"><?= $clinic->name ?></option>

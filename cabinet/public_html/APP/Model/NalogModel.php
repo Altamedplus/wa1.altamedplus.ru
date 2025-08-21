@@ -20,14 +20,21 @@ class NalogModel extends Model
             }
         }
 
-        if (in_array($nalog->status, [NalogStatus::WORKING, NalogStatus::READY])) {
-            $isReady = true;
+        if (in_array($nalog->status, [NalogStatus::WORKING, NalogStatus::READY, NalogStatus::ISSUED])) {
+            $isReady = [];
+            $isIssued = [];
             foreach ($nalogC as $cl) {
-                if ($cl->status != NalogStatus::READY) {
-                    $isReady = false;
+                if ($cl->status == NalogStatus::READY || $cl->status == NalogStatus::ISSUED) {
+                    $isReady[] = 1;
+                }
+                if ($cl->status == NalogStatus::ISSUED) {
+                    $isIssued[] = 1;
                 }
             }
-            $isReady ? $nalog->status = NalogStatus::READY : $nalog->status = NalogStatus::WORKING;
+            !empty($isReady) && count($isReady) == count($nalogC) ? $nalog->status = NalogStatus::READY : $nalog->status = NalogStatus::WORKING;
+            if (!empty($isIssued) && count($isIssued) == count($nalogC)) {
+                $nalog->status = NalogStatus::ISSUED;
+            }
         }
     }
 }
