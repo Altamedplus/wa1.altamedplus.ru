@@ -3,7 +3,6 @@ import { $, Rocet } from "@rocet/rocet";
 import { integ } from "@rocet/integration";
 import { UI } from "@rocet/UI";
 import { eventAdd } from "../../Tools/ElementsTool";
-import { select } from "@rocet/RocetNodeElements";
 
 
 
@@ -85,4 +84,16 @@ $('select[ui=multi]').render((Rocet: Rocet, i: number) => {
             {...spVal}
         </div>
     </div>
+});
+
+$('select[multiple] > option').on('click', function (ev:MouseEvent) {
+    ev.preventDefault();
+    if (this.selected) {
+        this.selected = false
+    } else { 
+        this.selected = true
+    }
+})
+$('select[multiple]').on('mousedown', function(ev:MouseEvent) {
+    ev.preventDefault();
 });
