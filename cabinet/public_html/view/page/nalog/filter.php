@@ -15,8 +15,8 @@
         </div>
     </th>
     <th style="max-width: 160px;"><input type="text"  name="nalog.phone" placeholder="Контакты" value="" style="width: 160px;" /></th>
-    <th><input type="text" placeholder="ФИО пациента" name="nalog.name" value="" sign="LIKE" /></th>
-    <th>
+    <th style="max-width: 220px;"><input type="text" placeholder="ФИО пациента" name="nalog.name" value="" sign="LIKE" /></th>
+    <th style="max-width: 220px;">
         <div class="flex-column">
             <input type="text" placeholder="ФИО налогоплательщика" name="nalog.taxpayer_fio" sign="LIKE" value="" />
             <input type="text" placeholder="ИНН" name="nalog.inn" sign="LIKE" value="" />

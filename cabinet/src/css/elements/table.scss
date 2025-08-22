@@ -163,7 +163,7 @@
                 background: var(--colors-theme-table);
                 color: var(--colors-theme-table-font-invert);
                 border: none;
-                height: 100%;
+                // height: 100%;
 
                 &:hover {
                     background: var(--colors-theme-table-hover);
@@ -196,6 +196,11 @@
 
             input[name=search]:focus {
                 box-shadow: none;
+            }
+            & th{
+                & input,& select{
+                    width: 100%;
+                } 
             }
         }
 
@@ -230,10 +235,6 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-            }
-
-            tr:nth-of-type(even) {
-                background-color: var(--colors-theme-table-line);
             }
 
             tr:hover {

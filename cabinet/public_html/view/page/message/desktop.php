@@ -28,7 +28,7 @@ use APP\Model\UsersModel;
                     <input type="number" min="1" name="message.id" placeholder="ID" value="<?= $filter['id'] ?>" sign="=" />
                 </th>
                 <th alias="phone">
-                    <input name="phone" placeholder="Телефон" value="<?= $filter['phone'] ?>" sign="LIKE" />
+                    <input name="message.phone" placeholder="Телефон" value="<?= $filter['phone'] ?>" sign="LIKE" />
                 </th>
                 <th alias="cdate">
                     <div class="row">

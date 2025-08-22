@@ -49,7 +49,7 @@ class Naloglist extends NalogModel implements Table
             'tl.name taxpayer_name',
             'nc.id clinic',
             "nalog.phone as contact",
-            "CONCAT(nalog.name, '<br/>', DATE_FORMAT(date_birth, '%d.%m.%Y'),'<br>', 'Налоговый период: ', nalog_year) as data_sick",
+            "CONCAT(nalog.name, '<br/>', DATE_FORMAT(date_birth, '%d.%m.%Y'),'<br>', 'Период: ', nalog_year) as data_sick",
             "CONCAT(taxpayer_fio, '<br/>', ' ИНН: ', inn) as data_nalog"
         );
         $this->where($where);

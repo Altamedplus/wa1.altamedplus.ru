@@ -2,6 +2,7 @@
 namespace APP\Model\Table;
 
 use APP\Enum\StatusMessage;
+use APP\Form\Form;
 use APP\Model\MessageModel;
 use APP\Model\Table;
 
@@ -24,6 +25,10 @@ class Messagelist extends MessageModel implements Table
     {
         if (in_array($k, ['message.status', 'message.sample_id', 'message.clinic_id', 'message.user_id']) && empty($v[0])) {
             return false;
+        }
+        if ($k == 'message.phone') {
+            $v['value'] =  Form::sanitazePhone($v['value']);
+            if (empty($v['value'])) return false;
         }
         if (in_array($k, ['message.cdate.from', 'message.cdate.to'])){
             $this->dateTime['message.cdate'][] = $v;
