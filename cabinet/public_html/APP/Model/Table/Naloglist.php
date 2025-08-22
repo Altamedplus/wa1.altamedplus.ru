@@ -19,6 +19,7 @@ class Naloglist extends NalogModel implements Table
     public $date = [];
     public $dateTime = [];
     public $time = [];
+    public $contact = "";
 
     public function renameFilter(string &$k, array|string &$v): bool
     {
@@ -31,11 +32,17 @@ class Naloglist extends NalogModel implements Table
             $this->dateTime['nalog.cdate'][] =  $v . ($k == 'nalog.cdate.from' ? ' 00:00:00' : ' 23:59:59');
             return false;
         }
+
+        if ($k == 'nalog.phone') {
+            $this->contact = $v;
+            return false;
+        }
         return true;
     }
 
     public function getDatatable(array $filters, string $where): void
     {
+        $contact = $this->contact;
         $this->select(
             'nalog.*',
             "CONCAT('# ', nalog.id) as request",
@@ -46,10 +53,13 @@ class Naloglist extends NalogModel implements Table
             "CONCAT(taxpayer_fio, '<br/>', ' ИНН: ', inn) as data_nalog"
         );
         $this->where($where);
+        if (!empty($contact)) {
+            $this->where(" (nalog.phone LIKE '%$contact%' OR nalog.email LIKE '%$contact%') ");
+        }
         $this->dateTimeFilter();
         $this->join('nalog_clinic nc')->on("nalog.id = nc.nalog_id AND nc.is_place = 1");
         $this->join('taxpayer_list tl')->on(['tl.type_id','taxpayer_type_id']);
-        // file_put_contents('data.sql', $this->toString());
+        file_put_contents('data.sql', $this->toString());
         $this->st = (clone $this)->select("COUNT(*) as st")->fetch(false)['st'];
         $this->groupBy('nalog.id');
         $this->orderBy('nalog.id', "DESC");

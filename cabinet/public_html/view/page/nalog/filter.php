@@ -14,7 +14,7 @@
             </select>
         </div>
     </th>
-    <th><input type="text" placeholder="79999999999" value="" style="width: 90px;" /></th>
+    <th style="max-width: 160px;"><input type="text"  name="nalog.phone" placeholder="Контакты" value="" style="width: 160px;" /></th>
     <th><input type="text" placeholder="ФИО пациента" name="nalog.name" value="" sign="LIKE" /></th>
     <th>
         <div class="flex-column">
