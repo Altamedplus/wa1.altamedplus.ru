@@ -53,16 +53,16 @@ use APP\Form\Form; ?>
                 <input type="text" name="video_url" placeholder="Url video" value="<?=$headerSample?->video_url?>"></input>
             </div>
         </div>
-
         <div class="flex-column ">
             <label>Группа Шаблона</label>
             <select name="group_type">
                 <? $gType = $formInfo['group_type'] ?? null ?>
                 <? foreach ($groupSample as  $gsample) : ?>
                     <option value="<?= $gsample['id'] ?>" <?= ($gType == $gsample['id'] ? "selected" : "") ?>><?= $gsample['name'] ?></option>
-                <? endforeach; ?>
-            </select>
-        </div>
+                    <? endforeach; ?>
+                </select>
+            </div>
+            <div class="flex-row">
         <div class="flex-column">
             <label>Тип Пользователя</label>
             <select name="type_users[]" multiple>
@@ -83,7 +83,7 @@ use APP\Form\Form; ?>
                 <? endforeach; ?>
             </select>
         </div>
-
+        </div>
         <div class="flex-column ">
             <label>Тип Кнопки</label>
             <select name="buttons[]" multiple>

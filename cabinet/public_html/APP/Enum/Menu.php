@@ -24,17 +24,17 @@ class Menu
     {
         $page = [
             self::HOME => (object)['url' => '/', 'name' => 'Сообщения', 'icon' => 'menu.message'],
-            self::MESSAGE => (object)['url' => '/message', 'name' => 'Отправленные', 'icon' => 'menu.message'],
+            self::MESSAGE => (object)['url' => '/message', 'name' => 'Отправленные', 'icon' => 'menu.mail'],
             self::CLINIC => (object)['url' => '/clinic', 'name' => 'Клиники', 'icon' => 'menu.home'],
             self::USERS => (object)['url' => '/users', 'name' => 'Пользователи', 'icon' => 'menu.users'],
-            self::BUTTONS => (object)['url' => '/buttons', 'name' => 'Кнопки', 'icon' => 'menu.service'],
-            self::VARIABLE => (object)['url' => '/variable', 'name' => 'Переменные', 'icon' => 'menu.post'],
-            self::SAMPLE => (object)['url' => '/sample', 'name' => 'Шаблоны', 'icon' => 'menu.post'],
-            self::GROUP_SAMPLE => (object)['url' => '/group_sample', 'name' => 'Группы Шаблонов', 'icon' => 'menu.post'],
-            self::EDNA => (object)['url' => '/edna', 'name' => 'Edna api', 'icon' => 'menu.post'],
-            self::NALOG => (object)['url' => '/nalog', 'name' => 'Налоговый вычет', 'icon' => 'menu.service'],
-            self::LICENSE => (object)['url' => '/license', 'name' => 'Лицензии', 'icon' => 'menu.service'],
-            self::EDNA_SAPMLE => (object)['url' => '/edna_sample', 'name' => 'Edna Шаблоны', 'icon' => 'menu.service']
+            self::BUTTONS => (object)['url' => '/buttons', 'name' => 'Кнопки', 'icon' => 'menu.minus-square'],
+            self::VARIABLE => (object)['url' => '/variable', 'name' => 'Переменные', 'icon' => 'menu.check-square'],
+            self::SAMPLE => (object)['url' => '/sample', 'name' => 'Шаблоны', 'icon' => 'menu.credit-card'],
+            self::GROUP_SAMPLE => (object)['url' => '/group_sample', 'name' => 'Группы Шаблонов', 'icon' => 'menu.layout'],
+            self::NALOG => (object)['url' => '/nalog', 'name' => 'Налоговый вычет', 'icon' => 'menu.file-edit'],
+            self::LICENSE => (object)['url' => '/license', 'name' => 'Лицензии', 'icon' => 'menu.file-text'],
+            self::EDNA => (object)['url' => '/edna', 'name' => 'Edna api', 'icon' => 'menu.union'],
+            self::EDNA_SAPMLE => (object)['url' => '/edna_sample', 'name' => 'Edna Шаблоны', 'icon' => 'menu.download-cloud']
         ];
         if (Auth::$profile['type'] == UT::ADMIN) {
             unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE], $page[self::EDNA_SAPMLE]);
