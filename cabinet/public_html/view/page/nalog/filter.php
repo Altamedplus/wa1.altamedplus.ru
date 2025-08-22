@@ -32,7 +32,7 @@
             <input type="date" name="nalog.cdate.to" value="<?= $filter['cdate'] ?? '' ?>" />
         </div>
     </th>
-    <th></th>
+
     <th></th>
     <th>
         <div class="flex-row">

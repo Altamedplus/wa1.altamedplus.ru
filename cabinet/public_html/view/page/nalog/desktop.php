@@ -31,7 +31,6 @@
                 <th alias="data_sick">Данные пациента</th>
                 <th alias="data_nalog">Данные налогоплательщика</th>
                 <th alias="cdate">Дата Создания</th>
-                <th alias="comment">Коментарии</th>
                 <th alias="tools">Действия</th>
                 <th alias="clinic">Клиники</th>
             </tr>
