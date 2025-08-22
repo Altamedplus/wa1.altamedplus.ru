@@ -14,12 +14,13 @@
 .clinic-row{
     display: inline-grid;
     grid-auto-flow: column;
-    grid-template-columns: 300px 130px 120px 70px;
-    justify-items: start;
+    grid-template-columns: 160px 130px 120px 70px;
+    justify-items: center;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
 
     p{
+        text-align: center;
         margin-right: 10px;
     }
     // border-bottom: 1px solid var(--line-2);

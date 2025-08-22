@@ -32,7 +32,6 @@ use Pet\Cookie\Cookie;
         limit="50"
         pagination="0"
         countsTab="0"
-        colors="0"
         showColums="0">
         <thead>
             <tr name="column">

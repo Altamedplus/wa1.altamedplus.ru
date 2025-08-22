@@ -266,9 +266,9 @@ export class Datatable {
                 <div className="limited-select">{limitedSelect}</div>
                 {/* {colors} */}
                 {colums}
-                {/* <select type="multi-issuing" multiple label="Видимость столбцов">
+                { <select type="multi-issuing" multiple label="Видимость столбцов">
                     {...select}
-                </select> */}
+                </select> }
                 <div className="block-buttons">{...BlockButtons}</div>
             </div>
         })

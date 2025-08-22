@@ -20,7 +20,6 @@
         limit="10"
         pagination="1"
         countsTab="1"
-        colors="1"
         showColums="1"
         scrolling="1">
         <thead>
