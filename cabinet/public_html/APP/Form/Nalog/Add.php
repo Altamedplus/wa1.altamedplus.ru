@@ -5,14 +5,11 @@ namespace APP\Form\Nalog;
 use APP\Form\Form;
 use APP\Model\NalogClinicFilesModel;
 use APP\Model\NalogClinicModel;
-use APP\Model\NalogCommentModel;
 use APP\Model\NalogModel;
 use APP\Module\Auth;
 use APP\Module\Tool;
 use APP\Module\UI\Fire;
-use Pet\Model\Model;
 use Pet\Request\Request;
-use Pet\Tools\Tools;
 
 class Add extends Form
 {

@@ -59,7 +59,6 @@ class Naloglist extends NalogModel implements Table
         $this->dateTimeFilter();
         $this->join('nalog_clinic nc')->on("nalog.id = nc.nalog_id AND nc.is_place = 1");
         $this->join('taxpayer_list tl')->on(['tl.type_id','taxpayer_type_id']);
-        file_put_contents('data.sql', $this->toString());
         $this->st = (clone $this)->select("COUNT(*) as st")->fetch(false)['st'];
         $this->groupBy('nalog.id');
         $this->orderBy('nalog.id', "DESC");
@@ -76,13 +75,9 @@ class Naloglist extends NalogModel implements Table
         foreach ($items as $k => &$rows) {
             foreach ($rows as $name => &$row) {
 
-                $rows['comment'] = View::getTemplate('template.nalog.btnComment', [
-                    'request_id' => $rows['id'],
-                    'count' => count((new NalogCommentModel())->find(['nalog_id' => $rows['id']]))
-                ]);
-
                 $rows['tools'] = View::getTemplate('template.nalog.btnTools', [
                     'nalog_id' => $rows['id'],
+                    'count' => count((new NalogCommentModel())->find(['nalog_id' => $rows['id']])),
                     'isPrint' => $rows['status'] == NalogStatus::READY || $rows['status'] == NalogStatus::ISSUED,
                     'isWa' =>  in_array($rows['status'], [NalogStatus::READY, NalogStatus::ISSUED]) && (int)$rows['is_send'] != 1
                 ]);
