@@ -34,7 +34,7 @@ use Pet\Model\Model;
                 <? endforeach; ?>
             </div>
             <div class="flex-column-center">
-                <form class="form-type-1" name="<?= $form_name ?>" csrf-token="<?= Form::csrf(true) ?>">
+                <form class="form-type-1" name="<?= $form_name ?>" csrf-token="<?= Form::csrf() ?>">
                     <input type="hidden" name="id" value="<?= $id ?>" />
                     <textarea name="comment"></textarea>
                     <button type="submit" class="btn-submit-blue">Новый</button>

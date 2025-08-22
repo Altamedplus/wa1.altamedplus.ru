@@ -39,6 +39,7 @@
             font-weight: 600;
             color: var(--dark-blue);
             margin-left: 5px;
+            min-height: 30px;
         }
 
         i {
@@ -135,6 +136,7 @@
         background: none;
         max-width: min-content;
         cursor: pointer;
+        z-index: 9999;
 
         &:hover::after {
             color: rgb(143, 8, 8);
