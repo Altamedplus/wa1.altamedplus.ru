@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    div:nth-child(2n){
+    .clinic-row:nth-child(1n+2){
         border-top: 1px solid var(--line-2);
     }
 }
