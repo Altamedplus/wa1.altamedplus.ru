@@ -100,11 +100,11 @@ export class Captcha {
         let input = ev.target as HTMLInputElement
         let str = input.value
         if (str.length == 4) {
-            console.log(Number(str) == obj.currentNumber)
             if (Number(str) == obj.currentNumber) {
                 obj.callback()
             } else {
                 input.setAttribute('data-error', '1');
+                this.generateCaptcha();
             }
         } else { 
             input.removeAttribute('data-error')
