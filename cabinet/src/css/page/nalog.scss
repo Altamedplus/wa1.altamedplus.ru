@@ -11,6 +11,11 @@
         margin: 3px 0px;
     }
 }
+[data-modal="history"] {
+    background-size: 30px 24px;
+    background-position-x: 4.5px;
+    background-position-y: 7px;
+}
 .clinic-row{
     display: inline-grid;
     grid-auto-flow: column;
@@ -129,12 +134,18 @@ table{
         background-color: var(--blue);
     }
 }
-.btn-content-message-circle{
+[data-modal="nalog"],[data-modal="history"] {
     position: relative;
     .tab{
         position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         top: -10px;
         right: -18px;
+        padding: 0px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
     }
 }

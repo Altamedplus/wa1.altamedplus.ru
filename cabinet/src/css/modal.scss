@@ -2,6 +2,7 @@
     position: relative;
     // max-height: 80vh;
     // overflow: auto;
+    width: 100%;
 
     &-carset {
         position: fixed;
@@ -130,7 +131,7 @@
 
     .close-modal {
         position: absolute;
-        right: 5px;
+
         right: 5px;
         border: none;
         background: none;
@@ -150,4 +151,34 @@
 
         }
     }
+    .block_body{
+        max-height: 80vh;
+        overflow: auto;
+    }
+    .history{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+       
+        &-name {
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 5px;
+        
+                b {
+                    font-weight: 600;
+                    font-size: 14px;
+                    margin-right: 10px;
+                }
+            }
+        
+        &-data {
+            p{
+                margin: 3px;
+                font-size: 13px;
+            }
+            margin-bottom: 10px;
+        }
+    }
+
 }

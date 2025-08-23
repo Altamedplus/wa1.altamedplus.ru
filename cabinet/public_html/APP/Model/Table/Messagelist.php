@@ -10,7 +10,7 @@ class Messagelist extends MessageModel implements Table
 {
     public $st = 0;
     private $dateTime = [
-        'message.cdate'=> []
+        'message.cdate' => []
     ];
 
     private $time = [

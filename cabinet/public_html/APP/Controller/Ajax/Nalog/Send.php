@@ -3,7 +3,10 @@
 namespace APP\Controller\Ajax\Nalog;
 
 use APP\Controller\AjaxController;
+use APP\Enum\HistoryType;
 use APP\Enum\StatusMessage;
+use APP\Form\Form;
+use APP\Model\HistoryModel;
 use APP\Model\MessageModel;
 use APP\Model\NalogClinicModel;
 use APP\Model\NalogModel;
@@ -37,6 +40,14 @@ class Send extends AjaxController
         ]);
 
         $nalog->is_send = 1;
+        (new HistoryModel())->create([
+            'entity_id' => $nalog->id,
+            'user_id' => Auth::$profile['id'],
+            'type' => HistoryType::ADD,
+            'field' => 'nalog.is_send',
+            'entity' => 'nalog',
+            'new_change' => "Отправил на номер телефона " . Form::unsaitazePhone($nalog->phone)
+        ]);
         return [$messangeId];
     }
 }

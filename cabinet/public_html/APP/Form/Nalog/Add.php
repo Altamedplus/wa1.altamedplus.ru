@@ -3,11 +3,15 @@
 namespace APP\Form\Nalog;
 
 use APP\Enum\HistoryType;
+use APP\Enum\NalogStatus;
+use APP\Enum\UsersType;
 use APP\Form\Form;
+use APP\Model\ClinicModel;
 use APP\Model\HistoryModel;
 use APP\Model\NalogClinicFilesModel;
 use APP\Model\NalogClinicModel;
 use APP\Model\NalogModel;
+use APP\Model\UsersModel;
 use APP\Module\Auth;
 use APP\Module\Tool;
 use APP\Module\UI\Fire;
@@ -17,12 +21,17 @@ class Add extends Form
 {
     public $auth = true;
     public $entity_id = null;
+    public $subentity_id = null;
+
     public function submit(Request $request)
     {
         $nalogId = attr('id');
         $this->entity_id = $nalogId;
         $clinic_id = supple('clinic');
         $status = attr('status');
+        if (Auth::$profile['type'] == UsersType::ADMIN) {
+            $status = ($status == NalogStatus::NEW ? NalogStatus::WORKING : $status);
+        }
         $license = Request::$attribute['licence'] ?? null;
         if (empty($license)) {
             return new Fire('Добавьте лицензию для клиники в раздел лицензий', Fire::ERROR);
@@ -37,6 +46,8 @@ class Add extends Form
         unset($history['cdate']);
 
         $nalogClinic = new NalogClinicModel(['nalog_id' => $nalogId, 'clinic_id' => $clinic_id]);
+        $this->subentity_id = $nalogClinic->clinic_id;
+
         $nalogClinicFiles = (new NalogClinicFilesModel())->find(['nalog_clinic_id' => $nalogClinic->id]);
         $this->complectFile($nalogClinicFiles, $nalogClinic->id);
         $data = [
@@ -49,7 +60,7 @@ class Add extends Form
 
         NalogModel::checkRequestStatus((int)$nalogId);
         $nalog->reboot();
-        $this->historyEdit($nalog, $history);
+        $this->historyEdit($nalog, $history, 'nalog');
         return [
             'type' => 'reload'
         ];
@@ -81,16 +92,17 @@ class Add extends Form
                     'origin' => $fileOrigin[$i] ?? '',
                     'relat' => $fileRelat[$i] ?? ''
                 ]);
-                $this->history([$item], 'nalog_clinic_files.name', HistoryType::ADD);
+                $this->history(['<a href="' . $fileUrl[$i] . '">' . $fileOrigin[$i] . '</a>'], 'nalog_clinic_files.name', HistoryType::ADD);
             }
 
             // Удалить
             if (!in_array($item, $fileName) && in_array($item, $fileNameN)) {
                 foreach ($nalogClinicFiles as $row) {
                     if ($row['name'] == $item) {
-                        (new NalogClinicFilesModel(['id' => $row['id']]))->delete();
+                        $filesNC = new NalogClinicFilesModel(['id' => $row['id']]);
                         $this->deleteFile($row['path'], $row['name']);
-                        $this->history([$row['name']], 'nalog_clinic_files.name', HistoryType::DELETE);
+                        $filesNC->delete();
+                        $this->history([' <b>' . $filesNC->origin . '</b>'], 'nalog_clinic_files.name', HistoryType::DELETE);
                     }
                 }
             }
@@ -110,10 +122,11 @@ class Add extends Form
         (new HistoryModel())->create([
             'entity' => 'nalog',
             'entity_id' => $this->entity_id,
+            'subentity_id' => $this->subentity_id,
             'type' => $type,
             'field' => $field,
             'new_change' => $change[0],
-            'old_change' => $change[1],
+            'old_change' => $change[1] ?? null,
             'user_id' => Auth::$profile['id']
         ]);
     }

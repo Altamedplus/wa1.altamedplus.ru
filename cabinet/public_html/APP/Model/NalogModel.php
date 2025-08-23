@@ -3,6 +3,7 @@
 namespace APP\Model;
 
 use APP\Enum\NalogStatus;
+use APP\Module\HistoryFields;
 use Pet\Model\Model;
 
 class NalogModel extends Model
@@ -38,5 +39,27 @@ class NalogModel extends Model
                 $nalog->status = NalogStatus::ISSUED;
             }
         }
+    }
+
+    public static function getHistory(int $nalogId) {
+        $data = [];
+        $history = (new HistoryModel())->findM([
+            'entity' => 'nalog',
+            'entity_id' => $nalogId
+        ], callback: function (Model $m) {
+            $m->select(
+                'history.*',
+                "CONCAT(users.name, ' ' , users.surname) user_name",
+            );
+            $m->join('users')->on('history.user_id = users.id');
+        });
+        foreach ($history as $i => $h) {
+            if (!isset($data[$h->cdate])) $data[$h->cdate] = [
+                'user' => $h->user_name,
+                'text' => []
+            ];
+            $data[$h->cdate]['text'][] = (new HistoryFields($h))->get();
+        }
+        return $data;
     }
 }

@@ -3,6 +3,7 @@ CREATE TABLE `history`
   `id` INT NOT NULL AUTO_INCREMENT ,
   `entity` VARCHAR(20) DEFAULT NULL,
   `entity_id` INT,
+  `subentity_id` INT DEFAULT NULL,
   `type` INT(1) DEFAULT '1',
   `user_id` INT DEFAULT '0',
   `field` VARCHAR(40),

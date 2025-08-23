@@ -5,6 +5,7 @@ namespace APP\Model\Table;
 use APP\Enum\NalogStatus;
 use APP\Enum\VariableType;
 use APP\Form\Form;
+use APP\Model\HistoryModel;
 use APP\Model\NalogClinicModel;
 use APP\Model\NalogCommentModel;
 use APP\Model\NalogModel;
@@ -79,7 +80,8 @@ class Naloglist extends NalogModel implements Table
                     'nalog_id' => $rows['id'],
                     'count' => count((new NalogCommentModel())->find(['nalog_id' => $rows['id']])),
                     'isPrint' => $rows['status'] == NalogStatus::READY || $rows['status'] == NalogStatus::ISSUED,
-                    'isWa' =>  in_array($rows['status'], [NalogStatus::READY, NalogStatus::ISSUED]) && (int)$rows['is_send'] != 1
+                    'isWa' =>  in_array($rows['status'], [NalogStatus::READY, NalogStatus::ISSUED]) && (int)$rows['is_send'] != 1,
+                    'historyCount' => count((new HistoryModel())->find(['entity' => 'nalog', 'entity_id' => $rows['id']]))
                 ]);
 
                 if ($name == 'request') {

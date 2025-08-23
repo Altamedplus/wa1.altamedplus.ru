@@ -5,7 +5,7 @@
 <tr name="filter">
     <th>
         <div class="flex-colum">
-            <input type="text" class="w-100" placeholder="Заявка" value="" />
+            <input type="text" class="w-100" name="nalog.id" placeholder="Заявка" value="" />
             <select name="nalog.status" class="w-100">
                 <option value="">-</option>
                 <? foreach (NalogStatus::data() as $id => $status) : ?>
