@@ -7,7 +7,7 @@ if ($prewContaner.length != 0) {
     const urls: string[] = [];
     $('[data-prev-url]').each((e: Rocet) => {
         let pdf = e.data('prevUrl')
-        if (pdf) { 
+        if (pdf && isPdf(pdf)) { 
             urls.push(pdf);
         }
     });
@@ -33,4 +33,7 @@ async function gluePdf(urls: string[]) {
     const mergedPdfBytes = await mergedPdf.save();
     const blob = new Blob([mergedPdfBytes as BlobPart], { type: 'application/pdf' });
     return URL.createObjectURL(blob);
+}
+function isPdf(url:string):boolean { 
+    return url.split('.').pop()?.toLowerCase() == 'pdf';
 }
