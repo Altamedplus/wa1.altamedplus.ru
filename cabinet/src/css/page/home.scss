@@ -159,6 +159,44 @@
             display: flex;
             flex-wrap: wrap;
             width: 100%;
+            transition: all 0.8s;
+        }
+        .line-close{
+            position: absolute;
+            height: 0;
+            transition: all 0.8s;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .collapse{
+            &-open{
+                position: relative;
+                cursor: pointer;
+                &::after{
+                    position: absolute;
+                    content: "\2039";
+                    padding: 11px 4px;
+                    font-size: 27px;
+                    top: -19px;
+                    transform-origin: center;
+                    transform: rotate(-90deg);
+                    transition: all 0.7s;
+                }
+            }
+            &-close{
+                position: relative;
+                cursor: pointer;
+                 &::after{
+                    position: absolute;
+                    content: "\2039";
+                    padding: 0px 12px;
+                    font-size: 27px;
+                    top:-9px;
+                    transform-origin: center;
+                    transition: all 0.7s;
+                    transform: rotate(90deg);
+                }
+            }
         }
 
         .sample {
