@@ -114,8 +114,8 @@ function eventMessange($messange: Rocet, $dynamic: Rocet) {
 }
 function evenSelect() { 
     const $select = $('select[data-clinic]');
-    const $address = $("[data-messange=address]");
-    const $clinic = $("[data-messange=clinic]");
+    const $address = $("[data-consant=address]");
+    const $clinic = $("[data-consant=clinic]");
     let nameClinic = '';
     let address = '';
     $select.find('option').each(($opt: Rocet) => {

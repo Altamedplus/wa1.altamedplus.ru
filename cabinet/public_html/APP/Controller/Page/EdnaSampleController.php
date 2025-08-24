@@ -19,7 +19,7 @@ class EdnaSampleController extends PageController
         $subjectId = $response['response'][0]['subjectId'];
         $response2 =  $wa->getSample([
             'subjectId' => $subjectId,
-            'matcherTypes' => ["OPERATOR", "USER", "CUSTOM"]
+            'matcherTypes' => ["USER"]
         ]);
 
         view('page.edna_sample.init', [

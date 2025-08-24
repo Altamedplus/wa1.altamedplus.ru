@@ -22,7 +22,7 @@ class SampleModel extends Model
                     $content = "<span class='btn btn-green' data-messange='$nameUniq'  data-content='$name'>$name</span>";
                     $text = str_replace('{{'.$nameUniq.'}}', $content, $text);
                 } elseif (in_array($nameUniq, VRT::keys())) {
-                    $content = "<span class='btn btn-green' data-messange='$nameUniq'  data-content='".VRT::get($nameUniq)."'>".VRT::get($nameUniq)."</span>";
+                    $content = "<span class='btn btn-green' data-consant='$nameUniq'  data-content='".VRT::get($nameUniq)."'>".VRT::get($nameUniq)."</span>";
                     $text = str_replace('{{'.$nameUniq.'}}', $content, $text);
                 }
             }

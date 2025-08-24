@@ -35,6 +35,7 @@ function getData(date: string) {
     ajax.send('status_get', {
         date: date
     }).then((data) => {
+        if (data.html == '') return;
         const $content = $(data.html);
         const $contaner = $('.open-items');
         const oldLength = $contaner.find('.open-item').length;

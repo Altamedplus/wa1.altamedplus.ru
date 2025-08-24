@@ -67,7 +67,7 @@ class Get extends AjaxController
         $message .= implode('<br/>', $this->getMessageButton($buttons));
         return [
             'header' => '',
-            'html'=>$result,
+            'html'=> $result,
             'message' => $message,
             'button' => $dataButtons,
         ];
