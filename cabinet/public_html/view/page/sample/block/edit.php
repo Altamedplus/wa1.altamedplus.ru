@@ -43,10 +43,18 @@ use APP\Form\Form; ?>
             </div>
             <div class="flex-column <?=($TYPE_HEADER == "DOCUMENT" ? '': 'd-none')?>" data-header-type="DOCUMENT">
                 <input type="text" name="document_name" placeholder="Название документа" value="<?=$headerSample?->document_name?>"></input>
-                <input type="text" name="document_url" placeholder="Url документа" value="<?=$headerSample?->document_url?>"></input>
+                <div class="flex-row w-100">
+                    <input type="text" name="document_url" placeholder="Url документа" value="<?=$headerSample?->document_url?>"></input>
+                    <label class="btn btn-plus-small">
+                        <input type="file" class="d-none" data-load="document_url"/>
+                    </label>
+                </div>
             </div>
-            <div class="flex-column <?=($TYPE_HEADER == "IMAGE" ? '': 'd-none')?>" data-header-type="IMAGE">
+            <div class="flex-row w-100 <?=($TYPE_HEADER == "IMAGE" ? '': 'd-none')?>" data-header-type="IMAGE">
                 <input type="text" name="img_url" placeholder="Url фото" value="<?=$headerSample?->img_url?>"></input>
+                <label class="btn btn-plus-small">
+                    <input type="file" class="d-none" data-load="img_url"/>
+                </label>
             </div>
              <div class="flex-column <?=($TYPE_HEADER == "VIDEO" ? '': 'd-none')?>" data-header-type="VIDEO">
                 <input type="text" name="video_name" placeholder="Название видео"  value="<?=$headerSample?->video_name?>"></input>

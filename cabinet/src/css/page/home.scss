@@ -181,7 +181,28 @@
             align-items: center;
             min-width: 147px;
             min-height: 66px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 500;
+            max-width: 200px;
+            color: var(--dark-blue);
+            background: var(--blue);
+            &:hover{
+                background: var(--dark-blue);
+                color: white;
+            }
+            &:hover:after{
+                color: white;
+            }
+            &::after{
+                color: var(--dark-blue);
+            }
+        }
+        .sample-active{
+             background: var(--dark-blue);
+             color: white;
+              &::after{
+                color:  white;
+            }
         }
     }
 }

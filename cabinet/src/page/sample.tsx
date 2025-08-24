@@ -2,6 +2,8 @@ import { $, Rocet } from '@rocet/rocet'
 import '../event/menu'
 import { Datatable } from '@tools/Datatable';
 import { integ } from '@rocet/integration';
+import "../css/page/sample.scss"
+import { ajax } from '@tools/ajax';
 
 if ($('[name="sample/Add"]').length >= 1) {
     const $form =  $('[name="sample/Add"]')
@@ -63,3 +65,15 @@ function initCreateSample()
         if (HeaderType == 'TEXT') $('[name="header_text"]').val(HeaderText)
         localStorage.removeItem('headerText');
 }
+
+$('[data-load]').on("change", function () { 
+    const $file = $(this);
+    const nameInput = $file.data('load');
+    ajax.send('sample_file',
+        {
+            file: $file.files[0],
+        }).then((data) => {
+            const $form = $file.closest('form[name="sample/Add"]');
+            $form.find(`input[name=${nameInput}]`).val(data.url)
+        });
+})
