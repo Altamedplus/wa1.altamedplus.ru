@@ -10,6 +10,6 @@ import './UI/element/select'
 import './UI/textarea'
 import './event/table'
 import './event/delete'
-import './event/message'
+
 import './event/mask'
 import './event/modal'

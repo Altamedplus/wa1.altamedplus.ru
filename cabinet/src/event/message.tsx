@@ -1,6 +1,7 @@
 import { $, Rocet } from "@rocet/rocet";
 import { Cookie } from "@src/Tools/Cookie";
 import { ajax } from "@tools/ajax";
+import { wa } from "./../page/home";
 
 var TimeInerval: any = null;
 $('[data-open=message]').on('click', (ev: MouseEvent) => {
@@ -51,6 +52,12 @@ function getData(date: string) {
                 $contaner.add($item)
             })
         }
-
+        $('[evt="wa-m"]').on('click', function (ev: MouseEvent) {
+            ev.preventDefault();
+            let phone = $(this).text();
+            wa(phone);
+        });
     })
 }
+
+

@@ -2,9 +2,9 @@
 use APP\Form\Form;
 ?>
 <div class="open-item open-item-active">
+    <span class="open-item-phone" evt="wa-m"><?=Form::unsaitazePhone($phone)?></span>
     <a href="/message/?id=<?=$id?>">
-        <span class="open-item-phone"><?=Form::unsaitazePhone($phone)?></span>
-        <span class="open-item-sample"><?=$name?></span>
+    <span class="open-item-sample"><?=$name?></span>
         <div class="open-item-footer">
             <span class="open-item-time"><?=$time?></span>
             <span class="open-item-status" data-status="<?=$status?>"></span>

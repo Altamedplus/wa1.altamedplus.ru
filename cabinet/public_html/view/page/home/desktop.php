@@ -13,7 +13,7 @@ use Pet\Cookie\Cookie;
                 <option value="<?= $clinic['id'] ?>" <?= ($clinic['id'] == Cookie::get('select_clinic_id') ? 'selected' : '') ?> data-address="<?= $clinic['address'] ?>"><?= $clinic['name'] ?></option>
             <? endforeach; ?>
         </select>
-        <label>Телефон</label>
+        <label>Телефон<span class="btn-round-small btn-content-wa" evt="wa" title="Перейти в WA приложение"><span></label>
         <input type="text" name="phone" placeholder="79999999999" data-reload autocomplete="off"></input>
         <div class="dynamic" data-dynamic></div>
         <div class="button" data-button></div>

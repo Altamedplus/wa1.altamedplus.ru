@@ -93,6 +93,10 @@
             color: var(--dark-blue);
             width: 100%;
             padding: 3px;
+            cursor: pointer;
+            &:hover{
+                font-weight: 800;
+            }
         }
 
         &-sample {
@@ -100,6 +104,10 @@
             color: var(--dark-blue);
             width: 100%;
             padding: 3px;
+            cursor: pointer;
+            &:hover{
+                font-weight: 800;
+            }
         }
 
         &-footer {

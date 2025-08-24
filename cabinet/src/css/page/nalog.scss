@@ -162,21 +162,6 @@ table{
     height: 90vh;
 
 }
-h3{
-    position: relative;
-    color: var(--dark-blue);
-    margin: 5px;
-    &::before{
-        position: absolute;
-        content: ' ';
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        left: -25px;
-        top: 3px;
-        background: var(--color-clinic);
-    }
-}
 
 embed{
     width: 100%;

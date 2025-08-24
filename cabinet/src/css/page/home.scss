@@ -44,6 +44,8 @@
                 margin-top: 15px;
                 margin-left: 13px;
                 color: var(--dark-blue);
+                display: flex;
+                align-items: center;
             }
         }
 
@@ -71,6 +73,12 @@
             &:hover {
                 background-color: var(--dark-blue);
             }
+        }
+        [evt="wa"]{
+            background-size: 12px 15px;
+            background-position-x: 4px;
+            background-position-y: 3px;
+            margin-left: 10px;
         }
     }
     

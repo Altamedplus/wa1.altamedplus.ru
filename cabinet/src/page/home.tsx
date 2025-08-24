@@ -6,6 +6,8 @@ import { Datatable } from "@tools/Datatable";
 import { ajax } from '@tools/ajax';
 import { DateF } from '@src/Tools/DateF';
 import { Cookie } from '@src/Tools/Cookie';
+import { Fire } from '@tools/Fire';
+import '../event/message'
 
 const $table = Datatable.get('buttonmessanangelist');
 if ($table) {
@@ -146,4 +148,24 @@ window['initResendModal'] = function (data: any) {
         console.log(form.find('button[type="submit"]'));
         form.find('button[type="submit"]').trigger('click');
     })
+}
+
+$('[evt="wa"]').on('click', function (ev: MouseEvent) {
+    ev.preventDefault();
+    let phone = $(this).closest('[name="message/send"]').find('[name="phone"]').val();
+    wa(phone);
+});
+
+
+
+export function wa(phone: string | null) {
+    if (phone === null) {
+        Fire.show({ status: 'error', text: 'Запоните телефон', header: 'Пустое поле' })
+        return
+    }
+    ['+', '(', ')', '-', '-', ' '].forEach((b: string) => {
+        phone = phone.replace(b, '');
+    });
+
+    window.open("https://web.whatsapp.com/send?phone=" + phone, '_blank')
 }
