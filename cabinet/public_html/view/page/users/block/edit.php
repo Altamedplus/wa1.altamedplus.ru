@@ -5,7 +5,7 @@ use APP\Enum\UsersType;
 
 ?>
 <div class="block-header flex-row">
-    <a href="/users" class="btn-round-back m-10"></a>
+    <a evt="back" class="btn-round-back m-10"></a>
     <p><?= $header ?></p>
 </div>
 <div class="flex-column-center w-100">

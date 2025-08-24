@@ -6,7 +6,7 @@ use APP\Enum\UsersType;
 use APP\Enum\VariableType;
 use APP\Form\Form; ?>
 <div class="block-header flex-row">
-    <a href="/variable" class="btn-round-back m-10"></a>
+    <a evt="back" class="btn-round-back m-10"></a>
     <p><?= $header ?></p>
 </div>
 

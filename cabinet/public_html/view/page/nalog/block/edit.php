@@ -3,7 +3,7 @@
 use APP\Enum\NalogStatus;
 use APP\Form\Form; ?>
 <div class="block-header flex-row">
-    <a href="/nalog" class="btn-round-back m-10"></a>
+    <a evt="back" class="btn-round-back m-10"></a>
 
     <div class="flex-column">
         <p class="m-5"><?= $header ?></p>

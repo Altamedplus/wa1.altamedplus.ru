@@ -66,3 +66,7 @@ $('[evt="change-form"]').on('click', function (ev: MouseEvent) {
         $form.find('.box').classAdd('box-hide');
     }
 })
+
+$('[evt="back"]').on('click', function () { 
+    history.back();
+})

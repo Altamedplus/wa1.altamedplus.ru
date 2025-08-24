@@ -3,7 +3,7 @@
 use APP\Form\Form; ?>
 
 <div class="block-header flex-row">
-    <a href="/clinic" class="btn-round-back m-10"></a>
+    <a evt="back" class="btn-round-back m-10"></a>
     <p><?= $header ?></p>
 </div>
 <div class="flex-column-center w-100">
