@@ -25,7 +25,7 @@ class Send extends AjaxController
         $nalogClinic = new NalogClinicModel(['nalog_id' => $nalog->id, 'is_place' => 1]);
         $variable = [
             'fio' => [$nalog->taxpayer_fio],
-            'nalog_id' => [$nalog->id]
+            'nalogid' => [$nalog->id]
         ];
         $data = $sample->complectWhatsApp($sample->id, $variable, [], $nalogClinic->clinic_id);
         // $request = [];

@@ -22,8 +22,8 @@ use APP\Form\Form; ?>
                 <button class="btn-round btn-content-trash"
                     type="button"
                     evt="delete"
-                    data-table="buttonsModel"
-                    data-redirect="/buttons"
+                    data-table="groupSampleModel"
+                    data-redirect="/group_sample"
                     data-id="<?= $formInfo['id'] ?>"></button>
             <? endif ?>
         </div>

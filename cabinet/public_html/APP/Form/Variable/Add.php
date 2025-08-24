@@ -20,6 +20,10 @@ class Add extends Form
         $id = (int)$fields['id'];
         unset($fields['id']);
 
+        if (!preg_match('/^[a-z]+$/', $fields['name_uniq'])) {
+            return new Fire('Уникальное имя может содержать только латинские буквы в нижнем регистре', Fire::ERROR);
+        }
+
         if (!empty($id)) {
             $variable = new VariableModel(['id' => $id]);
             if ($variable->exist()) {

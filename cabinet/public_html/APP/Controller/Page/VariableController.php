@@ -29,7 +29,7 @@ class VariableController extends PageController
         }
 
         view('page.variable.init', [
-            "header" => "Редактирование группы шаблона",
+            "header" => "Редактирование переменной",
             "formInfo" => $variable->getInfo(),
             'desktop' => '/variable/block/edit.php'
         ]);
@@ -38,7 +38,7 @@ class VariableController extends PageController
     public function add(): void
     {
         view('page.variable.init', [
-            "header" => "Добавление группы шаблона",
+            "header" => "Добавление переменной",
             'desktop' => '/variable/block/edit.php'
         ]);
     }

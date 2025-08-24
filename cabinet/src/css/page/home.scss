@@ -140,6 +140,8 @@
         flex: 1;
         border-right: 1px solid var(--line-2);
         padding: 20px 15px;
+        max-height: 81vh;
+        overflow-y: auto;
 
         [name=buttonmessanangelist] {
             thead {
