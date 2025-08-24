@@ -50,9 +50,9 @@
             }
         }
     }
-        &-disabled {
-            background-color: var(--disabled)
-        }
+    &-disabled {
+        background-color: var(--disabled) !important;
+    }
 
     &-plus {
         @extend .btn;

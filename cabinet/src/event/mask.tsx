@@ -1,4 +1,4 @@
 import { Mask } from "@tools/Mask";
 
 const mask = new Mask('[name=phone]');
-mask.modelNumber('+7(***) ***-**-**');
+mask.modelNumber('+*(***) ***-**-**', [[2, '7']]);

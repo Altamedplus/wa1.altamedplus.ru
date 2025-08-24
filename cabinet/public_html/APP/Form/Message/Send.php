@@ -12,6 +12,7 @@ use APP\Model\MessageModel;
 use APP\Model\SampleModel;
 use APP\Module\Auth;
 use APP\Module\WhatsApp;
+use Pet\Cookie\Cookie;
 use Pet\Request\Request;
 
 class Send extends Form
@@ -23,12 +24,26 @@ class Send extends Form
         $fields = (array)attr();
         $clinicId = attr('clinic');
         $phone = Form::sanitazePhone(attr('phone'));
+        if (!Form::validatePhone($phone)) {
+            return new Fire('Не валидный телефон', Fire::ERROR);
+        }
+        $isPhoneResend =  Form::sanitazePhone((Cookie::get('resend') ?: '')) == $phone;
         $variables = [];
         $result = [];
         $buttons = attr('button');
         $sample = new SampleModel($sample_id);
-        if ($sample->check_number == CheckNumber::NO_REQUEST && (new MessageModel(['phone' => $phone]))->exist()) {
+        $isMessage = (new MessageModel())->exist(['phone' => $phone, 'sample_id'=> $sample_id]);
+        if ($sample->check_number == CheckNumber::NO_REQUEST && $isMessage) {
             return new Fire('Запрещена повторная отправка', Fire::ERROR);
+        }
+        if ($sample->check_number == CheckNumber::ASK && $isMessage && !$isPhoneResend) {
+            return [
+                'type' => 'modal',
+                'template' => 'resend',
+                'header' => 'Повторная отправка!',
+                'content' => 'Такой тип сообщения уже был отправлен на этот номер! Вы уверены что хотите отправить?',
+                'callbackModal' => 'initResendModal'
+            ];
         }
 
         foreach ($fields as $name => $field) {

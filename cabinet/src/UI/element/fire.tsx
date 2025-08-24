@@ -16,8 +16,10 @@ export class Fire{
         this.status = option.status
         this.header = option?.header
     }
-    public static show(option: any = {}) {
-        (new Fire(option)).render()
+    public static show(option: any = {}):boolean{
+        const fire = new Fire(option);
+        fire.render()
+        return fire.status != 'error';
     }
 
     private render()

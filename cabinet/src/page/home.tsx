@@ -9,7 +9,6 @@ import { Cookie } from '@src/Tools/Cookie';
 
 const $table = Datatable.get('buttonmessanangelist');
 if ($table) {
-
     $table.rerender = (item: any, alias: any) => {
         const result: Array<JSX.Element> = [];
         const grouping: any = {};
@@ -113,15 +112,38 @@ function eventMessange($messange: Rocet, $dynamic: Rocet) {
 }
 function evenSelect() { 
     const $select = $('select[data-clinic]');
+    const $address = $("[data-messange=address]");
+    const $clinic = $("[data-messange=clinic]");
     let nameClinic = '';
     let address = '';
-    $select.find('option').each(($opt: Rocet) => { 
-        if (Number($opt.attr('value')) == Number($select.val())){ 
+    $select.find('option').each(($opt: Rocet) => {
+        if (Number($opt.attr('value')) == Number($select.val())) {
             nameClinic = $opt.text();
             address = $opt.data('address');
         }
-       
+    });
+    if ($clinic.length != 0) $clinic.text(nameClinic);
+    if ($address.length != 0) $address.text(address);
+}
+window['callbackSubmit'] = function (data:any) { 
+    if (data.type == 'modal' && data.template == 'resend') {
+        return { 'preventDefault': true }
+    } else { 
+        Cookie.delete('resend');
+    }
+
+}
+
+window['initResendModal'] = function (data: any) { 
+    $('[evt="noResed"]').on('click', function () {
+        $(this).closest('.modal').find('.close-modal').trigger('click');
+    });
+    $('[evt=resend]').on('click', function () {
+        const form = $('[name="message/send"]')
+        const tel:string = form.find('input[name=phone]').val();
+        Cookie.set('resend', tel);
+        $(this).closest('.modal').find('.close-modal').trigger('click');
+        console.log(form.find('button[type="submit"]'));
+        form.find('button[type="submit"]').trigger('click');
     })
-    $("[data-messange=clinic]").text(nameClinic);
-    $("[data-messange=address]").text(address);
 }

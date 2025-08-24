@@ -14,10 +14,18 @@ const submit =  function (evt: MouseEvent) {
     function sendData() {
         const form: HTMLFormElement | null = $(evt.target).closest('form').item() as HTMLFormElement;
         ajax.post(form).then((data) => {
-            ajax.eventForm(data)
-            $('[data-reload]').each(($elm: Rocet) => {
-                $elm.val('')
-            })
+            let ev = ajax.eventForm(data)
+            if (typeof window['callbackSubmit'] === 'function') {
+                const result:any = (window['callbackSubmit'] as Function)(data)
+                if (result?.preventDefault) {
+                    return false;
+                }
+            }
+            if (ev) {
+                $('[data-reload]').each(($elm: Rocet) => {
+                    $elm.val('')
+                })
+            }
             }
         );
     }

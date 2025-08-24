@@ -132,9 +132,7 @@ class Form extends Controller
     final public static function validatePhone(string $phone): bool
     {
         $digits = preg_replace('/\D/', '', $phone);
-        // Проверяем длину: должна быть 11 цифр (например, 8 или +7)
         if (strlen($digits) == 11) {
-            // Проверяем, что номер начинается с 7 или 8
             if ($digits[0] == '7' || $digits[0] == '8') {
                 return true;
             }

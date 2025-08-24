@@ -44,10 +44,12 @@ export class ajax {
 
     public static eventForm(data: any = {}): boolean
     {
-        if (data?.type == 'fire') { Fire.show(data); return false}
+        if (data?.type == 'fire') {
+            return Fire.show(data);
+        }
+        if (data?.type ==  'modal') ajax.modalOpen(data)
         if (data?.type == 'reload') location.reload();
         if (data?.type == 'redirect') location.href = data.href;
-        if (data?.type ==  'modal') ajax.modalOpen(data)
         return true;
     }
 
@@ -64,7 +66,7 @@ export class ajax {
             body.append(modal);
 
             $('input[ui=text-form]').render(inputTextFormRender)
-            $('button[type=submit]').on('click', function (evt: MouseEvent) {
+            $(modal).find('button[type=submit]').on('click', function (evt: MouseEvent) {
                 evt.preventDefault();
                 const $button = $(evt.target as HTMLElement)
                 const form: HTMLFormElement = $button.closest('form').item(0) as  HTMLFormElement;
