@@ -19,7 +19,7 @@ class SampleModel extends Model
                 $content = new VariableModel(['name_uniq' => $nameUniq]);
                 if ($content->exist()) {
                     $name = $content->name;
-                    $content = "<span class='btn btn-green' data-messange='$nameUniq'  data-content='$name'>$name</span>";
+                    $content = "<span class='btn btn-green' data-messange='$nameUniq' title='$content->description'  data-content='$name'>$name</span>";
                     $text = str_replace('{{'.$nameUniq.'}}', $content, $text);
                 } elseif (in_array($nameUniq, VRT::keys())) {
                     $content = "<span class='btn btn-green' data-consant='$nameUniq'  data-content='".VRT::get($nameUniq)."'>".VRT::get($nameUniq)."</span>";
