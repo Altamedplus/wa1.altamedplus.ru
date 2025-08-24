@@ -19,7 +19,7 @@ if ($table) {
         item.forEach((el: any) => {
             if (!Object.keys(grouping).includes(String(el.group_type))) {
                 grouping[String(el.group_type)] = [
-                    <h5>{el.gname}</h5>
+                    <h5 className="collapse-open" evt="collapse">{el.gname}</h5>
                 ]
                 resutGroping[String(el.group_type)] = [];
             }
@@ -59,6 +59,18 @@ if ($table) {
             })
         })
         $btn.trigger('click');
+
+        $('[evt="collapse"]').on('click', function () {
+            const $h = $(this);
+            const $div = $(this).closest('tr').find('.line-span');
+            if ($h.classList.contains('collapse-open')) {
+                $h.classReplase('collapse-open', 'collapse-close');
+                $div.classAdd('line-close')
+            } else {
+                $h.classReplase('collapse-close', 'collapse-open');
+                $div.classRemove('line-close');
+            }
+        })
 
     });
 
