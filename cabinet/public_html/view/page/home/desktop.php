@@ -29,7 +29,7 @@ use Pet\Cookie\Cookie;
         statusInfo="0"
         infoHeader="0"
         limitInfo="0"
-        limit="50"
+        limit="200"
         pagination="0"
         countsTab="0"
         showColums="0">

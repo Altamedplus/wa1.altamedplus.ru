@@ -21,6 +21,7 @@ use APP\Model\UsersModel;
         countsTab="1"
         showColums="1"
         scrolling="1"
+        is-save-setting ="1"
         >
         <thead>
             <tr name="filter">

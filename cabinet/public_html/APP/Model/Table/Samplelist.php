@@ -22,6 +22,7 @@ class Samplelist extends SampleModel implements Table
         );
          $this->join('group_sample gs')->on('gs.id = sample_messange_wa.group_type');
         $this->st = (clone $this)->select("COUNT(*) as st")->fetch(false)['st'];
+        $this->orderBy('sample_messange_wa.cdate', 'DESC');
     }
 
     /**

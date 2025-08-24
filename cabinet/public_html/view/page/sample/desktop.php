@@ -16,7 +16,9 @@ use APP\Form\Form; ?>
         limit="10"
         pagination="1"
         countsTab="1"
-        showColums="1">
+        showColums="1"
+        is-save-setting ="1"
+        >
         <thead>
         <tr name="column">
             <th alias="id">ID</th>

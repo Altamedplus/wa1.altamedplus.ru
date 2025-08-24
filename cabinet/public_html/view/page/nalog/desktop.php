@@ -21,6 +21,7 @@
         pagination="1"
         countsTab="1"
         showColums="1"
+        is-save-setting ="1"
         scrolling="1">
         <thead>
             <? include __DIR__ . '/filter.php'?>
