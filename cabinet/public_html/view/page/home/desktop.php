@@ -14,7 +14,7 @@ use Pet\Cookie\Cookie;
             <? endforeach; ?>
         </select>
         <label>Телефон<span class="btn-round-small btn-content-wa" evt="wa" title="Перейти в WA приложение"><span></label>
-        <input type="text" name="phone" placeholder="79999999999" data-reload autocomplete="off"></input>
+        <input type="text" name="phone" placeholder="79999999999" data-reload autocomplete="off" tabindex="0"></input>
         <div class="dynamic" data-dynamic></div>
         <div class="button" data-button></div>
         <div data-message></div>

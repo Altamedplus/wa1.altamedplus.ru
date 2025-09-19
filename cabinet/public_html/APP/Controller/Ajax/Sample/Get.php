@@ -38,7 +38,8 @@ class Get extends AjaxController
                 'title' => $variable->description,
                 'data-variable' => $alias,
                 'data-count' => $i,
-                'data-reload' => ''
+                'data-reload' => '',
+                'tabindex' => $i
             ] + $format);
             $i++;
         }
@@ -67,7 +68,7 @@ class Get extends AjaxController
         $message .= implode('<br/>', $this->getMessageButton($buttons));
         return [
             'header' => '',
-            'html'=> $result,
+            'html' => $result,
             'message' => $message,
             'button' => $dataButtons,
         ];

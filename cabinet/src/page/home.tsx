@@ -138,6 +138,16 @@ function evenSelect() {
     });
     if ($clinic.length != 0) $clinic.text(nameClinic);
     if ($address.length != 0) $address.text(address);
+    let tab = 1;
+    $(document.body).on('keydown', (ev: KeyboardEvent) => {
+        if (ev.key == 'Tab') {
+            document.querySelectorAll('[tabindex]').forEach((el: HTMLInputElement | HTMLTextAreaElement| HTMLButtonElement) => {
+                if (Number($(el).attr('tabindex')) == Number(tab)) {
+                    el.focus()
+                }
+            })
+        }
+    });
 }
 window['callbackSubmit'] = function (data:any) { 
     if (data.type == 'modal' && data.template == 'resend') {
