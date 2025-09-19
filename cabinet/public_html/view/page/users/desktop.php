@@ -24,6 +24,7 @@ use APP\Form\Form; ?>
             <th alias="name">Имя</th>
             <th alias="surname">Фамилия</th>
             <th alias="phone">Телефон</th>
+            <th alias="type">Тип</th>
             <th alias="cdate">Дата Создания</th>
             <th></th>
         </tr>
