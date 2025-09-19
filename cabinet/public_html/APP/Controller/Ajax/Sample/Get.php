@@ -39,7 +39,7 @@ class Get extends AjaxController
                 'data-variable' => $alias,
                 'data-count' => $i,
                 'data-reload' => '',
-                'tabindex' => $i
+                'tabindex' => '-1'
             ] + $format);
             $i++;
         }
@@ -103,7 +103,8 @@ class Get extends AjaxController
                     'name' => 'button[' . $button->id . ']',
                     'placeholder' => $button->text,
                     'title' => $button->text,
-                    'textContent' => $button->phone
+                    'textContent' => $button->phone,
+                    'tabindex' => '-1'
                 ]);
             }
 
@@ -119,7 +120,8 @@ class Get extends AjaxController
                         'title' => $button->url . ($button->is_url_postfix == 1 ? $button->url_postfix : ''),
                         'href' => $button->url,
                         'data-btn-postfix' => $button->is_url_postfix == 1 ? $button->url_postfix : '',
-                        'textContent' => $button->text
+                        'textContent' => $button->text,
+                        'tabindex' => '-1'
                     ]);
                 }
             }
@@ -133,7 +135,8 @@ class Get extends AjaxController
                         'placeholder' => $button->text,
                         'title' => $button->text,
                         'textContent' => $button->text,
-                        'data-btn-payload' => $button->payload
+                        'data-btn-payload' => $button->payload,
+                        'tabindex' => '-1'
                     ]);
             }
         }
@@ -153,7 +156,8 @@ class Get extends AjaxController
                     'name' => 'button[' . $button->id . ']',
                     'placeholder' => $button->text,
                     'title' => $button->text,
-                    'value' => $button->phone
+                    'value' => $button->phone,
+                    'tabindex' => '-1'
                 ]);
             }
 
@@ -165,7 +169,8 @@ class Get extends AjaxController
                         'name' => 'button[' . $button->id . ']',
                         'placeholder' => $button->text,
                         'title' => $button->text,
-                        'value' => $button->url
+                        'value' => $button->url,
+                        'tabindex' => '-1'
                     ]);
                 }
                 if ($button->is_url_postfix == 1) {
@@ -176,7 +181,8 @@ class Get extends AjaxController
                         'placeholder' => $button->text,
                         'title' =>$button->text,
                         'value' => $button->url_postfix,
-                        'data-reload' => ''
+                        'data-reload' => '',
+                        'tabindex' => '-1'
                     ]);
                 }
             }
@@ -187,7 +193,8 @@ class Get extends AjaxController
                         'name' => 'button[' . $button->id . ']',
                         'placeholder' => $button->text,
                         'title' => $button->text,
-                        'value' => $button->payload
+                        'value' => $button->payload,
+                        'tabindex' => '-1'
                     ]);
             }
         }

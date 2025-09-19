@@ -24,13 +24,15 @@ class HomeController extends PageController
             "headerButtons" => [[
                 'tag' => "button",
                 'class' => 'btn-round btn-content-messange',
-                'data-open' => 'message'
+                'data-open' => 'message',
+                'tabindex' => '-1'
             ],
              [
                 'tag' => 'button',
                 'class' => 'btn-round btn-content-log-in',
                 'evt' => 'exit',
-                'data' => 'log-in'
+                'data' => 'log-in',
+                'tabindex' => '-1'
             ]
             ],
         ]);

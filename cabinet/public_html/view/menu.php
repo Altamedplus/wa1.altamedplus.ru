@@ -5,13 +5,13 @@ use Pet\Cookie\Cookie;
 
 <div class="<?=(Cookie::get('menu') == '1' ? "menu menu-hide": "menu")?>">
     <ul>
-        <li style="padding-bottom: 5px; padding-top:5px;" evt="btn-roll-up-li">
-            <button class="btn btn-roll-up <?=(Cookie::get('menu') == '1' ? "": "btn-roll-up-close")?>"></button>
+        <li style="padding-bottom: 5px; padding-top:5px;" evt="btn-roll-up-li" tabindex="-1">
+            <button class="btn btn-roll-up <?=(Cookie::get('menu') == '1' ? "": "btn-roll-up-close")?>" tabindex="-1"></button>
         </li>
         <? foreach ($menu as $category): ?>
 
-            <a class="link" href="<?= $category->url ?>">
-                <li class="">
+            <a class="link" href="<?= $category->url ?>" tabindex="-1">
+                <li class="" tabindex="-1">
                     <div class="menu-icon"><? svg($category->icon) ?></div>
                     <span><?= $category->name ?></span>
                 </li>

@@ -8,6 +8,7 @@ import { DateF } from '@src/Tools/DateF';
 import { Cookie } from '@src/Tools/Cookie';
 import { Fire } from '@tools/Fire';
 import '../event/message'
+var tabs = 1;
 
 const $table = Datatable.get('buttonmessanangelist');
 if ($table) {
@@ -56,6 +57,8 @@ if ($table) {
             $('input[name=id]').val(id)
             ajax.send('sample_get', { id: id }).then((data) => {
                 buildFilds(data);
+                tabs = 0;
+                tabindex();
             })
         })
         $btn.trigger('click');
@@ -124,7 +127,7 @@ function eventMessange($messange: Rocet, $dynamic: Rocet) {
         })
     })
 }
-function evenSelect() { 
+function evenSelect() {
     const $select = $('select[data-clinic]');
     const $address = $("[data-consant=address]");
     const $clinic = $("[data-consant=clinic]");
@@ -138,17 +141,9 @@ function evenSelect() {
     });
     if ($clinic.length != 0) $clinic.text(nameClinic);
     if ($address.length != 0) $address.text(address);
-    let tab = 1;
-    $(document.body).on('keydown', (ev: KeyboardEvent) => {
-        if (ev.key == 'Tab') {
-            document.querySelectorAll('[tabindex]').forEach((el: HTMLInputElement | HTMLTextAreaElement| HTMLButtonElement) => {
-                if (Number($(el).attr('tabindex')) == Number(tab)) {
-                    el.focus()
-                }
-            })
-        }
-    });
+   
 }
+
 window['callbackSubmit'] = function (data:any) { 
     if (data.type == 'modal' && data.template == 'resend') {
         return { 'preventDefault': true }
@@ -190,4 +185,29 @@ export function wa(phone: string | null) {
     });
 
     window.open("https://web.whatsapp.com/send?phone=" + phone, '_blank')
+}
+
+function tabindex() {
+    (document.querySelector('[data-count]') as HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement).focus();
+    let MaxTabs = 0;
+    document.querySelectorAll('[data-count]').forEach((el) => { 
+        if (Number(el.getAttribute('data-count')) >= 0) { 
+            MaxTabs++;
+        }
+    })
+    console.log('mAXtABS', MaxTabs);
+    document.body.addEventListener('keydown', (ev: KeyboardEvent) => {
+        if (ev.key == 'Tab') {
+            ev.preventDefault();
+            tabs++;
+            document.querySelectorAll('[data-count]').forEach((el: HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement) => {
+
+                if (Number($(el).attr('data-count')) == Number(tabs)) {
+                    console.log('TABS', tabs, el)
+                    el.focus()
+                }
+            });
+            if (tabs > MaxTabs) tabs = 0;
+        }
+    });
 }
