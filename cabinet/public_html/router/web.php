@@ -86,3 +86,4 @@ Router::middleware(
 Router::post('/modal', [ModalController::class, 'index']);
 Router::get('/cron/message/send', [MessageSend::class, 'index']);
 Router::get('/cron/auth/reset', [AuthReset::class, 'index']);
+//Router::get('/cron/auth/set', [AuthReset::class, 'up']);

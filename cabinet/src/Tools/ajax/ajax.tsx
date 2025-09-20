@@ -1,7 +1,7 @@
 import { $ } from "@rocet/rocet";
 import { Fire } from "../../UI/element/fire";
 import { input } from "@rocet/RocetNodeElements";
-import { inputTextFormRender } from "../../UI/input";
+import { inputTextFormRender } from "@tools/UI/input";
 export class ajax {
     static async send(name:string, body:any, isJson:boolean = true) {
         return JSON.parse(await ajax.post(body, {}, '/ajax/' + name));
