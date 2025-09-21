@@ -106,7 +106,8 @@ class SampleModel extends Model
         if ($button->type == ButtonType::URL) {
             $result['url'] = $value;
             if ($button->is_url_postfix == 1) {
-                $result['urlPostfix'] = $field['postfix'][$id];
+               // $result['urlPostfix'] = $field['postfix'][$id];
+                $result['url'] = trim($field['postfix'][$id]);
             }
         }
 
