@@ -63,6 +63,7 @@ class Messagelist extends MessageModel implements Table
         $this->dateTimeFilter();
         // file_put_contents('data.sql',$this->toString());
         $this->st = (clone $this)->select("COUNT(*) as st")->fetch(false)['st'];
+        $this->orderBy('message.cdate', "DESC");
     }
 
     private function dateTimeFilter(): void
