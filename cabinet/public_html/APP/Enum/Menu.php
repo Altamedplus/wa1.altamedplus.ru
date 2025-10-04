@@ -19,6 +19,7 @@ class Menu
     const NALOG = 10;
     const LICENSE = 11;
     const EDNA_SAPMLE = 12;
+    const SETTING = 13;
 
     public static function data($UT = UT::SYSADMIN): array
     {
@@ -34,7 +35,8 @@ class Menu
             self::NALOG => (object)['url' => '/nalog', 'name' => 'Налоговый вычет', 'icon' => 'menu.file-edit'],
             self::LICENSE => (object)['url' => '/license', 'name' => 'Лицензии', 'icon' => 'menu.file-text'],
             self::EDNA => (object)['url' => '/edna', 'name' => 'Edna api', 'icon' => 'menu.union'],
-            self::EDNA_SAPMLE => (object)['url' => '/edna_sample', 'name' => 'Edna Шаблоны', 'icon' => 'menu.download-cloud']
+            self::EDNA_SAPMLE => (object)['url' => '/edna_sample', 'name' => 'Edna Шаблоны', 'icon' => 'menu.download-cloud'],
+            self::SETTING => (object)['url' => '/setting', 'name' => 'Настройки', 'icon' => 'menu.settings'],
         ];
         if (Auth::$profile['type'] == UT::ADMIN) {
             unset($page[self::EDNA], $page[self::GROUP_SAMPLE], $page[self::SAMPLE], $page[self::CLINIC], $page[self::BUTTONS], $page[self::USERS], $page[self::VARIABLE], $page[self::EDNA_SAPMLE]);

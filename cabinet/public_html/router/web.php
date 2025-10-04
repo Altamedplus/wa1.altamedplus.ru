@@ -18,7 +18,7 @@ use APP\Controller\Page\NalogController;
 use APP\Controller\Page\SampleController;
 use APP\Controller\Page\UsersController;
 use APP\Controller\Page\VariableController;
-use APP\Controller\RegistrationController;
+use APP\Controller\Page\SettingController;
 use Pet\Router\Router;
 use APP\Form\Form;
 use APP\Module\Auth;
@@ -59,6 +59,7 @@ Router::middleware(
     Router::get('/nalog', [NalogController::class, 'index']),
     Router::get('/license', [LicenseController::class, 'index']),
     Router::get('/edna_sample', [EdnaSampleController::class, 'index']),
+    Router::get('/setting', [SettingController::class, 'index']),
     
     Router::get('/clinic/edit/{id}', [ClinicController::class, 'edit']),
     Router::get('/users/edit/{id}', [UsersController::class, 'edit']),
@@ -81,7 +82,7 @@ Router::middleware(
 
     Router::get('/nalog/downloand/{id}', [NalogController::class, 'downloand']),
 
-    Router::post('/ajax/{name}', [AjaxController::class, 'index'])
+    Router::post('/ajax/{name}', [AjaxController::class, 'index']),
 );
 Router::post('/modal', [ModalController::class, 'index']);
 Router::get('/cron/message/send', [MessageSend::class, 'index']);

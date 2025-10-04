@@ -150,7 +150,13 @@ window['callbackSubmit'] = function (data:any) {
     } else { 
         Cookie.delete('resend');
     }
-
+    if (Cookie.get('clear-buf') == '1') {
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText('');
+        } else {
+            alert('API буфера обмена не поддерживается в этом браузере.');
+        }
+    }
 }
 
 window['initResendModal'] = function (data: any) { 
