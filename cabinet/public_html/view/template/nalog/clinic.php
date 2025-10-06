@@ -8,7 +8,7 @@ use APP\Enum\UsersType;
 <div class="clinic-column">
     <? foreach ($clinics as $clinic): ?>
         <div class="clinic-row">
-            <p class="<?= $clinic->is_place == 1 ? 'fa fa-star' : '' ?>"><span class="clinic-row-name"><?= $clinic->name ?></span></p>
+            <p class=""><span class="clinic-row-name"><?= $clinic->name ?></span></p>
             <? if ($clinic->no_doc == 1): ?>
                 <p>Только получение</p>
             <? else: ?>
