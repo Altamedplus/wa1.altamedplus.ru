@@ -42,6 +42,8 @@ class HeaderSampleModel extends Model
                     'headerType' =>  HeaderType::TEXT,
                     'text' => $this->text
                 ];
+                if (empty($this->text))
+                    $result = false;
                 break;
             case HeaderType::DOCUMENT:
                 $result = [
