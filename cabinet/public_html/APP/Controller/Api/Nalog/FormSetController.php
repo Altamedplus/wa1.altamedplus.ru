@@ -8,6 +8,8 @@ use APP\Model\NalogModel;
 use APP\Model\Table\Cliniclist;
 use APP\Model\TaxpayerListModel;
 use Pet\Controller;
+use Pet\Router\Response;
+use Pet\View\View;
 
 class FormSetController extends Controller
 {
@@ -59,5 +61,31 @@ class FormSetController extends Controller
             ], isNotExistCreate: true));
         }
         return ["ok"];
+    }
+
+    public function getWidgetJs()
+    {
+        header('Content-type: application/javascript');
+        $folder = View::DIR_VIEW . '/assets/js';
+        $filetimeApi = 0;
+
+        $fileJs = '';
+        $fileRoot = '';
+        $filetimeApiRoot = 0;
+        foreach (scandir($folder) as $file) {
+            if (str_contains($file, "api_") && $filetimeApi < ($time = filectime("$folder/$file"))) {
+                $filetimeApi = $time;
+                $fileJs = $file;
+            }
+            if (str_contains($file, "root_") && $filetimeApiRoot < ($time = filectime("$folder/$file"))) {
+                $filetimeApiRoot = $time;
+                $fileRoot = $file;
+            }
+        }
+        echo  file_get_contents("$folder/$fileRoot");
+    }
+
+    public function html() {
+        view('api.nalogform');
     }
 }

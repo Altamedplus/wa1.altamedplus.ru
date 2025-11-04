@@ -1,0 +1,117 @@
+* {
+    font-family: 'PT Sans', sans-serif;
+}
+
+.form {
+    --blue: rgb(139, 139, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .left {
+            min-width: 250px;
+
+            input[type=text],
+            select,
+            input[type=date] {
+                min-width: 400px;
+            }
+        }
+    }
+
+    .quote {
+        padding: 5px;
+        color: #009ADD;
+        background: #B7E5F9;
+        border-radius: 2px;
+        font-size: 12px;
+        margin-left: 16px;
+    }
+
+    &-block {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    label {
+        font-size: 13px;
+        color: #757b92;
+        padding: 4px 0px;
+
+        span {
+            color: red;
+        }
+    }
+
+    input[type=text],
+    select,
+    input[type=date] {
+        padding: 10px 7px;
+        outline: none;
+        border: 1px solid rgba(0, 0, 0, 0);
+        font-size: 14px;
+        background: rgb(244 244 244);
+        border-radius: 4px;
+        color: rgb(126, 126, 126);
+    }
+
+    .radio-box {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        padding: 8px;
+        border: 1px solid #ccc6;
+
+        input {
+            display: none;
+        }
+
+        .radio-year {
+            background: #F1F2F4;
+            display: grid;
+            margin: 2px;
+            flex-direction: row;
+            grid-template-columns: 55px 135px 31px;
+            grid-template-rows: auto 0px;
+            justify-items: center;
+            gap: 0px;
+            min-width: 200px;
+            align-items: center;
+            cursor: pointer;
+            padding: 2px;
+
+            p {
+                margin: 0px;
+            }
+
+            &:hover {
+                color: #68BCFF;
+            }
+
+            &::after {
+                margin-left: 5px;
+                display: block;
+                content: ' ';
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: #68BCFF;
+            }
+        }
+
+        .check {
+            color: #68BCFF;
+            &::after {
+                background: red;
+            }
+        }
+    }
+}

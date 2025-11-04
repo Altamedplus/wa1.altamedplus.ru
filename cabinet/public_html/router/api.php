@@ -9,3 +9,4 @@ Router::post('/api/edna/status', [StatusController::class, 'index']);
 Router::post('/api/nalog/form/set', [FormSetController::class, 'index']);
 Router::options('/api/nalog/form/set', [FormSetController::class, 'options']);
 Router::get('/api/nalog/status/check', [StatusCheckController::class, 'index']);
+Router::get('/api/nalog/form', [FormSetController::class, 'html']);

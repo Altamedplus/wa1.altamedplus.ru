@@ -6,5 +6,6 @@ node_modules/
 
 public_html/view/assets
 public_html/view/page/**/head.php
+public_html/view/api/head.php
 .env
 public_html/view/uploads
