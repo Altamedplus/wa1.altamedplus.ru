@@ -1,5 +1,5 @@
 <div class="header_div">
-    <img width="50" src="/upload/main/f04/f04d7dab6f33560da79ec27c78d63fe1.png" height="36" bxmailattachcid="1241"> <span class="header">Заказ справки для<br>налогового вычета</span>
+    <img width="50" src="https://www.altamedplus.ru/upload/main/f04/f04d7dab6f33560da79ec27c78d63fe1.png" height="36" bxmailattachcid="1241"> <span class="header">Заказ справки для<br>налогового вычета</span>
 </div>
 
 <p>
