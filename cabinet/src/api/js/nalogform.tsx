@@ -36,12 +36,17 @@ $('[evt=modal-open]').on('click', () => {
                     }}>ПРИНИМАЮ</button>
                     <button onclick={() => {
                         $('.modal-fone').remove();
-                          $('[name=consent]').attrRemove('checked');
+                        $('[name=consent]').attrRemove('checked');
                     }}>НЕ ПРИНИМАЮ</button>
                 </div>
             </div>
         </div>)
     })
+})
+$('button[type=submit]').on('click', () => { 
+    if (!$('[name="consent"]').checked) { 
+        $('[evt=modal-open]').trigger('click');
+    }
 })
 
 window['callbackSubmit'] = function (data: any) {
