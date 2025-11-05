@@ -114,7 +114,7 @@ class Submit extends Form
     }
 
     public static function sendMail($uniq, $fields) {
-        $fields['statusUrl'] = "https://www.altamedplus.ru/about/nalogovyy-vychet/status.php?hash=$uniq";
+        $fields['statusUrl'] = "https://www.altamedplus.ru/about/nalogovyy-vychet/status_new.php?hash=$uniq";
         (new Mail())->send(
             trim($fields['email']),
             $fields['fio_nalog'],
