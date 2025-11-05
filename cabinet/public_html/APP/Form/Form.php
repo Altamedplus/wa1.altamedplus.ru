@@ -21,6 +21,7 @@ class Form extends Controller
     public static $action = 'form-name';
     public $fields = [];
     public $auth = false;
+    public $isCheckToken = true;
 
     final public static function init(Request $request)
     {
@@ -30,18 +31,36 @@ class Form extends Controller
         if (!class_exists($nameClass)) {
             throw new AppException("Нет такого класса фoрмы $nameClass", E_ERROR);
         }
-        if (attr('csrf-token') == Session::get('csrf-token')) {
-            unset(Request::$attribute['csrf-token']);
-            Response::set(Response::TYPE_JSON);
-            $formClass = new $nameClass();
-            if ($formClass->auth) {
-                Auth::init();
-            }
-            return $formClass->submit($request);
+        $token = attr('csrf-token');
+        unset(Request::$attribute['csrf-token']);
+        Response::set(Response::TYPE_JSON);
+        $formClass = new $nameClass();
+        if ($formClass->isCheckToken === false) {
+            return self::response($formClass, $request);
+        }
+        if ($token == Session::get('csrf-token')) {
+            return self::response($$formClass, $request);
         } else {
             RE::setHttp(RE::STATUS_HTTP::FORBIDDEN);
             Response::die("Hе действительный токен csrf или проблема с сессиями на сервере");
         }
+    }
+
+    public static function errorInput($name, $message): array
+    {
+        return [
+            'type' => 'error-input',
+            'message' => $message,
+            'name' => $name
+        ];
+    }
+
+    private static function response($formClass, $request)
+    {
+        if ($formClass->auth) {
+            Auth::init();
+        }
+        return $formClass->submit($request);
     }
 
     final public static function csrf($current = false): string

@@ -2,6 +2,7 @@ import { $ } from "@rocet/rocet";
 import { Fire } from "../../UI/element/fire";
 import { input } from "@rocet/RocetNodeElements";
 import { inputTextFormRender } from "@tools/UI/input";
+import { ErrorInput } from "../ErrorInput";
 export class ajax {
     static async send(name:string, body:any, isJson:boolean = true) {
         return JSON.parse(await ajax.post(body, {}, '/ajax/' + name));
@@ -46,6 +47,20 @@ export class ajax {
     {
         if (data?.type == 'fire') {
             return Fire.show(data);
+        }
+        if (data?.type == 'error-input') {
+            if (Array.isArray(data.name)) {
+                data.name.forEach((e: any, i: any) => {
+                    new ErrorInput({
+                        message: data.message[i],
+                        name: e
+                    });
+                    
+                });
+            } else { 
+                new ErrorInput(data);
+            }
+            return false;
         }
         if (data?.type ==  'modal') ajax.modalOpen(data)
         if (data?.type == 'reload') location.reload();

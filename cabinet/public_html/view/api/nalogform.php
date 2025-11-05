@@ -6,16 +6,16 @@ use APP\Model\TaxpayerListModel; ?>
 <? include __DIR__ . '/head.php' ?>
 
 <body>
-    <form class="form">
+    <form class="form" name="nalog/Submit">
         <div class="row">
             <h4>ДАННЫЕ ПАЦИЕНТА</h4>
         </div>
-         <div class="row">
+        <div class="row">
             <span class="quote"> Пациент, даже несовершеннолетний должен именть ИНН, иначе ФНС не примет справку в работу</span>
-         </div>
+        </div>
         <div class="row">
             <div class="form-block left">
-                <label>Ф.И.О. пациента полностью <span>*</span></label>
+                <label>ФИО пациента полностью <span>*</span></label>
                 <input type="text" name="name" />
             </div>
             <div class="form-block">
@@ -27,8 +27,8 @@ use APP\Model\TaxpayerListModel; ?>
         <div class="row">
             <div class="form-block left">
                 <label>Укажите контактный телефон <span>*</span></label>
-                <input type="text" name="phone" />
-                <br/>
+                <input type="text" name="phone" placeholder="7 (999) 999-99-99"/>
+                <br />
                 <label>Ваш E-mail <span>*</span></label>
                 <input type="text" name="email" />
             </div>
@@ -44,7 +44,7 @@ use APP\Model\TaxpayerListModel; ?>
                     ) : ?>
                         <label class="radio-year">
                             <p><?= $year = array_keys($data)[0] ?></p>
-                            <input type="checkbox" name="<?= $year ?>"></input>
+                            <input type="checkbox" name="year[<?= $year ?>]"></input>
                             <p><?= $data[$year] ?></p>
                         </label>
                     <? endforeach ?>
@@ -64,8 +64,8 @@ use APP\Model\TaxpayerListModel; ?>
                 </select>
             </div>
             <div class="form-block ">
-                    <label>Дата рождения плательщика <span>*</span></label>
-                    <input type="date" name="date_birth">
+                <label>Дата рождения плательщика <span>*</span></label>
+                <input type="date" name="date_birth">
             </div>
         </div>
         <div class="row">
@@ -77,6 +77,12 @@ use APP\Model\TaxpayerListModel; ?>
                 <label>ИНН налогоплательщика <span>*</span></label>
                 <input type="text" name="inn" />
             </div>
+        </div>
+        <div class="block-submit">
+            <div class="flex-row-center-y"><input name="consent" type="checkbox" /><p evt="modal-open">Нажимая кнопку "Отправить" я принимаю <a>условия соглашения</a></p></div>
+            <button type="submit">Отправить</button>
+        </div>
+        <div class="error" style="display: none;">
         </div>
     </form>
 </body>
