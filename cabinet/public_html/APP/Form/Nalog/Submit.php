@@ -76,7 +76,10 @@ class Submit extends Form
             }
         }
 
-        return ['uniq' => $data['hash']];
+        return [
+            'type' => 'nalog-ok',
+            'uniq' => $data['hash']
+        ];
     }
     public static function isClinic($fields)
     {

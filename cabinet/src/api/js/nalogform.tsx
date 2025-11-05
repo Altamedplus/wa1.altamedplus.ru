@@ -26,11 +26,11 @@ $('[evt=modal-open]').on('click', () => {
         $('form').add(<div className='modal-fone'>
             <div className='modal-body'>
                 <div className='modal-header'>
-                    <p>Согласие клиентов на обработку персональных данных</p>
+                    <p>Согласие на обработку персональных данных</p>
                 </div>
                 <div clasName="modal-message">{data.html}</div>
                 <div className='modal-buttons'>
-                    <button className='' onclick={() => {
+                    <button className='green' onclick={() => {
                         $('[name=consent]').attr('checked', 'checked');
                         $('.modal-fone').remove();
                     }}>ПРИНИМАЮ</button>
@@ -43,3 +43,12 @@ $('[evt=modal-open]').on('click', () => {
         </div>)
     })
 })
+
+window['callbackSubmit'] = function (data: any) {
+    if (data.type == 'nalog-ok') { 
+        $('.form').html(' ');
+        ajax.send('nalog_finishForm', {}).then((data) => { 
+            $('.form').html(data.html)
+        })
+    }
+}
