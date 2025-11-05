@@ -62,7 +62,7 @@ class Submit extends Form
             'inn' => trim($fields['inn']),
             'taxpayer_type_id' => $fields['taxpayer'],
             'taxpayer_fio' => trim($fields['fio_nalog']),
-            'hash' => $form['hash'] ?? ''
+            'hash' => uniqid(),
         ];
         $nalogId = (new NalogModel())->create($data);
         $clinic = $fields['clinic'] ?? [];
@@ -75,6 +75,8 @@ class Submit extends Form
                 ], isNotExistCreate: true));
             }
         }
+
+        return ['uniq' => $data['hash']];
     }
     public static function isClinic($fields)
     {

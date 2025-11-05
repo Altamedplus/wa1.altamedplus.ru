@@ -39,7 +39,7 @@ class Form extends Controller
             return self::response($formClass, $request);
         }
         if ($token == Session::get('csrf-token')) {
-            return self::response($$formClass, $request);
+            return self::response($formClass, $request);
         } else {
             RE::setHttp(RE::STATUS_HTTP::FORBIDDEN);
             Response::die("Hе действительный токен csrf или проблема с сессиями на сервере");
