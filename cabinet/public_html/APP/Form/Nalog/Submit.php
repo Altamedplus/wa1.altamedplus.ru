@@ -7,6 +7,7 @@ use APP\Model\NalogClinicModel;
 use APP\Model\NalogCommentModel;
 use APP\Model\NalogModel;
 use APP\Module\Auth;
+use APP\Module\Mail;
 use Pet\Request\Request;
 
 class Submit extends Form
@@ -101,5 +102,9 @@ class Submit extends Form
             }
         }
         return implode(", ", $period);
+    }
+
+    public static function sendMail($uniq, $fields) {
+        (new Mail)
     }
 }

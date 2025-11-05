@@ -14,6 +14,7 @@ class StatusController extends Controller
     public function index()
     {
         $data = attr();
+       // file_put_contents('stat.txt', print_r($data, true), FILE_APPEND);
         $requestId = $data['requestId'] ?? null;
         if ($requestId) {
             $messange = new MessageModel(['request_id' => $requestId]);

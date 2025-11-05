@@ -23,7 +23,7 @@ class StatusMessage
         ];
     }
 
-    public static function get(int $name):string
+    public static function get(int $name): string
     {
         return self::data()[$name] ?? '';
     }
@@ -33,7 +33,7 @@ class StatusMessage
             'READ' => self::READ_WA,
             'DELIVERED' => self::DELIVERED_WA,
             'SENT' => self::SENT_WA,
-            'UNDELIVERED' => self::DELIVERED_WA
+            'UNDELIVERED' => self::UNDELIVERED_WA
         };
     }
 }

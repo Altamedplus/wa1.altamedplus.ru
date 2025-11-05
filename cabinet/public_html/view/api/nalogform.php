@@ -21,7 +21,7 @@ use APP\Model\TaxpayerListModel; ?>
             </div>
             <div class="form-block">
                 <label>Дата рождения пациента <span>*</span></label>
-                <input type="date" name="date_birth">
+                <input type="date" name="date_birth_paz" placeholder="дд.мм.гггг">
             </div>
         </div>
 
@@ -44,9 +44,9 @@ use APP\Model\TaxpayerListModel; ?>
                         ] as $data
                     ) : ?>
                         <label class="radio-year">
-                            <p><?= $year = array_keys($data)[0] ?></p>
+                            <p class="y"><?= $year = array_keys($data)[0] ?></p>
                             <input type="checkbox" name="year[<?= $year ?>]"></input>
-                            <p><?= $data[$year] ?></p>
+                            <p class="y-name"><?= $data[$year] ?></p>
                         </label>
                     <? endforeach ?>
                 </div>
@@ -79,7 +79,7 @@ use APP\Model\TaxpayerListModel; ?>
             </div>
             <div class="form-block ">
                 <label>Дата рождения плательщика <span>*</span></label>
-                <input type="date" name="date_birth">
+                <input type="date" name="date_birth_paz" placeholder="дд.мм.гггг"/>
             </div>
         </div>
         <div class="row">

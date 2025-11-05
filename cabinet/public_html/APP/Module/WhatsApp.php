@@ -81,7 +81,7 @@ class WhatsApp
         curl_setopt($curl, CURLOPT_VERBOSE, 1);
         curl_setopt($curl, CURLOPT_URL, $url);
         $result = curl_exec($curl);
-        $result = json_decode($result, true)?  json_decode($result, true) : $result;
+        $result = json_decode($result, true)? json_decode($result, true) : $result;
         return [ 'response' => $result ];
     }
 
