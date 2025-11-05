@@ -21,7 +21,7 @@ use APP\Model\TaxpayerListModel; ?>
             </div>
             <div class="form-block">
                 <label>Дата рождения пациента <span>*</span></label>
-                <input type="date" name="date_birth_paz" placeholder="дд.мм.гггг">
+                <input type="date" name="date_birth" placeholder="дд.мм.гггг">
             </div>
         </div>
 
@@ -79,7 +79,7 @@ use APP\Model\TaxpayerListModel; ?>
             </div>
             <div class="form-block ">
                 <label>Дата рождения плательщика <span>*</span></label>
-                <input type="date" name="date_birth_paz" placeholder="дд.мм.гггг"/>
+                <input type="date" name="taxpayer_date_birth" placeholder="дд.мм.гггг"/>
             </div>
         </div>
         <div class="row">

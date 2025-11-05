@@ -65,6 +65,7 @@ class Submit extends Form
             'inn' => trim($fields['inn']),
             'taxpayer_type_id' => $fields['taxpayer'],
             'taxpayer_fio' => trim($fields['fio_nalog']),
+            'taxpayer_date_birth' => trim($fields['taxpayer_date_birth']),
             'hash' => uniqid(),
         ];
         $nalogId = (new NalogModel())->create($data);

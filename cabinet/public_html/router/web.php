@@ -60,7 +60,7 @@ Router::middleware(
     Router::get('/license', [LicenseController::class, 'index']),
     Router::get('/edna_sample', [EdnaSampleController::class, 'index']),
     Router::get('/setting', [SettingController::class, 'index']),
-    
+
     Router::get('/clinic/edit/{id}', [ClinicController::class, 'edit']),
     Router::get('/users/edit/{id}', [UsersController::class, 'edit']),
     Router::get('/buttons/edit/{id}', [ButtonsController::class, 'edit']),

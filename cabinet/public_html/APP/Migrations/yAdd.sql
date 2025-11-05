@@ -15,3 +15,4 @@ ALTER TABLE `sample_messange_wa` CHANGE `check number` `check_number` INT NULL D
 ALTER TABLE `nalog_clinic` ADD `license_id` INT NULL DEFAULT NULL AFTER `clinic_id`;
 ALTER TABLE `nalog_clinic` ADD `is_place` TINYINT(1) NOT NULL DEFAULT '0' AFTER `user_id`;
 ALTER TABLE `nalog_clinic` ADD `no_doc` TINYINT(1) NOT NULL DEFAULT '0' AFTER `is_place`;
+ALTER TABLE `nalog` ADD `taxpayer_date_birth` DATE NULL DEFAULT NULL AFTER `taxpayer_fio`;
