@@ -33,8 +33,14 @@ class Submit extends Form
             $error['name'][] = 'phone';
             $error['message'][] = 'Невалидный номер телефона';
         }
+        $email = trim($fields['email']);
+        if (!Form::validateEmail($email)) {
+            $error['name'][] = 'email';
+            $error['message'][] = 'Невалидный email';
+        }
         if (!empty($error['name'])) {
             return self::errorInput($error['name'], $error['message']);
         }
+
     }
 }

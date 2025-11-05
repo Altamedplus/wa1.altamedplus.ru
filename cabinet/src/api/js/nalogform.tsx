@@ -14,7 +14,6 @@ $('.radio-year > input').on('change', function () {
 
 $('[evt=modal-open]').on('click', () => {
     ajax.send('nalog_consent', {}).then((data) => {
-
         $('form').add(<div className='modal-fone'>
             <div className='modal-body'>
                 <div className='modal-header'>

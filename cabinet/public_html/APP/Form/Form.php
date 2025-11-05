@@ -106,7 +106,7 @@ class Form extends Controller
         return false;
     }
 
-    final public static function validateEmail($email):string|false
+    final public static function validateEmail($email): bool
     {
         if (preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
             return true;

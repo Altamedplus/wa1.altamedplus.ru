@@ -49,6 +49,8 @@ export class ajax {
             return Fire.show(data);
         }
         if (data?.type == 'error-input') {
+            $('.in-err').classRemove('in-err');
+            $('.error').html(' ');
             if (Array.isArray(data.name)) {
                 data.name.forEach((e: any, i: any) => {
                     new ErrorInput({

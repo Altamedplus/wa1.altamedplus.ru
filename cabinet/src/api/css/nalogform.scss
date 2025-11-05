@@ -228,3 +228,21 @@
         }
     }
 }
+@media screen and (max-width: 600px) {
+    .form{
+        .row{
+            flex-direction: column;
+            .quote{
+                text-align: center;
+            }
+        }
+        &-block{
+            width: 100%;
+        }
+        .modal{
+           &-body{
+            width: 90%;
+           }
+        }
+    }
+}
