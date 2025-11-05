@@ -1,5 +1,6 @@
 <?php
 
+use APP\Controller\AjaxController;
 use APP\Controller\Api\Edna\StatusController;
 use APP\Controller\Api\Nalog\FormSetController;
 use APP\Controller\Api\Nalog\StatusCheckController;
@@ -10,3 +11,4 @@ Router::post('/api/nalog/form/set', [FormSetController::class, 'index']);
 Router::options('/api/nalog/form/set', [FormSetController::class, 'options']);
 Router::get('/api/nalog/status/check', [StatusCheckController::class, 'index']);
 Router::get('/api/nalog/form', [FormSetController::class, 'html']);
+Router::post('/api/ajax/{name}', [AjaxController::class, 'index']);

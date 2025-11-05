@@ -8,7 +8,9 @@ use APP\Model\NalogCommentModel;
 use APP\Model\NalogModel;
 use APP\Module\Auth;
 use APP\Module\Mail;
+use Exception;
 use Pet\Request\Request;
+use Pet\View\View;
 
 class Submit extends Form
 {
@@ -76,6 +78,12 @@ class Submit extends Form
                 ], isNotExistCreate: true));
             }
         }
+        try{
+            $fields['id'] = $nalogId;
+            self::sendMail($data['hash'], $fields);
+        }catch(Exception $e){
+
+        }
 
         return [
             'type' => 'nalog-ok',
@@ -105,6 +113,12 @@ class Submit extends Form
     }
 
     public static function sendMail($uniq, $fields) {
-        (new Mail)
+        $fields['statusUrl'] = "https://www.altamedplus.ru/about/nalogovyy-vychet/status.php?hash=$uniq";
+        (new Mail())->send(
+            trim($fields['email']),
+            $fields['fio_nalog'],
+            "⚡️ Заявление на подготовку справки для получения налогового вычета принято",
+            View::getTemplate('template.nalog.send_mail', $fields)
+        );
     }
 }

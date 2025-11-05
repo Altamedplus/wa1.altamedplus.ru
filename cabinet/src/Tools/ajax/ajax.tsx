@@ -8,6 +8,9 @@ export class ajax {
         return JSON.parse(await ajax.post(body, {}, '/ajax/' + name));
     }
 
+    static async sendApi(name:string, body:any, isJson:boolean = true) {
+        return JSON.parse(await ajax.post(body, {}, '/api/ajax/' + name));
+    }
 
     static async post(data: BodyInit | null | any | HTMLFormElement, headers:any = {}, href:string = null) {
         let body: any;

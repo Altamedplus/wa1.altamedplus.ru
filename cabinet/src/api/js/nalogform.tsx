@@ -1,6 +1,6 @@
 import { $, Rocet } from '@rocet/rocet'
 import './../css/nalogform.scss'
-import { ajax } from '@tools/ajax';
+import { ajax } from '@src/Tools/ajax/ajax';
 import { integ } from '@rocet/integration';
 
 $('.radio-year > input').on('change', function () {
@@ -22,7 +22,7 @@ $('.radio-cl > input').on('change', function () {
 });
 
 $('[evt=modal-open]').on('click', () => {
-    ajax.send('nalog_consent', {}).then((data) => {
+    ajax.sendApi('nalog_consent', {}).then((data) => {
         $('form').add(<div className='modal-fone'>
             <div className='modal-body'>
                 <div className='modal-header'>
@@ -47,7 +47,7 @@ $('[evt=modal-open]').on('click', () => {
 window['callbackSubmit'] = function (data: any) {
     if (data.type == 'nalog-ok') { 
         $('.form').html(' ');
-        ajax.send('nalog_finishForm', {}).then((data) => { 
+        ajax.sendApi('nalog_finishForm', {}).then((data) => { 
             $('.form').html(data.html)
         })
     }
