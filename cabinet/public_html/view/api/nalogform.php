@@ -7,7 +7,7 @@ use APP\Model\TaxpayerListModel; ?>
 <? include __DIR__ . '/head.php' ?>
 
 <body>
-    <form class="form" name="nalog/Submit">
+    <form class="form" name="nalog/Submit"> 
         <div class="row">
             <h4>ДАННЫЕ ПАЦИЕНТА</h4>
         </div>
