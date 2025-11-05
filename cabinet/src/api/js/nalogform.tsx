@@ -11,6 +11,15 @@ $('.radio-year > input').on('change', function () {
         btn.closest('.radio-year').classRemove('check');
     }
 });
+$('.radio-cl > input').on('change', function () {
+    const btn = $(this);
+    console.log(btn)
+    if (btn.checked) {
+        btn.closest('.radio-cl').classAdd('check');
+    } else {
+        btn.closest('.radio-cl').classRemove('check');
+    }
+});
 
 $('[evt=modal-open]').on('click', () => {
     ajax.send('nalog_consent', {}).then((data) => {

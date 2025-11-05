@@ -78,12 +78,14 @@
         padding: 8px;
         border: 1px solid #ccc6;
         min-width: max-content;
+         border-radius: 5px;
 
         input {
             display: none;
         }
 
         .radio-year {
+            border: 1px solid rgba(255, 255, 255, 0);
             background: #F1F2F4;
             display: grid;
             margin: 2px;
@@ -95,6 +97,7 @@
             align-items: center;
             cursor: pointer;
             padding: 2px;
+            border-radius: 5px;
 
             p {
                 margin: 0px;
@@ -227,6 +230,59 @@
             }
         }
     }
+    &-clb{
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        width: 100%;
+    }
+    .radio{
+        &-clinic{
+            padding: 5px;
+            display: flex;
+            width: 100%;
+            flex-direction: wrap;
+            flex-wrap: wrap;
+            min-width: min-content;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0);
+        }
+        &-cl{
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0);
+            p{
+                margin: 0px;
+            }
+            input{
+                display: none;
+            }
+            padding: 7px;
+            margin: 3px;
+            background: #F1F2F4;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+             &::after {
+                margin-left: 5px;
+                display: block;
+                content: ' ';
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: var(--data-color-clinic);
+            }
+                  
+                   &:hover {
+                       border: 1px solid #68BCFF;
+                   }
+        } 
+    }
+    .check{
+         border: 1px solid #68BCFF;
+    }
+
 }
 @media screen and (max-width: 600px) {
     .form{

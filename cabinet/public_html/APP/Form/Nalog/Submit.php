@@ -3,7 +3,9 @@
 namespace APP\Form\Nalog;
 
 use APP\Form\Form;
+use APP\Model\NalogClinicModel;
 use APP\Model\NalogCommentModel;
+use APP\Model\NalogModel;
 use APP\Module\Auth;
 use Pet\Request\Request;
 
@@ -38,9 +40,61 @@ class Submit extends Form
             $error['name'][] = 'email';
             $error['message'][] = 'Невалидный email';
         }
+        if (empty(($period = self::getPeriod($fields)))) {
+            $error['name'][] = 'period';
+            $error['message'][] = 'Выберете год получения правки';
+        }
+        if (!self::isClinic($fields)) {
+            $error['name'][] = 'clinics';
+            $error['message'][] = 'Выберете кинику';
+        }
+
         if (!empty($error['name'])) {
             return self::errorInput($error['name'], $error['message']);
         }
 
+        $data = [
+            'email' => $email,
+            'name' => $fields['name'],
+            'date_birth' => date('Y-m-d', strtotime($fields['date_birth'])),
+            'phone' => $phone,
+            'nalog_year' => $period,
+            'inn' => trim($fields['inn']),
+            'taxpayer_type_id' => $fields['taxpayer'],
+            'taxpayer_fio' => trim($fields['fio_nalog']),
+            'hash' => $form['hash'] ?? ''
+        ];
+        $nalogId = (new NalogModel())->create($data);
+        $clinic = $fields['clinic'] ?? [];
+        foreach ($clinic as $id => $v) {
+            if ((int)$v === 1) {
+                (new NalogClinicModel([
+                    'nalog_id' => $nalogId,
+                    'clinic_id' => $id,
+                    'is_place' =>  0
+                ], isNotExistCreate: true));
+            }
+        }
+    }
+    public static function isClinic($fields)
+    {
+        $isClinic = false;
+        foreach ($fields['clinic'] as $id => $v) {
+            if ((int)$v === 1) {
+                $isClinic = true;
+            }
+        }
+        return $isClinic;
+    }
+
+    public static function getPeriod($fields)
+    {
+        $period = [];
+        foreach ($fields['year'] as $year => $isCheck) {
+            if ((int)$isCheck === 1) {
+                $period[] = $year;
+            }
+        }
+        return implode(", ", $period);
     }
 }

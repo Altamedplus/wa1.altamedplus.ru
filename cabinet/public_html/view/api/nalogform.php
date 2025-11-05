@@ -2,6 +2,7 @@
 <html lang="ru">
 <?
 
+use APP\Model\ClinicModel;
 use APP\Model\TaxpayerListModel; ?>
 <? include __DIR__ . '/head.php' ?>
 
@@ -27,14 +28,14 @@ use APP\Model\TaxpayerListModel; ?>
         <div class="row">
             <div class="form-block left">
                 <label>Укажите контактный телефон <span>*</span></label>
-                <input type="text" name="phone" placeholder="7 (999) 999-99-99"/>
+                <input type="text" name="phone" placeholder="7 (999) 999-99-99" />
                 <br />
                 <label>Ваш E-mail <span>*</span></label>
                 <input type="text" name="email" />
             </div>
             <div class="form-block">
                 <label>За какой год получить справку <span>*</span></label>
-                <div class="radio-box">
+                <div class="radio-box" name="period">
                     <? foreach (
                         [
                             ['2022' => 'Бумажный формат'],
@@ -46,6 +47,19 @@ use APP\Model\TaxpayerListModel; ?>
                             <p><?= $year = array_keys($data)[0] ?></p>
                             <input type="checkbox" name="year[<?= $year ?>]"></input>
                             <p><?= $data[$year] ?></p>
+                        </label>
+                    <? endforeach ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-clb">
+                <label>Выберете в каких клиниках вам оказывались медицинские услуги<span>*</span></label>
+                <div class="radio-clinic" name="clinics">
+                    <? foreach ((new ClinicModel())->findM() as $clinic): ?>
+                        <label class="radio-cl" style="--data-color-clinic: <?=$clinic->color?>">
+                            <p><?= $clinic->name ?></p>
+                            <input type="checkbox" name="clinic[<?= $clinic->id ?>]"></input>
                         </label>
                     <? endforeach ?>
                 </div>
@@ -79,7 +93,9 @@ use APP\Model\TaxpayerListModel; ?>
             </div>
         </div>
         <div class="block-submit">
-            <div class="flex-row-center-y"><input name="consent" type="checkbox" /><p evt="modal-open">Нажимая кнопку "Отправить" я принимаю <a>условия соглашения</a></p></div>
+            <div class="flex-row-center-y"><input name="consent" type="checkbox" />
+                <p evt="modal-open">Нажимая кнопку "Отправить" я принимаю <a>условия соглашения</a></p>
+            </div>
             <button type="submit">Отправить</button>
         </div>
         <div class="error" style="display: none;">
