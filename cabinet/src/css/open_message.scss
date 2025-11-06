@@ -140,8 +140,8 @@
         width: 1.8px;
         height: 7px;
         transform: rotate(55deg) skew(20deg);
-        border-bottom: 1.5px solid var(--color-status);
-        border-right: 1.5px solid var(--color-status);
+        border-bottom: 2px solid var(--color-status);
+        border-right: 2px solid var(--color-status);
         right: -1.5px;
         top: 2px;
       }
@@ -162,7 +162,7 @@
     }
 
     [data-status="read"] {
-      --color-status: var(--dark-blue);
+      --color-status: var(--average-blue);
       @extend [data-status="delivered"];
     }
 
