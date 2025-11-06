@@ -51,9 +51,8 @@ $('button[type=submit]').on('click', () => {
 
 window['callbackSubmit'] = function (data: any) {
     if (data.type == 'nalog-ok') { 
-        $('.form').html(' ');
         ajax.sendApi('nalog_finishForm', {}).then((data) => { 
-            $('.form').html(data.html)
+            $('.form').add($(data.html))
         })
     }
 }

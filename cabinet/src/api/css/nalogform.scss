@@ -335,16 +335,28 @@
   .check {
     border: 1px solid #68bcff;
   }
-
-  .finish {
-    color: #404557;
-    border-left: 3px solid #0086c1;
-    padding: 20px;
-
-    h2 {
-      font-size: 32px;
-    }
-  }
+ .global-block{
+  position: absolute;
+  background: white;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  justify-items: end;
+  padding: 10px;
+   .finish {
+     color: #404557;
+     border-left: 3px solid #0086c1;
+     padding: 20px;
+ 
+     h2 {
+       font-size: 32px;
+     }
+   }
+ }
 }
 
 @media screen and (max-width: 600px) {
