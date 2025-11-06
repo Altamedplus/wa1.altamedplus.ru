@@ -1,4 +1,5 @@
 import { Datatable } from "@tools/Datatable";
+import '../css/page/message.scss'
 import '../event/menu'
 import { $, Rocet } from '@rocet/rocet';
 const $table:Datatable|null = Datatable.get('messagelist');

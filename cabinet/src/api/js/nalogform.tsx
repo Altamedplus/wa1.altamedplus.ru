@@ -21,6 +21,22 @@ $('.radio-cl > input').on('change', function () {
     }
 });
 
+$('[name=name]').on('change', function () {
+    if ($('[name=taxpayer]').val() == '139') {
+        $('[name=fio_nalog]').val($(this).val())
+        $('[name=taxpayer_date_birth]').val($('[name=date_birth]').val())
+    }
+});
+$('[name=date_birth]').on('change', () => $('[name=name]').trigger('change'));
+$('[name=taxpayer]').on('change', () => {
+    $('[name=name]').trigger('change');
+    if ($('[name=taxpayer]').val() != '139') {
+        $('[name=fio_nalog]').val() == $('[name=name]').val() ? $('[name=fio_nalog]').val('') : '';
+        $('[name=taxpayer_date_birth]').val() == $('[name=date_birth]').val() ? $('[name=taxpayer_date_birth]').val('') : '';
+    }
+}
+);
+
 $('[evt=modal-open]').on('click', () => {
     ajax.sendApi('nalog_consent', {}).then((data) => {
         $('form').add(<div className='modal-fone'>

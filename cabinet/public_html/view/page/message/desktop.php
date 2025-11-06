@@ -80,6 +80,7 @@ use APP\Model\UsersModel;
                 <th alias="request_id">
                     <input type="text" name="message.request_id" placeholder="request_id" value="" />
                 </th>
+                 <th alias="data_request"></th>
                 <th alias="clinic_name">
                      <select name="message.clinic_id" >
                         <option value="">-</option>
@@ -106,6 +107,7 @@ use APP\Model\UsersModel;
                 <th alias="status">Статус Сообщения</th>
                 <th alias="sample_name">Шаблон</th>
                 <th alias="request_id">Присвоеный ID Edna</th>
+                <th alias="data_request">Сообщение</th>
                 <th alias="clinic_name">Клиника</th>
                 <th alias="user_name">Отправитель</th>
             </tr>

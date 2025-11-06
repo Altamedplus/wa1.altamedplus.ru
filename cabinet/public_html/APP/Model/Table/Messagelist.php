@@ -129,6 +129,10 @@ class Messagelist extends MessageModel implements Table
                 if ($name == 'sample_name') {
                     $row = '<a href="/sample/edit/'.$rows['sample_id'].'" >'.$row.'</a>';
                 }
+
+                if ($name == 'data_request' && !empty($row)) {
+                    $row = "<div class=\"table-message\">" . (new MessageModel($rows['id']))->getHtml() . "</div>";
+                }
                 $row = $row ?: "-";
             }
         }

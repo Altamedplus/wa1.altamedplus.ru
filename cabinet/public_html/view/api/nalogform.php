@@ -77,9 +77,9 @@ use APP\Model\TaxpayerListModel; ?>
                     <? endforeach; ?>
                 </select>
             </div>
-            <div class="form-block ">
-                <label>Дата рождения плательщика <span>*</span></label>
-                <input type="date" name="taxpayer_date_birth" placeholder="дд.мм.гггг"/>
+            <div class="form-block">
+                <label>ИНН налогоплательщика <span>*</span></label>
+                <input type="text" name="inn" />
             </div>
         </div>
         <div class="row">
@@ -87,9 +87,9 @@ use APP\Model\TaxpayerListModel; ?>
                 <label>ФИО налогоплательщика <span>*</span></label>
                 <input type="text" name="fio_nalog" />
             </div>
-            <div class="form-block">
-                <label>ИНН налогоплательщика <span>*</span></label>
-                <input type="text" name="inn" />
+            <div class="form-block ">
+                <label>Дата рождения плательщика <span>*</span></label>
+                <input type="date" name="taxpayer_date_birth" placeholder="дд.мм.гггг"/>
             </div>
         </div>
         <div class="block-submit">

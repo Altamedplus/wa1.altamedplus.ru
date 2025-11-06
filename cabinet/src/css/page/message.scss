@@ -1,0 +1,18 @@
+.table-message{
+    font-size: 12px;
+    min-width: 300px;
+    background: rgb(231, 231, 231);
+    border-radius: 10px;
+    padding: 10px;
+    .body{
+        margin: 5px;
+    }
+    .footer{
+        margin: 3px;
+        display: flex;
+        flex-direction: column;
+    }
+    h4{
+        margin-left: 5px;
+    }
+}
