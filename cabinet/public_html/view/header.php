@@ -7,7 +7,7 @@ use APP\Module\Auth;
     <div class="wrapper">
         <div class="header_block">
             <div class="header_logo">
-                <img src="<?= img('logo', 'svg') ?>" />
+                <a href="https://wa1.altamedplus.ru"><img src="<?= img('logo', 'svg') ?>" /></a>
             </div>
             <div class="system_name">
                 Система Быстрых Cообщений
