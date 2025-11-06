@@ -32,3 +32,8 @@ git add . && git commit -m "Ваше сообщение"
 ```
 git push
 ```
+
+Запустить локальый сервер
+```
+cd ./cabinet && php pet serve
+```
