@@ -1,10 +1,12 @@
 <footer>
     <div class="footer-wrapper">
-        <img src="<?= IMG_RELAT . "/logo.svg" ?>">
+        <!--<img src="<?//= IMG_RELAT . "/logo.svg" ?>">-->
         <div class="menu-footer">
             <ul>
                 <li><a>Возможности</a></li>
+                <li> | </li>
                 <li><a>Цены</a></li>
+                <li> | </li>
                 <li><a>Полезное</a></li>
             </ul>
         </div>

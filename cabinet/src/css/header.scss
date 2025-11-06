@@ -1,52 +1,63 @@
-header{
+header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #202629;
+  .wrapper {
+    justify-content: space-between;
+    padding: 10px;
+  }
+  .header {
+    &_block {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+    &_logo {
+      width: 50px;
+      display: flex;
+      margin-left: 30px;
+      justify-content: center;
+      img {
+        width: 80px;
+      }
+    }
+  }
+  .link-row {
     display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
-    background-color: var(--blue);
-    .wrapper{
-        justify-content: space-between;
-        padding: 10px;
+    flex-direction: row;
+    font-size: 14px;
+    margin: 0px;
+    padding: 0px;
+    li {
+      padding: 0px;
+      margin: 5px;
+      list-style-type: none;
     }
-    .header{
-        &_block{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-        }
-        &_logo{
-            width: 70px;
-            display: flex;
-            margin-left: 40px;
-            justify-content: center;
-            img{
-                width: 80px;
-            }
-        }
-
-    }
-    .link-row{
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-        font-size: 14px;
-        margin: 0px;
-        padding: 0px;
-        li{
-            padding: 0px;
-            margin: 5px;
-            list-style-type:none;
-        }
-    }
+  }
 }
-
+.header_block .link-row .link,
+.header_block .link-row i {
+  color: #ffffff;
+  padding-top: 0;
+  font-style: normal;
+  padding-left: 2px;
+  padding-bottom: 0;
+}
+.system_name {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  padding: 0 20px;
+}
 @media screen and (max-width: 850px) {
-    header{
-        .link-row{
-            display: none;
-
-        }
+  header {
+    .link-row {
+      display: none;
     }
+  }
 }

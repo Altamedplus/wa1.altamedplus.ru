@@ -9,6 +9,9 @@ use APP\Module\Auth;
             <div class="header_logo">
                 <img src="<?= img('logo', 'svg') ?>" />
             </div>
+            <div class="system_name">
+                Система Быстрых Cообщений
+            </div>
             <ul class="link-row">
                 <li>
                     <div class="flex-column">
