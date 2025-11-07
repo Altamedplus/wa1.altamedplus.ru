@@ -41,6 +41,9 @@ class Forgot extends Form
             'status' => StatusMessage::QUEUE,
         ]);
 
-        return new Fire('Пароль выслан в WhatsApp');
+        return [
+            'type' => 'redirect',
+            'href' => '/login'
+        ];
     }
 }
