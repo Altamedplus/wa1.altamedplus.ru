@@ -8,6 +8,7 @@ class NalogStatus
     const WORKING = 2;
     const READY = 3;
     const ISSUED = 4;
+    const NO_ENTRY = 5;
 
     public static function data(): array
     {
@@ -15,7 +16,8 @@ class NalogStatus
             self::NEW => 'Новая',
             self::WORKING => 'В работе',
             self::READY => 'Готово',
-            self::ISSUED => 'Выдано'
+            self::ISSUED => 'Выдано',
+            self::NO_ENTRY => 'Не явился'
         ];
     }
 
