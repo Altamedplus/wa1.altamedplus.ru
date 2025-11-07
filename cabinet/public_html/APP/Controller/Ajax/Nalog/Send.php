@@ -20,8 +20,9 @@ class Send extends AjaxController
 
     public function helper()
     {
-        $nalog  = new NalogModel(attr('id'));
-        $sample = new SampleModel(['name' => 'Готовность справок Налогового вычета']);
+        $id = (int)attr('id');
+        $nalog  = new NalogModel($id);
+        $sample = new SampleModel(['name' => 'Готовность Налоговый вычет']);
         $nalogClinic = new NalogClinicModel(['nalog_id' => $nalog->id, 'is_place' => 1]);
         $variable = [
             'fio' => [$nalog->taxpayer_fio],
