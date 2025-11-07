@@ -13,6 +13,11 @@ class Auth
 
     public static function init()
     {
+
+        if (!self::accessIp()) {
+            Response::code(403);
+            Response::die('<h1>Forbidden  code 403</h1>');
+        }
         $auth = Cookie::get('auth');
         if (!$auth) {
             if (request()->path != '/login') {
@@ -32,5 +37,15 @@ class Auth
         if (empty(self::$profile['img'])) {
             self::$profile['img'] = IMG_RELAT . "avatar_man/1.png";
         }
+    }
+
+    private static function accessIp(): bool
+    {
+        $request = request();
+        $ip = $request->ip();
+        if ($ip == '127.0.0.1') return true;
+        $ips = explode('|', ALLOW_FROM_IP);
+        if (empty($ips)) return true;
+        return in_array($ip, $ips);
     }
 }
