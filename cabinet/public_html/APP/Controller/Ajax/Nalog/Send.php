@@ -23,18 +23,18 @@ class Send extends AjaxController
         $id = (int)attr('id');
         $nalog  = new NalogModel($id);
         $sample = new SampleModel(['name' => 'Готовность Налоговый вычет']);
-        $nalogClinic = new NalogClinicModel(['nalog_id' => $nalog->id, 'is_place' => 1]);
+        //$nalogClinic = new NalogClinicModel(['nalog_id' => $nalog->id, 'is_place' => 1]);
         $variable = [
             'fio' => [$nalog->taxpayer_fio],
             'nalogid' => [$nalog->id]
         ];
-        $data = $sample->complectWhatsApp($sample->id, $variable, [], $nalogClinic->clinic_id);
+        $data = $sample->complectWhatsApp($sample->id, $variable, [], null);
         // $request = [];
         // $result =  (new WhatsApp())->sendWhatsapp($nalog->phone, $dataWa, $request);
         $messangeId = (new MessageModel())->create([
             'phone' => $nalog->phone,
             'data_request' => json_encode($data, JSON_UNESCAPED_UNICODE),
-            'clinic_id' => $nalogClinic->clinic_id,
+            'clinic_id' => null,
             'user_id' => Auth::$profile['id'],
             'sample_id' => $sample->id,
             'status' => StatusMessage::QUEUE,
