@@ -6,30 +6,3 @@
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^(.*)$ index.php [QSA]
 </IfModule>
-
-#Order Deny,Allow
-Deny from all
-
-
-#altamed
-allow from 5.23.51.63
-allow from 134.0.110.94
-allow from 92.53.96.41
-#dubki
-allow from 79.174.54.248
-
-#lashin
-allow from 83.222.25.158
-allow from 62.181.50.153
-allow from 217.73.119.217
-allow from 5.23.51.63
-allow from 93.189.231.81
-
-#check req
-allow from 185.43.7.105
-
-<Limit POST PUT>
-	Order Deny,Allow
-	Deny from all
-	Allow from 92.53.96.41
-</Limit>
