@@ -19,7 +19,7 @@ if ($table) {
     $table.initCallback = () => { 
         initBtnModal();
         $('[evt="sendNalog"]').on('click', function () {
-            if (confirm("Отправить сообщение о готовности налогово вычета?")) { 
+            if (confirm("Хотите отправить уведомление о готовности?")) { 
                 ajax.send('nalog_send', { id: $(this).data('id') }).then(() => $table.reload());
             }
         });
