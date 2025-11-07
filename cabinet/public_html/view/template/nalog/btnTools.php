@@ -14,7 +14,7 @@
         type="button"
         data-modal="nalog"
         title="Комментарии"
-        data-header="Комментарии к заявки #<?= $nalog_id ?>"
+        data-header="Комментарии к заявкe #<?= $nalog_id ?>"
         data-template="nalog_comment"
         data-form="nalog/Comment"
         data-id="<?= $nalog_id ?>"
