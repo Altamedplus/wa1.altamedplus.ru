@@ -34,7 +34,6 @@ class Send extends AjaxController
         $messangeId = (new MessageModel())->create([
             'phone' => $nalog->phone,
             'data_request' => json_encode($data, JSON_UNESCAPED_UNICODE),
-            'clinic_id' => null,
             'user_id' => Auth::$profile['id'],
             'sample_id' => $sample->id,
             'status' => StatusMessage::QUEUE,
