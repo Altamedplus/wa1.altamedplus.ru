@@ -154,7 +154,8 @@
     }
 
     &-log-in {
-      background-image: url("./img/icons/log-in.svg");
+      //background-image: url("./img/icons/log-in.svg");
+      background-image: url("./img/icons/logout.svg");
       background-repeat: no-repeat;
       background-size: 24px 34px;
       background-position: center;
@@ -177,7 +178,8 @@
       background-position-x: 7px;
     }
     &-edit {
-      background-image: url("./img/icons/edit-2.svg");
+      //background-image: url("./img/icons/edit-2.svg");
+      background-image: url("./img/icons/pencil.svg");
       background-repeat: no-repeat;
       background-size: 25px 21px;
       background-position: center;
@@ -185,33 +187,37 @@
       background-position-y: 8px;
     }
     &-message-circle {
-      background-image: url("./img/icons/message-circle.svg");
+      //background-image: url("./img/icons/message-circle.svg");
+      background-image: url("./img/icons/comment.svg");
       background-repeat: no-repeat;
       background-size: 25px 21px;
       background-position: end;
       background-position-x: 8px;
-      background-position-y: 8px;
+      background-position-y: 10px;
     }
     &-eye {
-      background-image: url("./img/icons/eye-fff.svg");
+      //background-image: url("./img/icons/eye-fff.svg");
+      background-image: url("./img/icons/changelog.svg");
       background-repeat: no-repeat;
       background-size: 13px 13px;
       background-position-x: 4px;
       background-position-y: 3px;
     }
     &-print {
-      background-image: url("./img/icons/print_3.svg");
+      //background-image: url("./img/icons/print_3.svg");
+      background-image: url("./img/icons/printer.svg");
       background-repeat: no-repeat;
       background-size: 26px 33px;
       background-position-x: 7px;
       background-position-y: 3px;
     }
     &-wa {
-      background-image: url("./img/icons/wa.svg");
+      //background-image: url("./img/icons/wa.svg");
+      background-image: url("./img/icons/whatsapp.svg");
       background-repeat: no-repeat;
       background-size: 21px 29px;
-      background-position-x: 9px;
-      background-position-y: 4px;
+      background-position-x: 10px;
+      background-position-y: 5px;
     }
   }
 

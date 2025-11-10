@@ -25,7 +25,7 @@ class NalogModel extends Model
         $isIssued = [];
         $isNew = [];
         foreach ($nalogC as $cl) {
-            if ($cl->status == NalogStatus::READY || $cl->status == NalogStatus::ISSUED) {
+            if ($cl->status == NalogStatus::READY || $cl->status == NalogStatus::ISSUED || $cl->status == NalogStatus::NO_ENTRY) {
                 $isReady[] = 1;
             }
             if ($cl->status == NalogStatus::ISSUED) {
@@ -34,6 +34,7 @@ class NalogModel extends Model
             if ($cl->status == NalogStatus::NEW) {
                 $isNew[] = 1;
             }
+
         }
 
         !empty($isReady) && count($isReady) == count($nalogC) ? $nalog->status = NalogStatus::READY
