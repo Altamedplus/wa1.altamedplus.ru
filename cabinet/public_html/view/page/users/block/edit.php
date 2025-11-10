@@ -16,7 +16,7 @@ use APP\Enum\UsersType;
         <label>Фамилия</label>
         <input type="text" name="surname" placeholder="Фамилия" value="<?= $formInfo['surname'] ?? '' ?>" />
         <label>Телефон</label>
-        <input type="text" name="phone" placeholder="Телефон" value="<?= $formInfo['phone'] ?? '' ?>" />
+        <input type="text" name="phone" placeholder="Телефон" value="<?= $formInfo['phone'] ?? '' ?>" data-phonemask="1"/>
         <label>Тип пользователя</label>
         <select name="type">
             <? foreach (UsersType::data() as $t => $type): ?>

@@ -41,7 +41,7 @@ use APP\Form\Form; ?>
     
         <div class="flex-column <?= ($TYPE == 'PHONE'?'': 'd-none')?>" data-type="PHONE">
             <label>Телефон</label>
-            <input type="text" name="phone" placeholder="Телефон" value="<?= $formInfo['phone'] ?? '' ?>" />
+            <input type="text" name="phone" placeholder="Телефон" value="<?= $formInfo['phone'] ?? '' ?>" data-phonemask="1"/>
         </div>
 
         <div class="flex-column d-none">

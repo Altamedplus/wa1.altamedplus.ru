@@ -28,7 +28,7 @@ use APP\Model\TaxpayerListModel; ?>
         <div class="row">
             <div class="form-block left">
                 <label>Укажите контактный телефон <span>*</span></label>
-                <input type="text" name="phone" placeholder="7 (999) 999-99-99" />
+                <input type="text" name="phone" placeholder="7 (999) 999-99-99"  data-phonemask="1"/>
                 <br />
                 <label>Ваш E-mail <span>*</span></label>
                 <input type="text" name="email" />
