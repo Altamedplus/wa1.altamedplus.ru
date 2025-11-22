@@ -8,6 +8,8 @@ import { DateF } from '@src/Tools/DateF';
 import { Cookie } from '@src/Tools/Cookie';
 import { Fire } from '@tools/Fire';
 import '../event/message'
+import '../event/sugression'
+
 var tabs = 1;
 
 const $table = Datatable.get('buttonmessanangelist');
