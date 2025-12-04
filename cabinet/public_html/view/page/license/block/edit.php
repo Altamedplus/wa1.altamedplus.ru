@@ -20,7 +20,7 @@ use APP\Form\Form; ?>
          <label>Клиника</label>
         <select name="clinic_id">
             <? foreach ($clinics as $clinic) : ?>
-                <option value="<?= $clinic['id'] ?>"><?= $clinic['name'] ?></option>
+                <option value="<?= $clinic['id'] ?>" <?=$formInfo['clinic_id'] == $clinic['id'] ? 'selected' : '';?>><?= $clinic['name'] ?></option>
             <? endforeach; ?>
         </select>
         <div class="flex-row-center">
