@@ -12,3 +12,4 @@ Router::options('/api/nalog/form/set', [FormSetController::class, 'options']);
 Router::get('/api/nalog/status/check', [StatusCheckController::class, 'index']);
 Router::get('/api/nalog/form', [FormSetController::class, 'html']);
 Router::post('/api/ajax/{name}', [AjaxController::class, 'index']);
+Router::post('/edna/callback_ednaru.php', [StatusController::class, 'index']);
