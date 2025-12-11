@@ -1,12 +1,11 @@
 <?php
+
 namespace APP\Controller\Cron;
 
 use APP\Enum\StatusMessage;
 use APP\Model\MessageModel;
-use APP\Module\Auth;
 use APP\Module\WhatsApp;
 use Pet\Controller;
-use Pet\Errors\AppException;
 use Pet\Router\Response;
 
 class MessageSend extends Controller

@@ -13,6 +13,7 @@ use APP\Controller\Page\EdnaSampleController;
 use APP\Controller\Page\GroupSampleController;
 use APP\Controller\Page\HomeController;
 use APP\Controller\Page\LicenseController;
+use APP\Controller\Page\MaxController;
 use APP\Controller\Page\MessageController;
 use APP\Controller\Page\NalogController;
 use APP\Controller\Page\SampleController;
@@ -60,6 +61,7 @@ Router::middleware(
     Router::get('/license', [LicenseController::class, 'index']),
     Router::get('/edna_sample', [EdnaSampleController::class, 'index']),
     Router::get('/setting', [SettingController::class, 'index']),
+    Router::get('/max', [MaxController::class, 'index']),
 
     Router::get('/clinic/edit/{id}', [ClinicController::class, 'edit']),
     Router::get('/users/edit/{id}', [UsersController::class, 'edit']),
