@@ -22,12 +22,16 @@ abstract class Entity
         return $curl;
     }
 
-    public function sendMessange($data)
+    public function sendMessangeUser($data, $userId)
     {
         $curl = $this->curlInit();
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
-        // curl_setopt($curl, CURLOPT_URL, $this->patformApiUrl .'/');
+        $data['format'] = ($data['format'] ?? "html");
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data, JSON_UNESCAPED_UNICODE));
+        curl_setopt($curl, CURLOPT_URL, $this->platformApiUrl . "/messages?user_id=$userId");
         curl_setopt($curl, CURLOPT_POST, true);
+        $result = curl_exec($curl);
+        $result = json_decode($result, true) ?  json_decode($result, true) : $result;
+        return [ 'response' => $result ];
     }
 
     public function me()

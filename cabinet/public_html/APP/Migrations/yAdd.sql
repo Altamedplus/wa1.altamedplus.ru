@@ -16,3 +16,4 @@ ALTER TABLE `nalog_clinic` ADD `license_id` INT NULL DEFAULT NULL AFTER `clinic_
 ALTER TABLE `nalog_clinic` ADD `is_place` TINYINT(1) NOT NULL DEFAULT '0' AFTER `user_id`;
 ALTER TABLE `nalog_clinic` ADD `no_doc` TINYINT(1) NOT NULL DEFAULT '0' AFTER `is_place`;
 ALTER TABLE `nalog` ADD `taxpayer_date_birth` DATE NULL DEFAULT NULL AFTER `taxpayer_fio`;
+ALTER TABLE `contact` ADD `code` INT(6) NULL DEFAULT NULL AFTER `cdate`;
