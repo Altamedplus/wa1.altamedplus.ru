@@ -13,3 +13,4 @@ import './event/delete'
 
 import './event/mask'
 import './event/modal'
+import './module/showflakes'
