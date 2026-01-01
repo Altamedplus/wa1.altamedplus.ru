@@ -12,7 +12,7 @@ use APP\Model\TaxpayerListModel; ?>
             <h4>ДАННЫЕ ПАЦИЕНТА</h4>
         </div>
         <div class="row">
-            <span class="quote"> Пациент, даже несовершеннолетний должен именть ИНН, иначе ФНС не примет справку в работу.</span>
+            <span class="quote"> Пациент, даже несовершеннолетний должен иметь ИНН, иначе ФНС не примет справку в работу.</span>
         </div>
         <div class="row">
             <div class="form-block left">
