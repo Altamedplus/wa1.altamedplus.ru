@@ -24,7 +24,7 @@ class SubscriptionsController extends Controller
         try {
             switch ($data['update_type']) {
                 case 'bot_started':
-                    $this->botStarted($data);
+                    $this->botStarted($data['user']['user_id']);
                     break;
                 case 'message_created':
                     $this->message($data);
@@ -40,9 +40,8 @@ class SubscriptionsController extends Controller
     }
 
 
-    private function botStarted($data)
+    private function botStarted($userId)
     {
-        $userId = $data['user']['user_id'];
         $contact = new Contact(['max_user_id' => $userId], isNotExistCreate:true);
         if (empty($contact->step_authorization)) {
             $result = (new Messenger())->sendMessangeUser([
@@ -60,7 +59,7 @@ class SubscriptionsController extends Controller
         $text = mb_strtolower(trim($data['message']['body']['text']));
 
         if (in_array($text, $this->command)) {
-            $contact->set('step_authorization',  TypeAutorization::START);
+            $this->botStarted($userId);
             return;
         }
 
