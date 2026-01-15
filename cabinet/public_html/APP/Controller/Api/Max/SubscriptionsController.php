@@ -13,6 +13,10 @@ use Pet\Router\Response;
 
 class SubscriptionsController extends Controller
 {
+    private $command = [
+        'сброс авторизации',
+        'сменить номер телефона',
+    ];
     public function index()
     {
         Response::set(Response::TYPE_JSON);
@@ -53,6 +57,13 @@ class SubscriptionsController extends Controller
     {
         $userId = $data['message']['sender']['user_id'];
         $contact = new Contact(['max_user_id' => $userId]);
+        $text = mb_strtolower(trim($data['message']['body']['text']));
+
+        if (in_array($text, $this->command)) {
+            $contact->set('step_authorization',  TypeAutorization::START);
+            return;
+        }
+
         if ($contact->step_authorization  == TypeAutorization::START) {
             $phone = Form::sanitazePhone($data['message']['body']['text']);
             if (!Form::validatePhone($phone)) {
@@ -61,11 +72,11 @@ class SubscriptionsController extends Controller
                 ], $userId);
             } else {
                 $code = rand(100000, 999999);
+                $contact = $contact->reContact($phone);
                 $contact->set('code', $code);
-                $contact->set('phone', $phone);
                 $r = (new Sms())->send($phone, "Код авторизации бота в Mаx: $code");
                 $result = (new Messenger())->sendMessangeUser([
-                    'text' => "Код отправлен на номер телефона $phone"
+                    'text' => "Код отправлен на номер телефона $phone . Если хотите исправить номер телефона напишите ".implode(", ", $this->command)."."
                 ], $userId);
                 file_put_contents(__DIR__ . '/debug.txt', print_r($result, true) . "\n" . print_r($r, true) . "\n", FILE_APPEND);
                 $contact->set('step_authorization', TypeAutorization::CODE);
@@ -76,12 +87,12 @@ class SubscriptionsController extends Controller
             $code = trim($data['message']['body']['text']);
             if ($code == $contact->code) {
                 (new Messenger())->sendMessangeUser([
-                    'text' => "Вы успешно авторизовались теперь вы будете получать сообщения о записях и прочее в альтамед"
+                    'text' => "Вы успешно авторизовались теперь вы будете получать сообщения о записях и прочее от Альтамед+"
                 ], $userId);
                 $contact->set('step_authorization', TypeAutorization::AUTORIZATION);
             } else {
                 (new Messenger())->sendMessangeUser([
-                    'text' => "Неверный код"
+                    'text' => "Неверный код."
                 ], $userId);
             }
         }
