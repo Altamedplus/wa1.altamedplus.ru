@@ -10,8 +10,14 @@
           "Pet\\": "vendor/pet/framework/"
         }
     },
+  "require-dev":{
+    "phpunit/phpunit": "^11"
+  },
   "files":[
     "/vendor/pet/framework/function.php"
-  ]
-
+  ],
+  "scripts": {
+    "test": "phpunit --configuration=tests/phpunit.xml",
+    "test:filter": "phpunit --configuration=tests/phpunit.xml --filter"
+  }
 }
