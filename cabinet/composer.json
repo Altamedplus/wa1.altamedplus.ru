@@ -7,7 +7,8 @@
     }, 
     "autoload": {
         "psr-4": {
-          "Pet\\": "vendor/pet/framework/"
+          "Pet\\": "vendor/pet/framework/",
+          "Test\\": "tests/"
         }
     },
   "require-dev":{
