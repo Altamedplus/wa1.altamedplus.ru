@@ -3,7 +3,12 @@
 namespace APP\Module;
 
 use Pet\Errors\AppException;
-
+/**
+ * @see cabinet/tests/Unit/Module/SmsTest.php
+ *  Модуль тестирования SmsTest
+ *  запуск в консоли
+ *  composer::filter SmsTest
+ **/
 class Sms{
     protected $url = 'https://smsc.ru/sys/send.php';
     protected $login = 'altamedplus';
