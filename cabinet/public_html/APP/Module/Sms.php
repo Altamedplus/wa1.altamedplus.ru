@@ -7,9 +7,10 @@ use Pet\Errors\AppException;
  * @see cabinet/tests/Unit/Module/SmsTest.php
  *  Модуль тестирования SmsTest
  *  запуск в консоли
- *  composer::filter SmsTest
+ *  composer unit::filter SmsTest
  **/
-class Sms{
+class Sms
+{
     protected $url = 'https://smsc.ru/sys/send.php';
     protected $login = 'altamedplus';
     protected $psw = 'MxiMgxThyG7C';
