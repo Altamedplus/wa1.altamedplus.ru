@@ -31,16 +31,14 @@ class SampleModel extends Model
         $text = preg_replace('/\r\n/', '<br/>', $text);
         return $text;
     }
-
-
-    public static function complectWhatsApp(int $id, $variables = [], $button = [], $clinicId = null): array
+    private static function complect(int $id, $variables = [], $button = [], $clinicId = null): false | object
     {
         $result = (new self())->find(callback: function (Model $q) use ($id) {
             $q->select('sample_messange_wa.*',);
             $q->where("sample_messange_wa.id = $id");
         });
 
-        if (empty($result[0])) return [];
+        if (empty($result[0])) return false;
 
         $s = (object)$result[0];
         foreach ($variables as $name => $values) {
@@ -65,7 +63,14 @@ class SampleModel extends Model
                 }
             }
         }
+        return $s;
+    }
 
+    public static function complectWhatsApp(int $id, $variables = [], $button = [], $clinicId = null): array
+    {
+        if (empty($s = self::complect($id, $variables, $button, $clinicId))) {
+            return [];
+        }
         $data = [
            'contentType' =>  $s->content_type,
            'text' =>   $s->text,
@@ -124,5 +129,91 @@ class SampleModel extends Model
         return $result;
     }
 
+    public function complectMax(int $id, $variables = [], $button = [], $clinicId = null): array
+    {
+        if (empty($s = self::complect($id, $variables, $button, $clinicId))) {
+            return [];
+        }
+        $header = (new HeaderSampleModel(['sample_id' => $s->id]))->headerMaxComplect();
+        $headerText = is_string($header) ? $header : '';
+        $s->text = preg_replace('/\*(.*?)\*/', '<b>$1</b>', $s->text);
+        $data = [
+            'text' => $headerText . $s->text . "\n\r\n\r <i>" . ($s->footer ?? '') .'</i>',
+            'format' => 'html'
+        ];
+        $sampleButtons =  (new ButtonsSampleModel())->findM(['sample_id' => $s->id], callback: function (Model $m) {
+            $m->select('b.*');
+            $m->join('buttons b')->on(['b.id', 'buttons_sample.buttons_id']);
+        });
+        $dataButton = [];
+        foreach ($sampleButtons as $mBut) {
+            foreach ($button as $id => $value) {
+                if ((int)$id === (int)$mBut->id) {
+                    $dataButton[] =  self::complectButtonsMax($mBut, (int)$id, $value, $button);
+                }
+            }
+        }
+        if (is_array($header) && !empty($header)){
+            $data['attachments'] = [$header];
+        }
+        if (!empty($dataButton)) {
+            if (!isset($data['attachments'])) $data['attachments'] = [];
+            $data['attachments'] = array_merge($data['attachments'], $dataButton);
+        }
+        return $data;
+
+    }
+
+    public static function complectButtonsMax(Model $button, $id, $value, $field): array
+    {
+        $attachment = [
+            'type' => '',
+            'payload' => [
+                'buttons' => [
+                    []
+                ]
+            ]
+        ];
+        if ($button->type == ButtonType::URL) {
+            $url = $value;
+            if ($button->is_url_postfix == 1) {
+                $url = trim($field['postfix'][$id]);
+            }
+            $attachment['type'] = 'inline_keyboard';
+            $attachment['payload']['buttons'][0][] = [
+                'type' => 'link',
+                'url' => $url,
+                'text' => $button->text
+            ];
+            return $attachment;
+        }
+
+        if ($button->type == ButtonType::PHONE) {
+               $attachment['type'] = 'contact';
+               $attachment['payload'] = [
+                    'name' => $button->text,
+                    'contact_id' => null,
+                    'vcf_info' => "BEGIN:VCARD
+                                    VERSION:3.0
+                                    FN:{$button->text}
+                                    TEL;TYPE=WORK,VOICE:{$button->phone}
+                                    TEL;TYPE=HOME,VOICE:{$button->phone}
+                                    EMAIL:
+                                    END:VCARD"
+               ];
+
+               return $attachment;
+        }
+
+        if ($button->type == ButtonType::QUICK_REPLY) {
+            $attachment['type'] = 'inline_keyboard';
+            $attachment['payload']['buttons'][0][] = [
+                'type' => 'message',
+                'text' => $button->payload
+            ];
+            return $attachment;
+        }
+        return [];
+    }
 }
 

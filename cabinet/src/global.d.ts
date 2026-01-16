@@ -3,6 +3,7 @@ interface Window {
   normalCaptcha: boolean
   reloadTable: Function
   callbackSubmit: Function | null
-  initResendModal:Function | null
+  initResendModal: Function | null
+  submit: Function | null
 }
 declare var isDevelopment: boolean;

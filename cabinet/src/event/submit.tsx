@@ -13,7 +13,7 @@ const submit =  function (evt: MouseEvent) {
     }
     function sendData() {
         const form: HTMLFormElement | null = $(evt.target).closest('form').item() as HTMLFormElement;
-        ajax.post(form).then((data) => {
+        ajax.post(form, {}, null, evt.target as HTMLElement).then((data) => {
             let ev = ajax.eventForm(data)
             if (typeof window['callbackSubmit'] === 'function') {
                 const result:any = (window['callbackSubmit'] as Function)(data)
@@ -30,6 +30,8 @@ const submit =  function (evt: MouseEvent) {
         );
     }
 }
+
+window['submit'] = submit
 
 $('button[type=submit]').on('click', submit);
 

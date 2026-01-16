@@ -104,6 +104,29 @@ function buildFilds(data: any) {
     evenSelect();
 }
 
+
+$('[name=phone]').on('input', async function () {
+    $('[name=max]').remove();
+    let phone = parseInt(this.value.replace(/\D+/g, ""));
+    if ((new String(phone)).length >= 11) {
+        const result = await ajax.send('home_get_butSubmit', { phone });
+        if (result.max) {
+            result.max.forEach((el: string) => {
+                const div = $(`<div class='flex-row-center'></div>`);
+                const btn = $(el);
+                btn.on('click', window['submit'])
+                div.add(btn)
+                $('form[name="message/send"]').add(div);
+            })
+        }
+    } else {
+        const btns = $('[name=max]')
+        if (btns.length != 0) {
+            btns.remove();
+        }
+    }
+});
+
 function eventMessange($messange: Rocet, $dynamic: Rocet) {
 
     const $variable = $dynamic.find('[data-variable]');
@@ -170,7 +193,7 @@ window['initResendModal'] = function (data: any) {
         const tel:string = form.find('input[name=phone]').val();
         Cookie.set('resend', tel);
         $(this).closest('.modal').find('.close-modal').trigger('click');
-        console.log(form.find('button[type="submit"]'));
+        // console.log(form.find('button[type="submit"]'));
         form.find('button[type="submit"]').trigger('click');
     })
 }

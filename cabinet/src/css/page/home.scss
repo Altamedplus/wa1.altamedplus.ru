@@ -61,15 +61,16 @@
       flex-direction: column;
     }
 
-    .btn-content-message-circle {
+    .btn-content-message-circle , .btn-content-max{
       background-color: var(--average-blue);
       color: white;
       font-weight: 500;
       padding: 10px 15px;
       border-radius: 5px;
       padding-right: 40px;
-      background-position: right 27% top 7px;
+      background-position: right 18% top 7px;
       width: 100%;
+      margin-bottom: 10px;
       &:hover {
         background-color: var(--dark-blue);
       }

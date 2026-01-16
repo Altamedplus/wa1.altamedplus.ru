@@ -23,6 +23,7 @@ class Send extends Form
         $sample_id = (int)attr('id');
         $fields = (array)attr();
         $clinicId = attr('clinic');
+        $isMax = (bool)attr('max');
         $phone = Form::sanitazePhone(attr('phone'));
         if (!Form::validatePhone($phone)) {
             return new Fire('Не валидный телефон', Fire::ERROR);
@@ -52,17 +53,23 @@ class Send extends Form
                 unset($fields[$name]);
             }
         }
-        $data = (new SampleModel())->complectWhatsApp($sample_id, $variables, $buttons, $clinicId);
-        // $request = [];
-        // $result =  (new WhatsApp())->sendWhatsapp($phone, $data, $request);
-        $messangeId = (new MessageModel())->create([
+        $sendData = [
             'phone' => $phone,
-            'data_request' => json_encode($data, JSON_UNESCAPED_UNICODE),
             'clinic_id' => $clinicId,
             'user_id' => Auth::$profile['id'],
             'sample_id' => $sample_id,
             'status' => StatusMessage::QUEUE,
-        ]);
+        ];
+        if ($isMax) {
+            $sendData['data_request'] = json_encode((new SampleModel())->complectMax($sample_id, $variables, $buttons, $clinicId), JSON_UNESCAPED_UNICODE);
+            $sendData['type_send'] = 1;
+        } else {
+            $sendData['data_request'] = json_encode((new SampleModel())->complectWhatsApp($sample_id, $variables, $buttons, $clinicId), JSON_UNESCAPED_UNICODE);
+            $sendData['type_send'] = 0;
+        }
+        // $request = [];
+        // $result =  (new WhatsApp())->sendWhatsapp($phone, $data, $request);
+        $messangeId = (new MessageModel())->create($sendData);
 
         return new Fire('Сообщение поставлено в очередь на отправку');
     }

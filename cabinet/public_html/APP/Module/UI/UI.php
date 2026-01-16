@@ -26,6 +26,7 @@ class UI {
         foreach ($el as $name => $value) {
             $attr .= "$name='$value' ";
         }
-        return "<{$obj?->tag}  $attr >{$obj?->textContent}</{$obj?->tag}>";
+        $textContent = $obj->textContent ?? '';
+        return "<{$obj?->tag}  $attr >{$textContent}</{$obj?->tag}>";
     }
 }

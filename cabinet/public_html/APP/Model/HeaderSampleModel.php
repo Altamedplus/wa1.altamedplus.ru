@@ -29,6 +29,24 @@ class HeaderSampleModel extends Model
         $this->set($this->default());
     }
 
+    public function headerMaxComplect(): string | array
+    {
+        if (!$this->exist()) {
+            return '';
+        }
+        switch ($this->type) {
+            case HeaderType::TEXT:
+                return "<h1>{$this->text}</h1>";
+                break;
+            case HeaderType::IMAGE:
+                return [
+                    'type' => 'image',
+                    'payload' => ['url' => $this->img_url]
+                ];
+        }
+        return '';
+    }
+
     public function headerComplect(): array| false
     {
         if (!$this->exist()) {

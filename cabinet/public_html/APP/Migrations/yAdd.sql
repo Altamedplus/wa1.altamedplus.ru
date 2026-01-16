@@ -17,3 +17,6 @@ ALTER TABLE `nalog_clinic` ADD `is_place` TINYINT(1) NOT NULL DEFAULT '0' AFTER 
 ALTER TABLE `nalog_clinic` ADD `no_doc` TINYINT(1) NOT NULL DEFAULT '0' AFTER `is_place`;
 ALTER TABLE `nalog` ADD `taxpayer_date_birth` DATE NULL DEFAULT NULL AFTER `taxpayer_fio`;
 ALTER TABLE `contact` ADD `code` INT(6) NULL DEFAULT NULL AFTER `cdate`;
+
+ALTER TABLE `message` ADD `type_send` INT NOT NULL DEFAULT '0' AFTER `cdate`;
+ALTER TABLE `header` ADD `token_img_max` VARCHAR(2000) NULL DEFAULT NULL AFTER `video_name`;

@@ -12,11 +12,11 @@ export class ajax {
         return JSON.parse(await ajax.post(body, {}, '/api/ajax/' + name));
     }
 
-    static async post(data: BodyInit | null | any | HTMLFormElement, headers:any = {}, href:string = null) {
+    static async post(data: BodyInit | null | any | HTMLFormElement, headers:any = {}, href:string = null, submiter?:HTMLElement) {
         let body: any;
         let url: string = href || location.href;
         if (data instanceof HTMLFormElement) {
-            body = new FormData(data);
+            body = new FormData(data, submiter);
             this.checkboxNormalize(data, body);
             if (data.hasAttribute('name')) { 
                 headers['form-name'] = data.getAttribute('name');
