@@ -36,7 +36,7 @@ class HeaderSampleModel extends Model
         }
         switch ($this->type) {
             case HeaderType::TEXT:
-                return "<h1>{$this->text}</h1>";
+                return "<h1>{$this->text}</h1> \n\r\n\r";
                 break;
             case HeaderType::IMAGE:
                 return [

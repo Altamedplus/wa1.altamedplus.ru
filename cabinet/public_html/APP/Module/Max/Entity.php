@@ -18,7 +18,8 @@ abstract class Entity {
     ];
 
 
-    public function getApiUrl(): string {
+    public function getApiUrl(): string
+    {
         return $this->platformApiUrl;
     }
 
@@ -27,7 +28,8 @@ abstract class Entity {
         $this->headers[] = "Authorization: $token";
     }
 
-    private function curlInit() {
+    private function curlInit()
+    {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -35,7 +37,8 @@ abstract class Entity {
         return $curl;
     }
 
-    public function send(string $data, $url) {
+    public function send(string $data, $url)
+    {
         $curl = $this->curlInit();
         $this->result['send'][] = $data;
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
@@ -47,9 +50,9 @@ abstract class Entity {
         return ['response' => $result];
     }
 
-    public function sendMessangeUser($data, $userId) {
-        $data['format'] = ($data['format'] ?? "html");
-        $json = json_encode($data, JSON_UNESCAPED_UNICODE);
+    public function sendMessangeUser(array|string $data, $userId)
+    {
+        $json = is_array($data) ? json_encode($data, JSON_UNESCAPED_UNICODE) : $data;
         return $this->send($json, $this->platformApiUrl . "/messages?user_id=$userId");
     }
 
@@ -83,10 +86,12 @@ abstract class Entity {
         return ['response' => $result];
     }
 
-    public function getResult(): array {
+    public function getResult(): array
+    {
         return $this->result;
     }
-    public function getUrlLoad($type) {
+    public function getUrlLoad($type)
+    {
         return $this->send('', $this->platformApiUrl . "/uploads?type=$type");
     }
 
@@ -137,5 +142,27 @@ abstract class Entity {
             }
         }
         return false;
+    }
+
+
+    public function longPollingUpdate(array $type = [], $marker = '')
+    {
+        $get = [];
+        $getStr = '';
+        if (!empty($type)) {
+            $get[] = "type=" . implode(',', $type);
+        }
+        if (!empty($marker)) {
+            $get[] = "marker=$marker";
+        }
+        if (!empty($get)) {
+            $getStr = '?' . implode('&', $get);
+        }
+        $curl = $this->curlInit();
+        curl_setopt($curl, CURLOPT_URL, $this->platformApiUrl . "/updates$getStr");
+        $result = curl_exec($curl);
+        $result = json_decode($result, true) ?  json_decode($result, true) : $result;
+        $this->result['response'][] = $result;
+        return ['response' => $result];
     }
 }

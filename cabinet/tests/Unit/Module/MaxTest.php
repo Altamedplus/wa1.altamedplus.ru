@@ -25,10 +25,10 @@ class MaxTest extends TestCase {
 
     public function testSendButton()
     {
-        $contet =  file_get_contents(DATA_MAX_DIR . 'test.button.payload.messag.json');
-        // $contet = json_decode($contet, )
-        $this->max->send($contet, $this->max->getApiUrl() . '/messages?user_id=36866622');
-        Console::print($this->max->getResult(), Console::GREEN);
+        // $contet =  file_get_contents(DATA_MAX_DIR . 'test.button.payload.messag.json');
+        // // $contet = json_decode($contet, )
+        // $this->max->send($contet, $this->max->getApiUrl() . '/messages?user_id=36866622');
+        // Console::print($this->max->getResult(), Console::GREEN);
     }
 
     public function testLoadFile(){
@@ -42,5 +42,11 @@ class MaxTest extends TestCase {
     {
         // $data = $this->max->getUrlLoad();
         // Console::print($data, Console::GREEN);
+    }
+
+    public function testLongPuling()
+    {
+        $pulling = $this->max->longPollingUpdate(['message_created', 'message_edit', 'message_callback']);
+        Console::print($pulling, Console::GREEN);
     }
 }
