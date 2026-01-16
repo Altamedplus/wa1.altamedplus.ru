@@ -8,7 +8,8 @@ public_html/view/assets
 public_html/view/page/**/head.php
 public_html/view/api/head.php
 .env
-.env.real
+.env.my
 public_html/view/uploads
 .gitinfo
 debug.txt
+config.constant.php
