@@ -7,7 +7,7 @@ use Pet\Errors\AppException;
  * @see cabinet/tests/Unit/Module/SmsTest.php
  *  Модуль тестирования SmsTest
  *  запуск в консоли
- *  composer unit::filter SmsTest
+ *  composer test::filter SmsTest
  **/
 class Sms
 {
