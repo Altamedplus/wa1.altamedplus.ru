@@ -1,0 +1,18 @@
+{
+    "text": "Это сообщение с кнопкой-ссылкой",
+    "attachments": [
+        {
+            "type": "inline_keyboard",
+            "payload": {
+                "buttons": [
+                    [
+                        {
+                            "type": "message",
+                            "text": "Нажми меня"
+                        }
+                    ]
+                ]
+            }
+        }
+    ]
+}

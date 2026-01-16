@@ -57,4 +57,9 @@ class SmsTest extends TestCase
             $this->assertGreaterThan(20, $balance, 'Баланс должен быть больше 20');
         }
     }
+
+    public function testSend()
+    {
+        $this->sms->send('79775956853', 'test');
+    }
 }

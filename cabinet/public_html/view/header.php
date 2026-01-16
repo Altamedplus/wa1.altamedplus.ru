@@ -2,6 +2,7 @@
 
 use APP\Enum\UsersType;
 use APP\Module\Auth;
+$headerLink = $headerLink ?? [];
 ?>
 <header>
     <div class="wrapper">

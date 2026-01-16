@@ -4,8 +4,22 @@ namespace APP\Module\Max;
 abstract class Entity
 {
     protected $token = '';
-    protected $headers = ['Content-Type: application/json'];
+    protected $headers = [
+        'Content-Type: application/json',
+        'Accept: application/json'
+    ];
+
     protected $platformApiUrl = 'https://platform-api.max.ru';
+    private $result = [
+        'response' => [],
+        'send' => []
+    ];
+
+
+    public function getApiUrl(): string
+    {
+        return $this->platformApiUrl;
+    }
 
     public function __construct($token)
     {
@@ -22,24 +36,34 @@ abstract class Entity
         return $curl;
     }
 
-    public function sendMessangeUser($data, $userId)
+    public function send(string $data, $url)
     {
         $curl = $this->curlInit();
-        $data['format'] = ($data['format'] ?? "html");
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data, JSON_UNESCAPED_UNICODE));
-        curl_setopt($curl, CURLOPT_URL, $this->platformApiUrl . "/messages?user_id=$userId");
+        $this->result['send'][] = $data;
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_POST, true);
         $result = curl_exec($curl);
         $result = json_decode($result, true) ?  json_decode($result, true) : $result;
+        $this->result['response'][] = $result;
         return [ 'response' => $result ];
+    }
+
+    public function sendMessangeUser($data, $userId)
+    {
+        $data['format'] = ($data['format'] ?? "html");
+        $json = json_encode($data, JSON_UNESCAPED_UNICODE);
+        return $this->send($json, $this->platformApiUrl . "/messages?user_id=$userId");
     }
 
     public function me()
     {
+
         $curl = $this->curlInit();
         curl_setopt($curl, CURLOPT_URL, $this->platformApiUrl . '/me');
         $result = curl_exec($curl);
         $result = json_decode($result, true) ?  json_decode($result, true) : $result;
+        $this->result['response'][] = $result;
         return [ 'response' => $result ];
     }
 
@@ -49,6 +73,7 @@ abstract class Entity
         curl_setopt($curl, CURLOPT_URL, $this->platformApiUrl . '/subscriptions');
         $result = curl_exec($curl);
         $result = json_decode($result, true) ?  json_decode($result, true) : $result;
+        $this->result['response'][] = $result;
         return [ 'response' => $result ];
     }
 
@@ -60,6 +85,12 @@ abstract class Entity
         curl_setopt($curl, CURLOPT_POST, true);
         $result = curl_exec($curl);
         $result = json_decode($result, true) ?  json_decode($result, true) : $result;
+        $this->result['response'][] = $result;
         return [ 'response' => $result ];
+    }
+
+    public function getResult(): array
+    {
+        return $this->result;
     }
 }

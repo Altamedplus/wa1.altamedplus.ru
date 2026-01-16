@@ -1,0 +1,19 @@
+{
+    "text": "Это сообщение с кнопкой-ссылкой",
+    "attachments": [
+        {
+            "type": "inline_keyboard",
+            "payload": {
+                "buttons": [
+                    [
+                        {
+                            "type": "link",
+                            "text": "Откройте сайт",
+                            "url": "https://example.com"
+                        }
+                    ]
+                ]
+            }
+        }
+    ]
+}
