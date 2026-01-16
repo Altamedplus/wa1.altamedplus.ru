@@ -55,6 +55,13 @@ class SubscriptionsController extends Controller
     {
         $userId = $data['message']['sender']['user_id'];
         $contact = new Contact(['max_user_id' => $userId]);
+
+        //  если такого контакта нет
+        if (!$contact->exist()) {
+            $this->botStarted($userId);
+            return;
+        }
+
         $text = mb_strtolower(trim($data['message']['body']['text']));
 
         if (in_array($text, $this->command)) {
@@ -63,36 +70,34 @@ class SubscriptionsController extends Controller
             $this->botStarted($userId);
             return;
         }
+        self::dd((int)$contact->get('step_authorization') == TypeAutorization::START ? 'true' : 'false');
+        $step = (int)$contact->get('step_authorization');
 
-        if ((int)$contact->get('step_authorization') == TypeAutorization::START) {
+        if ($step == TypeAutorization::START) {
             $phone = Form::sanitazePhone($data['message']['body']['text']);
             if (!Form::validatePhone($phone)) {
-                 $this->maxMessenger->sendMessangeUser([
+                $this->maxMessenger->sendMessangeUser([
                     'text' => "$phone Номер телефона не валидный"
                 ], $userId);
             } elseif (!empty($phone) && (int)$phone === (int)$contact->phone) {
                 $this->auth($contact);
-                return;
             } else {
                 $code = rand(100000, 999999);
-                $contact = $contact->reContact($phone);
                 $contact->set('code', $code);
+                $typeCommand = implode(', ', $this->command);
                 $this->maxMessenger->sendMessangeUser([
-                    'text' => "Код отправлен на номер телефона $phone . Если хотите исправить номер телефона напишите " . implode(', ', $this->command)."."
+                    'text' => "Код отправлен на номер телефона $phone. Если хотите исправить номер телефона напишите $typeCommand."
                 ], $userId);
                 $contact->set('step_authorization', TypeAutorization::CODE);
                 $r = (new Sms())->send($phone, "Код авторизации бота в Mаx: $code");
                 self::dd("Responce SMSC: " . $r);
-                return;
             }
-        }
-
-        if ((int)$contact->get('step_authorization')  == TypeAutorization::CODE) {
+        } elseif ($step == TypeAutorization::CODE) {
             $code = trim($data['message']['body']['text']);
             if ($code == $contact->code) {
                 $this->auth($contact);
             } else {
-                 $this->maxMessenger->sendMessangeUser([
+                $this->maxMessenger->sendMessangeUser([
                     'text' => "Неверный код."
                 ], $userId);
             }
@@ -100,7 +105,7 @@ class SubscriptionsController extends Controller
     }
 
 
-    private static function dd($data): void
+    public static function dd($data): void
     {
         file_put_contents(__DIR__ . '/debug.txt', print_r($data, true) . "\n", FILE_APPEND);
     }
