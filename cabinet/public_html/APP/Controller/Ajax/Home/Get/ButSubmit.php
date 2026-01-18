@@ -24,18 +24,18 @@ class ButSubmit extends AjaxController{
             'max' => []
         ];
 
-        // foreach ($contacts as $contact) {
-        //     if ($contact->get('step_authorization') == TypeAutorization::AUTORIZATION) {
-        //         $result['max'][] = UI::showStr([
-        //             'tag' => 'input',
-        //             'type' => 'submit',
-        //             'class' => 'btn  btn-content-max',
-        //             'name' => 'max',
-        //             'value' => 'Отправить в MAX',
-        //             'textContent' =>  "Отправить в MAX",
-        //         ]);
-        //     }
-        // }
+        foreach ($contacts as $contact) {
+            if ($contact->get('step_authorization') == TypeAutorization::AUTORIZATION) {
+                $result['max'][] = UI::showStr([
+                    'tag' => 'input',
+                    'type' => 'submit',
+                    'class' => 'btn  btn-content-max',
+                    'name' => 'max',
+                    'value' => 'Отправить в MAX',
+                    'textContent' =>  "Отправить в MAX",
+                ]);
+            }
+        }
 
         return $result;
     }
