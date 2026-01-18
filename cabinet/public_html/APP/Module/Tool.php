@@ -20,7 +20,12 @@ class Tool
         }
     }
 
-    public static function value($key, array $array) :array
+    public static function urlSanitaze($url)
+    {
+        return str_replace('../../../', '', $url);
+    }
+
+    public static function value($key, array $array) : array
     {
         $result = [];
         foreach ($array as $v) {

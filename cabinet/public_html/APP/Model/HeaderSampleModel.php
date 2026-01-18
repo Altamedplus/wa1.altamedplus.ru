@@ -3,6 +3,7 @@
 namespace APP\Model;
 
 use APP\Enum\HeaderType;
+use APP\Module\Tool;
 use Pet\Model\Model;
 use Pet\Router\Header;
 
@@ -41,7 +42,7 @@ class HeaderSampleModel extends Model
             case HeaderType::IMAGE:
                 return [
                     'type' => 'image',
-                    'payload' => ['url' => $this->img_url]
+                    'payload' => ['url' => Tool::urlSanitaze($this->img_url)]
                 ];
         }
         return '';

@@ -46,7 +46,7 @@ class SubscriptionsController extends Controller {
         $contact = new Contact(['max_user_id' => $userId], isNotExistCreate: true);
         if (empty($contact->step_authorization)) {
             $result = $this->maxMessenger->sendMessangeUser([
-                'text' => 'Для получения уведолений вам требуется авторизоваться! Напишите ваш номер телефона и вам придет смс кодом и запишите его следующим сообщением.'
+                'text' => 'Для получения уведолений вам требуется авторизоваться! Напишите ваш номер телефона и вам придет смс кодом и запишите его следующем сообщением.'
             ], $userId);
             $contact->set('step_authorization', TypeAutorization::START);
         }
@@ -66,7 +66,7 @@ class SubscriptionsController extends Controller {
        // self::dd(['text' => $text, 'is' => in_array($text, $this->command) ? '']);
         if (in_array($text, $this->command)) {
             $contact->set('step_authorization', null); // обнуляем авторизацию
-            //$contact->set('phone', null);
+            $contact->set('phone', null);
             $this->botStarted($userId);
             return;
         }
