@@ -16,6 +16,7 @@ class SubscriptionsController extends Controller {
     private $command = [
         'сброс авторизации',
         'сменить номер телефона',
+        'начать авторизацию с начала'
     ];
     protected Messenger $maxMessenger;
     public function index()
@@ -62,10 +63,10 @@ class SubscriptionsController extends Controller {
         }
 
         $text = mb_strtolower(trim($data['message']['body']['text']));
-
+       // self::dd(['text' => $text, 'is' => in_array($text, $this->command) ? '']);
         if (in_array($text, $this->command)) {
             $contact->set('step_authorization', null); // обнуляем авторизацию
-            $contact->set('phone', null);
+            //$contact->set('phone', null);
             $this->botStarted($userId);
             return;
         }
@@ -98,7 +99,7 @@ class SubscriptionsController extends Controller {
                                     [
                                         [
                                             'type' => 'message',
-                                            'text' => 'Отправить код повторно',
+                                            'text' => 'Начать авторизацию с начала',
                                         ]
                                     ]
                                 ]
@@ -119,6 +120,7 @@ class SubscriptionsController extends Controller {
             'text' => "Код отправлен на номер телефона $phone. Если хотите исправить номер телефона напишите $typeCommand.",
         ], $userId);
         $contact->set('step_authorization', TypeAutorization::CODE);
+        $contact->set('phone', $phone);
         $r = (new Sms())->send($phone, "Код авторизации бота в Mаx: $code");
         self::dd("Responce SMSC: " . $r);
     }
