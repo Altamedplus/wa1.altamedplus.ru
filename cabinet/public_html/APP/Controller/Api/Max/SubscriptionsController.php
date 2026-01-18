@@ -25,6 +25,7 @@ class SubscriptionsController extends Controller {
         Response::set(Response::TYPE_JSON);
         $data = attr();
         // self::dd($data);
+        // self::dd([$_POST,  file_get_contents('php://input')]);
         try {
             switch ($data['update_type']) {
                 case 'bot_started':

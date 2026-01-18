@@ -193,13 +193,7 @@ class SampleModel extends Model
                $attachment['payload'] = [
                     'name' => $button->text,
                     'contact_id' => null,
-                    'vcf_info' => "BEGIN:VCARD
-                                    VERSION:3.0
-                                    FN:{$button->text}
-                                    TEL;TYPE=WORK,VOICE:{$button->phone}
-                                    TEL;TYPE=HOME,VOICE:{$button->phone}
-                                    EMAIL:
-                                    END:VCARD"
+                    'vcf_info' => "BEGIN:VCARD\n\nVERSION:3.0\n\nFN:{$button->text}\n\nTEL;CELL:{$button->phone}\n\nEND:VCARD\n\n"
                ];
 
                return $attachment;
