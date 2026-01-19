@@ -29,6 +29,11 @@ class Submit extends Form
                 $error['message'][] = 'Не все поля заполнены';
             }
         }
+        if (strlen($fields['inn_patient']) != 12) {
+            $error['name'][] = 'inn_patient';
+            $error['message'][] = 'Количество символов у ИНН не меннее 12';
+        }
+
         if (strlen($fields['inn']) != 12) {
             $error['name'][] = 'inn';
             $error['message'][] = 'Количество символов у ИНН не меннее 12';
@@ -67,6 +72,7 @@ class Submit extends Form
             'taxpayer_fio' => trim($fields['fio_nalog']),
             'taxpayer_date_birth' => trim($fields['taxpayer_date_birth']),
             'hash' => uniqid(),
+            'inn_patient' => trim($fields['inn_patient'])
         ];
         $nalogId = (new NalogModel())->create($data);
         $clinic = $fields['clinic'] ?? [];

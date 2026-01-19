@@ -20,3 +20,4 @@ ALTER TABLE `contact` ADD `code` INT(6) NULL DEFAULT NULL AFTER `cdate`;
 
 ALTER TABLE `message` ADD `type_send` INT NOT NULL DEFAULT '0' AFTER `cdate`;
 ALTER TABLE `header` ADD `token_img_max` VARCHAR(2000) NULL DEFAULT NULL AFTER `video_name`;
+ALTER TABLE `nalog` ADD `inn_patient` VARCHAR(15) NULL DEFAULT NULL AFTER `inn`;

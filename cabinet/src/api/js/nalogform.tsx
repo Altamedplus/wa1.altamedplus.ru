@@ -27,6 +27,19 @@ $('[name=name]').on('change', function () {
         $('[name=taxpayer_date_birth]').val($('[name=date_birth]').val())
     }
 });
+
+$('[name=inn_patient]').on('input', function () { 
+    if ($('[name="taxpayer"]').val() == '139') { 
+        $('[name="inn"]').val($(this).val());
+    }
+})
+$('[name="taxpayer"]').on('change', function () { 
+    if ($(this).val() == '139') {
+        $('[name="inn"]').val($(this).val());
+    } else { 
+         $('[name="inn"]').val('');
+    }
+})
 $('[name=date_birth]').on('change', () => $('[name=name]').trigger('change'));
 $('[name=taxpayer]').on('change', () => {
     $('[name=name]').trigger('change');

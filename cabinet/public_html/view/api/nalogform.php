@@ -24,6 +24,12 @@ use APP\Model\TaxpayerListModel; ?>
                 <input type="date" name="date_birth" placeholder="дд.мм.гггг">
             </div>
         </div>
+         <div class="row">
+            <div class="form-block left">
+                <label>Инн пациента <span>*</span></label>
+                <input type="text" name="inn_patient" />
+            </div>
+        </div>
 
         <div class="row">
             <div class="form-block left">
