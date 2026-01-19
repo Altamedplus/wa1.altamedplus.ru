@@ -76,8 +76,9 @@ class NalogController extends PageController
 
         $nalogClinic = (new NalogClinicModel())->findM(['nalog_id' => $nalog->id], function (Model $m){
             $m->select(
+                'c.*',
                 'nalog_clinic.*',
-                'c.*'
+                'nalog_clinic.id id'
             );
             $m->join('clinic c')->on('nalog_clinic.clinic_id = c.id');
             $m->where('no_doc = 0 or no_doc = NULL');

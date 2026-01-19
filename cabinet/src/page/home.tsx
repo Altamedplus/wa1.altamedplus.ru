@@ -127,7 +127,7 @@ $('[name=phone]').on('input', async function () {
         } else {
 
             if (invite.length == 0) {
-                const btninvite = $(`<button type="submit" name="invite"  class="btn  btn-content-invite" value="1" >Пригласить в Max и Телеграмм</button>`);
+                const btninvite = $(`<button type="submit" name="invite"  class="btn  btn-content-invite" value="1" >Пригласить в Max</button>`);
                 btninvite.on('click', window['submit']);
                 const div = $(`<div class='flex-row-center'></div>`);
                 div.add(btninvite);
