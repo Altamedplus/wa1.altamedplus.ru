@@ -2,9 +2,13 @@
 namespace APP\Model\Table;
 
 use APP\Enum\StatusMessage;
+use APP\Enum\TypeSend;
 use APP\Form\Form;
 use APP\Model\MessageModel;
 use APP\Model\Table;
+use APP\Module\Tool;
+use Pet\View\View;
+use PharIo\Manifest\Type;
 
 class Messagelist extends MessageModel implements Table
 {
@@ -128,6 +132,13 @@ class Messagelist extends MessageModel implements Table
                 }
                 if ($name == 'sample_name') {
                     $row = '<a href="/sample/edit/'.$rows['sample_id'].'" >'.$row.'</a>';
+                }
+
+                if ($name == 'type_send') {
+                     ob_start();
+                     svg('type.' . mb_strtolower((TypeSend::get($row) ?: 'whatsapp')));
+                    $svg = ob_get_clean();
+                    $row = "<span class=\"flex\" style=\"height:20px; width:20px;\">$svg</span>";
                 }
 
                 if ($name == 'data_request' && !empty($row)) {

@@ -31,6 +31,7 @@ use APP\Model\UsersModel;
                 <th alias="phone">
                     <input name="message.phone" placeholder="Телефон" value="<?= $filter['phone'] ?>" sign="LIKE" />
                 </th>
+                <th></th>
                 <th alias="cdate">
                     <div class="row">
                         <b>C</b>
@@ -101,6 +102,7 @@ use APP\Model\UsersModel;
             <tr name="column">
                 <th alias="id">ID</th>
                 <th alias="phone">Телефон</th>
+                <th alias="type_send">Тип</th>
                 <th alias="cdate">Дата создания</th>
                 <th alias="send_date">Дата отправки</th>
                 <th alias="send_time">Время отправки</th>
