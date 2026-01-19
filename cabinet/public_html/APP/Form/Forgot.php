@@ -8,6 +8,7 @@ use APP\Model\SampleModel;
 use APP\Model\UsersModel;
 use APP\Module\UI\Fire;
 use APP\Module\Mail;
+use APP\Module\Sms;
 use Pet\Request\Request;
 
 class Forgot extends Form
@@ -23,23 +24,24 @@ class Forgot extends Form
              return new Fire("Такоко пользователя не существует. Обратитесь в Тех. Поддержку", Fire::ERROR);
         }
         $password = Form::generatePassword();
-        $sample = (new SampleModel(['name' => 'Временный пароль']));
-        $password = Form::generatePassword();
-        if (!$sample->exist()) {
-            return new Fire('Нет шаблона с именем Временный пароль. Обратитесь в Тех. Поддержку', Fire::ERROR);
-        }
+        // $sample = (new SampleModel(['name' => 'Временный пароль']));
+        // $password = Form::generatePassword();
+        // if (!$sample->exist()) {
+        //     return new Fire('Нет шаблона с именем Временный пароль. Обратитесь в Тех. Поддержку', Fire::ERROR);
+        // }
         $user->set([
             'temporary_password' => 1,
-            'password' => password_hash(SALT.$password, PASSWORD_DEFAULT)
+            'password' => password_hash(SALT . $password, PASSWORD_DEFAULT)
         ]);
-        $data = $sample->complectWhatsApp($sample->id, ['password' => [$password]]);
-        $messangeId = (new MessageModel())->create([
-            'phone' => $phone,
-            'data_request' => json_encode($data, JSON_UNESCAPED_UNICODE),
-            'user_id' => $user->id,
-            'sample_id' => $sample->id,
-            'status' => StatusMessage::QUEUE,
-        ]);
+        // $data = $sample->complectWhatsApp($sample->id, ['password' => [$password]]);
+        (new Sms())->send($phone, "Ваш пароль : $password");
+        // $messangeId = (new MessageModel())->create([
+        //     'phone' => $phone,
+        //     'data_request' => json_encode($data, JSON_UNESCAPED_UNICODE),
+        //     'user_id' => $user->id,
+        //     'sample_id' => $sample->id,
+        //     'status' => StatusMessage::QUEUE,
+        // ]);
 
         return [
             'type' => 'redirect',
