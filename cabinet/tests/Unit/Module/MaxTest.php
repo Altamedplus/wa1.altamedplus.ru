@@ -25,14 +25,16 @@ class MaxTest extends TestCase {
 
     public function testSendButton()
     {
-        // $contet =  file_get_contents(DATA_MAX_DIR . 'test.button.payload.messag.json');
-        // // $contet = json_decode($contet, )
-        // $this->max->send($contet, $this->max->getApiUrl() . '/messages?user_id=36866622');
-        // Console::print($this->max->getResult(), Console::GREEN);
+        $contet =  file_get_contents(DATA_MAX_DIR . 'test.button.payload.messag.json');
+        // $contet = json_decode($contet, true);
+        // $contet['attachments'][0]['payload']['vcf_info'] = file_get_contents(DATA_MAX_DIR . 'phone.vcf');
+        // $contet = json_encode($contet, JSON_UNESCAPED_UNICODE);
+        $this->max->send($contet, $this->max->getApiUrl() . '/messages?user_id=36866622');
+        Console::print($this->max->getResult(), Console::GREEN);
     }
 
     public function testLoadFile(){
-        // $testUrl = 'https://app.edna.ru/edna.b1/886/2023-11-03/197ce21c25de47b58721910c316a1096.jpg';
+        // $testUrl = 'https://wa1.altamedplus.ru/view/uploads/sample/690b575b47585.jpg';
         // $token = $this->max->load($testUrl, 'image');
         // Console::print($this->max->getResult(), Console::GREEN);
 
@@ -46,7 +48,7 @@ class MaxTest extends TestCase {
 
     public function testLongPuling()
     {
-        $pulling = $this->max->longPollingUpdate(['message_created', 'message_edit', 'message_callback']);
-        Console::print($pulling, Console::GREEN);
+        // $pulling = $this->max->longPollingUpdate(['message_created', 'message_edit', 'message_callback']);
+        // Console::print($pulling, Console::GREEN);
     }
 }

@@ -1,0 +1,44 @@
+/* Минимальные стили для заявления */
+body {
+    font-family: "Times New Roman", "DejaVu Serif", serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    margin: 2cm;
+}
+
+header {
+    text-align: right;
+    margin-bottom: 3cm;
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.5cm;
+}
+
+h1 {
+    text-align: center;
+    font-size: 14pt;
+    margin: 1cm 0 0.2cm 0;
+}
+
+h4 {
+    text-align: center;
+    font-size: 12pt;
+    font-weight: normal;
+    font-style: italic;
+    margin: 0 0 2cm 0;
+}
+
+p {
+    margin: 0.5cm 0;
+    text-indent: 1.5cm;
+}
+
+i {
+    font-style: italic;
+    display: block;
+    margin: 1cm 0;
+}
+
+/* Подпись */
+p:last-of-type {
+    margin-top: 3cm;
+}

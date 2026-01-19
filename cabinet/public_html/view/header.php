@@ -2,6 +2,8 @@
 
 use APP\Enum\UsersType;
 use APP\Module\Auth;
+use APP\Module\UI\UI;
+
 $headerLink = $headerLink ?? [];
 ?>
 <header>
@@ -33,7 +35,7 @@ $headerLink = $headerLink ?? [];
             <div class="header_buttons">
                 <? if (isset($headerButtons)): ?>
                     <? foreach ($headerButtons as $but): ?>
-                        <? APP\Module\UI\UI::show($but); ?>
+                        <? UI::show($but); ?>
                     <? endforeach; ?>
                 <? endif ?>
 
