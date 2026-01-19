@@ -5,6 +5,7 @@ namespace APP\Model;
 use APP\Enum\ButtonType;
 use APP\Enum\VariableReserveType as VRT;
 use APP\Enum\VariableReserveType;
+use APP\Form\Form;
 use Pet\Model\Model;
 
 class SampleModel extends Model
@@ -189,12 +190,13 @@ class SampleModel extends Model
         }
 
         if ($button->type == ButtonType::PHONE) {
-               $attachment['type'] = 'contact';
-               $attachment['payload'] = [
-                    'name' => $button->text,
-                    'contact_id' => null,
-                    'vcf_info' => "BEGIN:VCARD\n\nVERSION:3.0\n\nFN:{$button->text}\n\nTEL;CELL:{$button->phone}\n\nEND:VCARD\n\n"
-               ];
+               $attachment['type'] = 'inline_keyboard';
+               $phone = Form::sanitazePhone($button->phone);
+               $attachment['payload']['buttons'][0][] = [
+                    'type' => 'link',
+                    'text' => $button->text,
+                    'url' => "https://www.altamedplus.ru/contacts/?phone={$phone}"
+                ];
 
                return $attachment;
         }

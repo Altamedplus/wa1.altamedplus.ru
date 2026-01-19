@@ -11,6 +11,7 @@ use APP\Model\EdnaModel;
 use APP\Model\MessageModel;
 use APP\Model\SampleModel;
 use APP\Module\Auth;
+use APP\Module\Sms;
 use APP\Module\WhatsApp;
 use Pet\Cookie\Cookie;
 use Pet\Request\Request;
@@ -23,10 +24,18 @@ class Send extends Form
         $sample_id = (int)attr('id');
         $fields = (array)attr();
         $clinicId = attr('clinic');
-        $isMax = (bool)attr('max');
+        $isMax = isset($_POST['max']);
+        $isInvite =  isset($_POST['invite']);
         $phone = Form::sanitazePhone(attr('phone'));
         if (!Form::validatePhone($phone)) {
             return new Fire('Не валидный телефон', Fire::ERROR);
+        }
+        if (!empty($isInvite)) {
+            (new Sms())->send(
+                $phone,
+                'Приглашаем в мессенжер MAX https://max.ru/id5032138346_bot'
+            );
+            return new Fire('Приглашение отправлено по СМС', Fire::SUCCESS);
         }
         $isPhoneResend =  Form::sanitazePhone((Cookie::get('resend') ?: '')) == $phone;
         $variables = [];
