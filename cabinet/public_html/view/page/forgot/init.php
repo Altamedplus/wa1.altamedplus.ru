@@ -15,7 +15,7 @@
                     <input ui="text-form" label="Логин" type="text" placeholder="Телефон"  name="login" data-error=""/>
                      <div class="flex-column">
                         <p>Если у вас нет аккаунта. Обратитесь в Тех. Поддержку</p>
-                        <p>Новый сгенерированый пароль поступит в WhatsApp<p>
+                        <p>Новый сгенерированый пароль поступит в Sms<p>
                     </div>
                     <div class="flex-row">
                         <button type="submit" class="btn btn-submit-blue">Запросить пароль</button>
