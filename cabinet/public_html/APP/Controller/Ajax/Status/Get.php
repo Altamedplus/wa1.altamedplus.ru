@@ -22,6 +22,7 @@ class Get extends AjaxController
             $m->select(
                 "message.id",
                 "message.status",
+                "message.type_send",
                 "message.phone",
                 "DATE_FORMAT(message.cdate, '%H:%i') AS time",
                 "smw.name"

@@ -93,6 +93,12 @@
       width: 100%;
       padding: 3px;
       cursor: pointer;
+      display: flex;
+      align-items: end;
+      span{
+        margin-left: 10px;
+        margin-bottom: 5px;
+      }
       &:hover {
         font-weight: 800;
       }
