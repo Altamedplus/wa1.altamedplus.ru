@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Заявление</title>
     <style>
         <?= file_get_contents(__DIR__ . '/style.css'); ?>
     </style>
@@ -12,8 +12,8 @@
 
 <body>
     <header>
-        <p>Генеральному директору ООО «Альтамед+»</p>
-        <p>Гребцовой И.Б.</p>
+        <p>Генеральному директору <?=  $legal_name ?></p>
+        <p><?= $owner ?></p>
         <p>от <?= $name ?>
         </p>
         <? if (isset($mail)): ?>

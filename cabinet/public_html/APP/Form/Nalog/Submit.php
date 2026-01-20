@@ -3,6 +3,7 @@
 namespace APP\Form\Nalog;
 
 use APP\Form\Form;
+use APP\Model\ClinicModel;
 use APP\Model\NalogClinicFilesModel;
 use APP\Model\NalogClinicModel;
 use APP\Model\NalogCommentModel;
@@ -11,6 +12,7 @@ use APP\Module\Auth;
 use APP\Module\Mail;
 use APP\Module\Write\Pdf;
 use Exception;
+use Pet\Model\Model;
 use Pet\Request\Request;
 use Pet\View\View;
 
@@ -93,38 +95,53 @@ class Submit extends Form
         }catch(Exception $e){
 
         }
-        try {
-            $pdf =  new Pdf();
-            $var = [
-                'name' =>  trim($fields['fio_nalog']),
-                'mail' => $email,
-                'phone' => $phone,
-                'patient' => $fields['name'],
-                'dateB' => date('m.d.Y', strtotime(trim($fields['taxpayer_date_birth']))),
-                'inn' => trim($fields['inn']),
-                'date' =>  date('m.d.Y'),
-                'year' => $period
-            ];
-            $pdf->WriteHTML(View::getTemplate('template.nalog.statement.html', $var));
-            $path = View::DIR_VIEW . DS . 'uploads' . DS . 'nalog' . DS . $nalogId;
-            if (!is_dir($path)) {
-                mkdir($path, 0777, true);
+        // try {
+            foreach ((new NalogClinicModel())->findM(
+                    ['nalog_id' => $nalogId],
+                    callback: function (Model $m) {
+                        $m->select(
+                            'clinic.legal_name',
+                            'clinic.owner',
+                            'nalog_clinic.*'
+                        );
+                        $m->join('clinic')->on('nalog_clinic.clinic_id = clinic.id');
+                    })
+                as
+                $clinic
+            ) {
+                $pdf =  new Pdf();
+                $var = [
+                    'name' =>  trim($fields['fio_nalog']),
+                    'mail' => $email,
+                    'phone' => $phone,
+                    'patient' => $fields['name'],
+                    'dateB' => date('m.d.Y', strtotime(trim($fields['taxpayer_date_birth']))),
+                    'inn' => trim($fields['inn']),
+                    'date' =>  date('m.d.Y'),
+                    'year' => $period,
+                    'legal_name' => $clinic->legal_name,
+                    'owner' => $clinic->owner,
+                ];
+                $pdf->WriteHTML(View::getTemplate('template.nalog.statement.html', $var));
+                $path = View::DIR_VIEW . DS . 'uploads' . DS . 'nalog' . DS . $nalogId;
+                if (!is_dir($path)) {
+                    mkdir($path, 0777, true);
+                }
+                $nameFile =  uniqid() . '.pdf';
+                $file = $path . DS . $nameFile;
+                $pdf->Output($file, 'F');
+                (new NalogClinicFilesModel([
+                    'nalog_clinic_id' => $clinic->id,
+                    'url_file' => URL_WA . "/view/uploads/nalog/$nalogId/$nameFile",
+                    'path' => $path,
+                    'name' => $nameFile,
+                    'origin' => "Заявление_" . str_replace(['/',' ', ',', '.','+'], '_' , $fields['fio_nalog']) . '.pdf',
+                    'relat' =>  UPLOADS . "nalog/$nalogId/$nameFile",
+                ], isNotExistCreate:true));
             }
-            $nameFile =  uniqid() . '.pdf';
-            $file = $path . DS . $nameFile;
-            $pdf->Output($file, 'F');
-            $clinic = (new NalogClinicModel())->findM(['nalog_id' => $nalogId])[0];
-            (new NalogClinicFilesModel([
-                'nalog_clinic_id' => $clinic->id,
-                'url_file' => URL_WA . UPLOADS . "nalog/$nalogId/$nameFile",
-                'path' => $path,
-                'name' => $nameFile,
-                'origin' => "Заявление_" . str_replace(['/',' ', ',', '.','+'], '_' , $fields['fio_nalog']) . '.pdf',
-                'relat' =>  UPLOADS . "nalog/$nalogId/$nameFile",
-            ], isNotExistCreate:true));
-        } catch (Exception $e) {
+        // } catch (Exception $e) {
 
-        }
+        // }
         return [
             'type' => 'nalog-ok',
             'uniq' => $data['hash']

@@ -20,9 +20,9 @@ class Tool
         }
     }
 
-    public static function urlSanitaze($url)
+    public static function urlSanitaze($url, $rep = '')
     {
-        return str_replace('../../../', '', $url);
+        return str_replace('../../../', $rep, $url);
     }
 
     public static function value($key, array $array) : array

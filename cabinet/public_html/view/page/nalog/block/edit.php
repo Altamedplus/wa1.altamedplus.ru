@@ -1,7 +1,10 @@
 <?php
 
 use APP\Enum\NalogStatus;
-use APP\Form\Form; ?>
+use APP\Form\Form;
+use APP\Module\Tool;
+
+ ?>
 <div class="block-header flex-row">
     <a evt="back" class="btn-round-back m-10"></a>
 
@@ -35,7 +38,7 @@ use APP\Form\Form; ?>
                         <input type="hidden" data-origin name="file_origin[]" value="<?=$file->origin ?? ''?>"></input>
                         <input type="hidden" data-name name="file_name[]" value="<?=$file->name ?? ''?>"></input>
                         <input type="hidden" data-relat name="file_relat[]" value="<?=$file->relat ?? ''?>"></input>
-                        <input type="hidden" data-url name="file_url[]" value="<?=$file->url_file ?? ''?>"></input>
+                        <input type="hidden" data-url name="file_url[]" value="<?= Tool::urlSanitaze($file->url_file) ?? ''?>"></input>
                     </div>
                     <label class="btn btn-plus-small">
                         <input class="d-none" type="file" evt="add-file" />
