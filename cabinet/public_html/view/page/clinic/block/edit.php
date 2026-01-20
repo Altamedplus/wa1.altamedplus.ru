@@ -11,6 +11,10 @@ use APP\Form\Form; ?>
         <input type="hidden" name="id" value="<?= $formInfo['id'] ?? '' ?>">
         <label>Название</label>
         <input type="text" name="name" placeholder="Название клиники" value="<?= $formInfo['name'] ?? '' ?>" />
+        <label>Юридическое название</label>
+        <input type="text" name="legal_name" placeholder="Юридическое название" value="<?= $formInfo['legal_name'] ?? '' ?>" />
+        <label>Ген. Директор</label>
+        <input type="text" name="owner" placeholder="Ген. Директор" value="<?= $formInfo['owner'] ?? '' ?>" />
         <label>Адрес клиники</label>
         <input type="text" name="address" placeholder="Адрес клиники" value="<?= $formInfo['address'] ?? '' ?>" />
         <label>Латинское Название</label>
