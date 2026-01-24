@@ -33,7 +33,7 @@ class Send extends Form
         if (!empty($isInvite)) {
             (new Sms())->send(
                 $phone,
-                'Приглашаем в мессенжер MAX https://max.ru/id5032138346_bot'
+                'Dlya polucheniya soobzhenii v MAX ot Altamed+ pereidite po ssylke https://max.ru/id5032138346_bot'
             );
             return new Fire('Приглашение отправлено по СМС', Fire::SUCCESS);
         }

@@ -21,7 +21,7 @@ class MessageSend extends Controller
 
     public function index()
     {
-        $messanges = (new MessageModel())->find(['status' => StatusMessage::QUEUE, 'type_send' => 1]);
+        $messanges = (new MessageModel())->find(['status' => StatusMessage::QUEUE]);
         $resultControl = [];
         foreach ($messanges as $m) {
             $request = [];
@@ -32,7 +32,6 @@ class MessageSend extends Controller
             $status = StatusMessage::SEND_WA;
 
             if ($m['type_send'] == 0) { //отправка в ватсам
-                continue;
                 $data = json_decode($m['data_request'], true);
                 $result = (new WhatsApp())->sendWhatsapp($phone, $data, $request);
                 $resultControl[] = [$request, $result];
@@ -63,7 +62,7 @@ class MessageSend extends Controller
                 'request_id' => $requestId,
                 'data_response' => json_encode($result, JSON_UNESCAPED_UNICODE)
             ]);
-            usleep(300000); //Задержка 300мс
+             usleep(300000); //Задержка 300мс
         }
         header(Response::TYPE_JSON);
         return $resultControl;
