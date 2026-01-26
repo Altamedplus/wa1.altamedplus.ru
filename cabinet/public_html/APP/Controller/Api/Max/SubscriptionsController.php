@@ -47,7 +47,7 @@ class SubscriptionsController extends Controller {
         $contact = new Contact(['max_user_id' => $userId], isNotExistCreate: true);
         if (empty($contact->step_authorization)) {
             $result = $this->maxMessenger->sendMessangeUser([
-                'text' => 'Для получения уведолений вам требуется авторизоваться! Напишите ваш номер телефона и вам придет смс кодом и запишите его следующем сообщением.'
+                'text' => 'Для получения сообщений от «Альтамед+» вам необходимо авторизоваться. \n\r Напишите ваш номер следующим сообщением и нажмите отправить. Вам придет СМС-сообщение с кодом подтверждения, который нужно будет ввести в этом чате. В дальнейшем авторизация больше не потребуется. ☺️'
             ], $userId);
             $contact->set('step_authorization', TypeAutorization::START);
         }
@@ -116,9 +116,8 @@ class SubscriptionsController extends Controller {
     {
         $code = rand(100000, 999999);
         $contact->set('code', $code);
-        $typeCommand = implode(', ', $this->command);
         $this->maxMessenger->sendMessangeUser([
-            'text' => "Код отправлен на номер телефона $phone. Если хотите исправить номер телефона напишите $typeCommand.",
+            'text' => "Код с номером подтверждения отправлен в СМС на номер $phone. Если вы неверно указали номер телефона напишите следующим сообщением \"сброс авторизации\" без кавычек и процедура авторизации начнется сначала.",
         ], $userId);
         $contact->set('step_authorization', TypeAutorization::CODE);
         $contact->set('phone', $phone);
@@ -135,7 +134,7 @@ class SubscriptionsController extends Controller {
     private function auth($contact)
     {
         $this->maxMessenger->sendMessangeUser([
-            'text' => "Вы успешно авторизовались теперь вы будете получать сообщения о записях и прочее от Альтамед+",
+            'text' => "Авторизация прошла успешно! Теперь мы на связи: пишите нам в чат, а мы будем заранее напоминать о визитах к врачу и подсказывать, как к ним подготовиться.",
         ], $contact->max_user_id);
         $contact->set('step_authorization', TypeAutorization::AUTORIZATION);
     }
