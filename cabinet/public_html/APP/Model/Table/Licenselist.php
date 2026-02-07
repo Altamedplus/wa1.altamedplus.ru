@@ -30,10 +30,12 @@ class Licenselist extends LicenseModel implements Table
         foreach ($items as $k => &$rows) {
             foreach ($rows as $col => &$row) {
                 if ($col == 'is_actual') {
-                    $row = $row == 1 ? 'Да': 'Нет';
+                    $row = $row == 1 ? 'Да' : 'Нет';
                 }
                 if ($col == 'url_file') {
-                    $row = '<div class="flex-column" style="width: 190px; height:245px"><embed  style="height:100%" src=' . $row . ' ></embed></div>';
+                    $name = str_replace([' ', '/', '.'], '_', $rows['name']);
+                    $rows['name'] = "<p> <a href='$row' target=\"_blank\"><i>" . $rows['name'] . "</i></a><br/><br/><a href='$row' download='$name.pdf'>Скачать</a></p>";
+                    $row = "<a href='$row' target=\"_blank\"><div class=\"flex-column\" style=\"width: 190px; height:245px\"><embed  style=\"height:100%\" src=' $row ' ></embed></div></a>";
                 }
                 $row = $row ?: "-";
             }
