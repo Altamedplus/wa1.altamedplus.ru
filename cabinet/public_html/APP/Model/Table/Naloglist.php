@@ -95,7 +95,7 @@ class Naloglist extends NalogModel implements Table
                     ]);
                 }
                 if ($name == 'contact') {
-                    $phone = Form::unsaitazePhone($row);
+                    $phone = Form::unsanitazePhone($row);
                     $email = $rows['email'];
                     $row = "<div class='flex-column t-phone'>$phone<br/>$email</div>";
                 }

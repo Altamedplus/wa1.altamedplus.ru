@@ -178,7 +178,7 @@ class Form extends Controller
      * @param string $phone
      * @return string
      */
-    final public static function unsaitazePhone(string $phone): string
+    final public static function unsanitazePhone(string $phone): string
     {
         $p = str_replace(['+', '(', ')', '-', ' '], '', trim($phone));
         $p[0] = '7';

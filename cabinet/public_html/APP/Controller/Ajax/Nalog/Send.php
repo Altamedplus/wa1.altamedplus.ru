@@ -46,7 +46,7 @@ class Send extends AjaxController
             'type' => HistoryType::ADD,
             'field' => 'nalog.is_send',
             'entity' => 'nalog',
-            'new_change' => "Отправил на номер телефона " . Form::unsaitazePhone($nalog->phone)
+            'new_change' => "Отправил на номер телефона " . Form::unsanitazePhone($nalog->phone)
         ]);
         return [$messangeId];
     }
