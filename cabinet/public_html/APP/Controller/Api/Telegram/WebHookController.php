@@ -48,8 +48,9 @@ class WebHookController extends Controller
                             ],
                         ])
                     ]);
-                    //self::dd($result);
                 }
+            } else {
+                $this->resenderJivo($data);
             }
         }
 
@@ -57,9 +58,11 @@ class WebHookController extends Controller
         if (!empty($userId)) {
             if ('started' == $data['callback_query']['data']) {
                  $this->tg->sendMessage($userId, 'Авторизация сброшена! Начните сначала');
-                $this->started($userId);
+                 $this->started($userId);
+                 return;
             }
         }
+        $this->resenderJivo($data);
     }
 
     public function setwebHook()
@@ -68,7 +71,8 @@ class WebHookController extends Controller
     }
     public function info()
     {
-        dd((new Telegram())->getWebhookInfo());
+        Response::set(Response::TYPE_JSON);
+        Response::die((new Telegram())->getWebhookInfo());
     }
 
     public static function dd($data): void
@@ -108,4 +112,21 @@ class WebHookController extends Controller
         //self::dd($result);
         (new Sms())->send($phone, "Код авторизации бота в Телеграмм: $code");
     }
+
+
+    private function resenderJivo($data)
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Accept: application/json'
+        ]);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_VERBOSE, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data, JSON_UNESCAPED_UNICODE));
+        curl_setopt($curl, CURLOPT_URL, "https://joint.jivo.ru/EKJNVVuMFshpdzJT/7422941003:AAGOxt5_mrEhNhyoYZarTAt28NWKXdDu5KM");
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_exec($curl);
+    }
+
 }

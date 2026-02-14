@@ -27,7 +27,7 @@ class Menu
         $page = [
             self::HOME => (object)['url' => '/', 'name' => 'Сообщения', 'icon' => 'menu.message'],
             self::MESSAGE => (object)['url' => '/message', 'name' => 'Отправленные', 'icon' => 'menu.mail'],
-            self::MAX => (object)['url' => '/max', 'name' => 'Max', 'icon' => 'menu.max'],
+            self::MAX => (object)['url' => '/max', 'name' => 'Контакты', 'icon' => 'menu.max'],
             self::CLINIC => (object)['url' => '/clinic', 'name' => 'Клиники', 'icon' => 'menu.home'],
             self::USERS => (object)['url' => '/users', 'name' => 'Пользователи', 'icon' => 'menu.users'],
             self::BUTTONS => (object)['url' => '/buttons', 'name' => 'Кнопки', 'icon' => 'menu.minus-square'],

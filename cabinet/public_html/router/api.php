@@ -18,6 +18,7 @@ Router::post('/edna/callback_ednaru.php', [StatusController::class, 'index']);
 Router::post('/edna/callback_ednaru.php', [StatusController::class, 'index']);
 
 Router::post('/api/max/subscriptions', [SubscriptionsController::class, 'index']);
+Router::get('/api/max/info', [SubscriptionsController::class, 'info']);
 Router::post('/api/telegram/webhook', [WebHookController::class, 'index']);
 Router::get('/api/telegram/iniwebhook', [WebHookController::class, 'setwebHook']);
 Router::get('/api/telegram/info', [WebHookController::class, 'info']);

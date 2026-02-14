@@ -13,4 +13,5 @@ import './event/delete'
 
 import './event/mask'
 import './event/modal'
-import './module/showflakes' // Зимняя тема в шапке
+// import './module/showflakes' // Зимняя тема в шапке
+ import './module/meteo'

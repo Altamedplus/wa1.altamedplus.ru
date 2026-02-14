@@ -15,8 +15,10 @@
             <th alias="id">ID</th>
             <th alias="phone">Телефон</th>
             <th alias="max_user_id">Макс ID</th>
+            <th alias="tg_user_id">Телеграмм ID</th>
             <th alias="name">Название</th>
-            <th alias="step_authorization">Шаг авторизации</th>
+            <th alias="step_authorization">Шаг авторизации Макс</th>
+            <th alias="tg_step_auth">Шаг авторизации ТГ</th>
             <th alias="cdate">Дата создания</th>
             <th style="width: 20px;"></th>
         </tr>

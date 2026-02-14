@@ -24,15 +24,18 @@ class SubscriptionsController extends Controller {
         $this->maxMessenger = new Messenger();
         Response::set(Response::TYPE_JSON);
         $data = attr();
-        // self::dd($data);
+        //self::dd($data);
         // self::dd([$_POST,  file_get_contents('php://input')]);
         try {
             switch ($data['update_type']) {
                 case 'bot_started':
-                    $this->botStarted($data['user']['user_id']);
+                    $this->botStarted($data['user']['user_id'], $data);
                     break;
                 case 'message_created':
                     $this->message($data);
+                    break;
+                default:
+                    $this->resenderJivo($data);
                     break;
             }
         } catch (Exception $e) {
@@ -43,13 +46,16 @@ class SubscriptionsController extends Controller {
     }
 
 
-    private function botStarted($userId) {
+    private function botStarted($userId, $data) {
         $contact = new Contact(['max_user_id' => $userId], isNotExistCreate: true);
         if (empty($contact->step_authorization)) {
             $result = $this->maxMessenger->sendMessangeUser([
                 'text' => 'Для получения сообщений от «Альтамед+» вам необходимо авторизоваться. \n\r Напишите ваш номер следующим сообщением и нажмите отправить. Вам придет СМС-сообщение с кодом подтверждения, который нужно будет ввести в этом чате. В дальнейшем авторизация больше не потребуется. ☺️'
             ], $userId);
             $contact->set('step_authorization', TypeAutorization::START);
+            $firstName = $data['message']['sender']['first_name'] ?? '';
+            $lastName = $data['message']['sender']['last_name'] ?? '';
+            $contact->set('name', "$firstName $lastName");
         }
     }
 
@@ -59,7 +65,7 @@ class SubscriptionsController extends Controller {
 
         //  если такого контакта нет
         if (!$contact->exist()) {
-            $this->botStarted($userId);
+            $this->botStarted($userId, $data);
             return;
         }
 
@@ -68,7 +74,7 @@ class SubscriptionsController extends Controller {
         if (in_array($text, $this->command)) {
             $contact->set('step_authorization', null); // обнуляем авторизацию
             $contact->set('phone', null);
-            $this->botStarted($userId);
+            $this->botStarted($userId, $data);
             return;
         }
 
@@ -83,6 +89,7 @@ class SubscriptionsController extends Controller {
             } else {
                 $this->sendCode($contact, $phone, $userId);
             }
+            return;
         } elseif ($step == TypeAutorization::CODE) {
             $code = trim($data['message']['body']['text']);
             if ($code == $contact->code) {
@@ -107,7 +114,10 @@ class SubscriptionsController extends Controller {
                     ]
                 ], $userId);
             }
+        } else {
+            $this->resenderJivo($data);
         }
+
     }
 
     public function sendCode($contact, $phone, $userId): void
@@ -135,5 +145,27 @@ class SubscriptionsController extends Controller {
             'text' => "Авторизация прошла успешно! Теперь мы на связи: пишите нам в чат, а мы будем заранее напоминать о визитах к врачу и подсказывать, как к ним подготовиться.",
         ], $contact->max_user_id);
         $contact->set('step_authorization', TypeAutorization::AUTORIZATION);
+    }
+
+    public function info(){
+        $this->maxMessenger = new Messenger();
+        Response::set(Response::TYPE_JSON);
+        Response::die($this->maxMessenger->subscriptions());
+    }
+
+
+    public function resenderJivo($data)
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Accept: application/json'
+        ]);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_VERBOSE, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data, JSON_UNESCAPED_UNICODE));
+        curl_setopt($curl, CURLOPT_URL, 'https://joint.jivo.ru/Kj9mP4vN8xL2qR7t/f9LHodD0cOIMO1nE4s82Q63DkbPsDc3gmgN_M-iOZDcSSJjVDNUDsQRHBAnlyqGIFdM0vL9YXaCcx04cFC6i');
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_exec($curl);
     }
 }

@@ -27,7 +27,8 @@ $headerLink = $headerLink ?? [];
                 foreach ($headerLink as $link) : ?>
                     <li><a class="link" href="<?= $link->url ?>" target="_blank"><?= $link->name ?></a></li>
                 <? endforeach; ?>
-                <ul>
+            </ul>
+             <div style="color: white;" meteo></div>
         </div>
         <div class="header_block">
             <div class="header_location">
