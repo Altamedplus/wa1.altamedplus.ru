@@ -1,19 +1,23 @@
 <?php
 
-class TelegramBot
+namespace APP\Module;
+
+use Exception;
+
+class Telegram
 {
     private $token;
     private $apiUrl;
     private $webhookUrl;
-    
+
     /**
      * Constructor
      * @param string $token Bot token from BotFather
      */
-    public function __construct($token = null)
+    public function __construct($token = false)
     {
-        $this->token = $token ?: ;
-        $this->apiUrl = "https://api.telegram.org/bot{$token}/";
+        $this->token = $token ?: self::getTokenEnv();
+        $this->apiUrl = "https://api.telegram.org/bot{$this->token}/";
     }
     public static function getTokenEnv()
     {

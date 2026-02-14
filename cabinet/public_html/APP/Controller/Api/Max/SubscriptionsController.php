@@ -80,8 +80,6 @@ class SubscriptionsController extends Controller {
                 $this->maxMessenger->sendMessangeUser([
                     'text' => "$phone Номер телефона не валидный"
                 ], $userId);
-            } elseif (!empty($phone) && (int)$phone === (int)$contact->phone) {
-                $this->auth($contact);
             } else {
                 $this->sendCode($contact, $phone, $userId);
             }

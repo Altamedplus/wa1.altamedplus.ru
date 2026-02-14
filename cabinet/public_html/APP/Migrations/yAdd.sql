@@ -23,3 +23,5 @@ ALTER TABLE `header` ADD `token_img_max` VARCHAR(2000) NULL DEFAULT NULL AFTER `
 ALTER TABLE `nalog` ADD `inn_patient` VARCHAR(15) NULL DEFAULT NULL AFTER `inn`;
 ALTER TABLE `clinic` ADD `legal_name` VARCHAR(300) NULL DEFAULT NULL AFTER `cdate`;
 ALTER TABLE `clinic` ADD `owner` VARCHAR(200) NULL DEFAULT NULL AFTER `legal_name`;
+
+ALTER TABLE `contact` ADD `tg_user_id` INT NULL DEFAULT NULL AFTER `code`, ADD `tg_step_auth` INT NOT NULL DEFAULT '0' AFTER `tg_user_id`;
