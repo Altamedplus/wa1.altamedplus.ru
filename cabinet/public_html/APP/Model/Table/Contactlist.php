@@ -29,7 +29,7 @@ class Contactlist extends Contact implements Table
     public function behind(array &$items): void
     {   foreach ($items as $k => &$rows) {
             $rows['name'] = $rows['name'] ?: 'Не определенный';
-            $rows['phone'] = Form::unsanitazePhone($rows['phone']);
+            $rows['phone'] = empty($rows['phone']) ? '-' : Form::unsanitazePhone($rows['phone']);
         }
     }
 }
