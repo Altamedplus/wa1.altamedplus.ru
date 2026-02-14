@@ -19,7 +19,7 @@ class WebHookController extends Controller
         $this->tg = (new Telegram());
 
         $data = attr();
-        self::dd($data);
+        //self::dd($data);
         $userId = $data['message']['from']['id'] ?? null;
         if (!empty($userId)) {
             $contact = new Contact(['tg_user_id' => $userId]);
@@ -48,7 +48,7 @@ class WebHookController extends Controller
                             ],
                         ])
                     ]);
-                    self::dd($result);
+                    //self::dd($result);
                 }
             }
         }
@@ -105,7 +105,7 @@ class WebHookController extends Controller
 
             ],  JSON_UNESCAPED_UNICODE)
         ]);
-        self::dd($result);
+        //self::dd($result);
         (new Sms())->send($phone, "Код авторизации бота в Телеграмм: $code");
     }
 }
