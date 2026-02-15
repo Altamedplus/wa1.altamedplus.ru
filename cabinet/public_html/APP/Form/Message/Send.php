@@ -27,12 +27,22 @@ class Send extends Form
         if (!Form::validatePhone($phone)) {
             return new Fire('Не валидный телефон', Fire::ERROR);
         }
+        foreach ($fields as $key => $field) {
+            if (str_contains($key, 'var_',)) {
+                foreach ($fields[$key] as  $value) {
+                    if (empty($value)) {
+                        return new Fire('Не все поля заполнены', Fire::ERROR);
+                    }
+                }
+            }
+        }
         $isPhoneResend =  Form::sanitazePhone((Cookie::get('resend') ?: '')) == $phone;
         $variables = [];
         $result = [];
         $buttons = attr('button');
         $sample = new SampleModel($sample_id);
-        $isMessage = (new MessageModel())->exist(['phone' => $phone, 'sample_id'=> $sample_id]);
+        $isMessage = (new MessageModel())->exist(['phone' => $phone, 'sample_id' => $sample_id]);
+
         if ($sample->check_number == CheckNumber::NO_REQUEST && $isMessage) {
             return new Fire('Запрещена повторная отправка', Fire::ERROR);
         }
