@@ -19,7 +19,10 @@ use Pet\Cookie\Cookie;
         <div class="button" data-button></div>
         <div data-message></div>
         <div class="flex-row-center">
-            <button class="btn  btn-content-message-circle" type="submit">Отправить</button>
+            <button name="wa" class="btn btn-content-wab" type="submit">Отправить в WA</button>
+        </div>
+        <div class="flex-row-center">
+            <button name="sms" class="btn  btn-content-message-circle" type="submit">Отправить СМС</button>
         </div>
     </form>
 </div>
@@ -50,11 +53,11 @@ use Pet\Cookie\Cookie;
     <div class="open-content ">
         <div class="open-status">
             <label>Статус</label>
-            <input type="date" name="serch-date-status" value="<?=date('Y-m-d')?>">
+            <input type="date" name="serch-date-status" value="<?= date('Y-m-d') ?>">
         </div>
     </div>
     <div class="open-items">
-        
+
     </div>
 </div>
 </div>

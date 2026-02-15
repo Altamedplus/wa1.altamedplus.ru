@@ -47,6 +47,18 @@ class HeaderSampleModel extends Model
         }
         return '';
     }
+    public function headerTelegramComplect(): array
+    {
+        if (!$this->exist()) {
+            return ['text' => ''];
+        }
+        return match ($this->type) {
+            HeaderType::TEXT => ['text' =>  "<b>{$this->text}</b> \n\r\n\r"],
+            HeaderType::IMAGE => ['text' => "<b>{$this->text}</b> \n\r\n\r", 'photo' => Tool::urlSanitaze($this->img_url)],
+            default => ['text' => ''],
+        };
+    }
+
 
     public function headerComplect(): array| false
     {

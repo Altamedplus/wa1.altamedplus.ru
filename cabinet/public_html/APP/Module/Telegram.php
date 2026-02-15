@@ -112,7 +112,29 @@ class Telegram
         
         return $update;
     }
-    
+
+    public function send($chatId = null, array|string $options = [])
+    {
+        $options = is_array($options) ? $options : json_decode($options, true);
+        if (!empty($chatId)) {
+            $options['chat_id'] = $chatId;
+        }
+        if (isset($options['reply_markup'])) {
+            $options['reply_markup'] = json_encode($options['reply_markup'], JSON_UNESCAPED_UNICODE);
+        }
+        $type = 'sendMessage';
+        if (isset($options['photo'])) {
+            $type = 'sendPhoto';
+            $options['caption'] = $options['text'];
+            unset($options['text']);
+        }
+        if (isset($options['document'])) {
+            $type = 'sendDocument';
+            $options['caption'] = $options['text'];
+            unset($options['text']);
+        }
+        return $this->request($type, $options);
+    }
     /**
      * Send message
      * @param int|string $chatId Chat ID
@@ -120,17 +142,15 @@ class Telegram
      * @param array $options Additional options (parse_mode, disable_web_page_preview, etc.)
      * @return array Response
      */
-    public function sendMessage($chatId, $text, $options = [])
+    public function sendMessage($chatId, $text = null, $options = [])
     {
         $data = [
             'chat_id' => $chatId,
             'text' => $text
         ];
-        
         if (!empty($options)) {
             $data = array_merge($data, $options);
         }
-        
         return $this->request('sendMessage', $data);
     }
     
@@ -149,11 +169,11 @@ class Telegram
             'photo' => $photo,
             'caption' => $caption
         ];
-        
+
         if (!empty($options)) {
             $data = array_merge($data, $options);
         }
-        
+
         return $this->request('sendPhoto', $data);
     }
     

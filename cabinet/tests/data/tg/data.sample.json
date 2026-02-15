@@ -1,0 +1,61 @@
+{
+    "response": {
+        "message": {
+            "recipient": {
+                "chat_id": 84814567,
+                "chat_type": "dialog",
+                "user_id": 36866622
+            },
+            "timestamp": 1771162557136,
+            "body": {
+                "mid": "mid.00000000050e2ae7019c6183dad074a4",
+                "seq": 116074909344494756,
+                "text": "Медицинский центр «Альтамед+ на Союзной» приветствует вас!\r\n\r\nК сожалению, нам не удалось Вам дозвониться.  Хотим предупредить, что мы вынуждены отменить Вашу запись на приём к доктору доктор 1 в связи с изменением расписания врача.\r\n\r\nПожалуйста, свяжитесь с нами по телефону: +7 (495) 212-90-03 или напишите нам в этом чате. \r\n\r\nМы сделаем все возможное, чтобы подобрать для Вас максимально удобное время и дату приема.\n\r\n\r Доктора, увы, тоже болеют :(",
+                "attachments": [
+                    {
+                        "payload": {
+                            "photo_id": 5366654425,
+                            "token": "Lli3D8W0WbxqSIX7P\/JLYGAHi4IVMHI9wPsone5FTdy\/4wwn9uwcvgmBgahPFQNSzLnUImVI38UezO9EvL5f1aFKWio\/Ea7HNmtgRk4SV+Y=",
+                            "url": "https:\/\/i.oneme.ru\/i?r=BTGBPUwtwgYUeoFhO7rESmr8oCCWZIW4sh9LfSmyuI8KaYAUBCBNtNVl_KQjBA4z8Y8"
+                        },
+                        "type": "image"
+                    },
+                    {
+                        "callback_id": "f9LHodD0cOKEzRyWuJI4h9yNPWO-ndYg4I1n9HCuRPeoHU-Ro6pBHR6CULzEPFvMtCuTyI0r0PmxQZbzqAUdxq_aaChhjAex-ee65pZqI3JswDUmgGLR",
+                        "payload": {
+                            "buttons": [
+                                [
+                                    {
+                                        "text": "Я хочу отменить запись к врачу",
+                                        "type": "message"
+                                    }
+                                ]
+                            ]
+                        },
+                        "type": "inline_keyboard"
+                    }
+                ],
+                "markup": [
+                    {
+                        "from": 135,
+                        "length": 39,
+                        "type": "strong"
+                    },
+                    {
+                        "from": 426,
+                        "length": 28,
+                        "type": "emphasized"
+                    }
+                ]
+            },
+            "sender": {
+                "user_id": 121413849,
+                "first_name": "AltamedPlus",
+                "username": "id5032138346_bot",
+                "is_bot": true,
+                "last_activity_time": 1771162557155,
+                "name": "AltamedPlus"
+            }
+        }
+    }
+}

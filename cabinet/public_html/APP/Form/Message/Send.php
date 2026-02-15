@@ -4,17 +4,15 @@ namespace APP\Form\Message;
 
 use APP\Enum\CheckNumber;
 use APP\Enum\StatusMessage;
+use APP\Enum\TypeCannel;
 use APP\Form\Form;
-use APP\Model\ButtonsModel;
 use APP\Module\UI\Fire;
-use APP\Model\EdnaModel;
 use APP\Model\MessageModel;
 use APP\Model\SampleModel;
 use APP\Module\Auth;
-use APP\Module\Sms;
-use APP\Module\WhatsApp;
 use Pet\Cookie\Cookie;
 use Pet\Request\Request;
+use PharIo\Manifest\Type;
 
 class Send extends Form
 {
@@ -24,18 +22,10 @@ class Send extends Form
         $sample_id = (int)attr('id');
         $fields = (array)attr();
         $clinicId = attr('clinic');
-        $isMax = isset($_POST['max']);
-        $isInvite =  isset($_POST['invite']);
+        $typesCannel = [TypeCannel::SMS => isset($fields['sms']), TypeCannel::WA => isset($fields['wa']), TypeCannel::TELEGRAM =>  isset($fields['tg']), TypeCannel::MAX => isset($fields['max'])];
         $phone = Form::sanitazePhone(attr('phone'));
         if (!Form::validatePhone($phone)) {
             return new Fire('Не валидный телефон', Fire::ERROR);
-        }
-        if (!empty($isInvite)) {
-            (new Sms())->send(
-                $phone,
-                'Dlya polucheniya soobzhenii v MAX ot Altamed+ pereidite po ssylke https://max.ru/id5032138346_bot'
-            );
-            return new Fire('Приглашение отправлено по СМС', Fire::SUCCESS);
         }
         $isPhoneResend =  Form::sanitazePhone((Cookie::get('resend') ?: '')) == $phone;
         $variables = [];
@@ -62,6 +52,7 @@ class Send extends Form
                 unset($fields[$name]);
             }
         }
+
         $sendData = [
             'phone' => $phone,
             'clinic_id' => $clinicId,
@@ -69,15 +60,29 @@ class Send extends Form
             'sample_id' => $sample_id,
             'status' => StatusMessage::QUEUE,
         ];
-        if ($isMax) {
-            $sendData['data_request'] = json_encode((new SampleModel())->complectMax($sample_id, $variables, $buttons, $clinicId), JSON_UNESCAPED_UNICODE);
-            $sendData['type_send'] = 1;
-        } else {
-            $sendData['data_request'] = json_encode((new SampleModel())->complectWhatsApp($sample_id, $variables, $buttons, $clinicId), JSON_UNESCAPED_UNICODE);
-            $sendData['type_send'] = 0;
+        foreach ($typesCannel as $type => $isSend) {
+            if (!$isSend) continue;
+            if ($type == TypeCannel::MAX) {
+                $sendData['data_request'] = json_encode((new SampleModel())->complectMax($sample_id, $variables, $buttons, $clinicId), JSON_UNESCAPED_UNICODE);
+                $sendData['type_send'] = $type;
+            }
+            if ($type == TypeCannel::WA) {
+                $sendData['data_request'] = json_encode((new SampleModel())->complectWhatsApp($sample_id, $variables, $buttons, $clinicId), JSON_UNESCAPED_UNICODE);
+                $sendData['type_send'] = $type;
+            }
+            if ($type == TypeCannel::TELEGRAM) {
+                $sendData['data_request'] = json_encode((new SampleModel())->complectTelegram($sample_id, $variables, $buttons, $clinicId), JSON_UNESCAPED_UNICODE);
+                $sendData['type_send'] = $type;
+            }
+            if ($type == TypeCannel::SMS) {
+                $dataSms = (new SampleModel())->complectSms($sample_id, $variables, $buttons, $clinicId);
+                if (empty($dataSms['text'])) {
+                    return new Fire('Шаблон смс Пуст !!! Заполниете текст смс в шаблоне', Fire::ERROR);
+                }
+                $sendData['data_request'] = json_encode($dataSms, JSON_UNESCAPED_UNICODE);
+                $sendData['type_send'] = $type;
+            }
         }
-        // $request = [];
-        // $result =  (new WhatsApp())->sendWhatsapp($phone, $data, $request);
         $messangeId = (new MessageModel())->create($sendData);
 
         return new Fire('Сообщение поставлено в очередь на отправку');

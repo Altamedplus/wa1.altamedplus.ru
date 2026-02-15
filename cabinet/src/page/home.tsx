@@ -107,35 +107,25 @@ function buildFilds(data: any) {
 
 
 $('[name=phone]').on('input', async function () {
-    $('[name=max]').remove();
+    $('[data-but-send]').remove();
     
     let phone = parseInt(this.value.replace(/\D+/g, ""));
     if ((new String(phone)).length >= 11) {
-        const invite = $('[name=invite]');
         const $form = $('form[name="message/send"]');
         const result = await ajax.send('home_get_butSubmit', { phone });
 
-        if (result.max && result.max.length != 0) {
-            result.max.forEach((el: string) => {
+        if (result.but && result.but.length != 0) {
+            result.but.forEach((el: string) => {
                 const div = $(`<div class='flex-row-center'></div>`);
                 const btn = $(el);
                 btn.on('click', window['submit'])
                 div.add(btn)
                 $form.add(div);
             });
-            invite.remove();
-        } else {
-
-            if (invite.length == 0) {
-                const btninvite = $(`<button type="submit" name="invite"  class="btn  btn-content-invite" value="1" >Пригласить в Max</button>`);
-                btninvite.on('click', window['submit']);
-                const div = $(`<div class='flex-row-center'></div>`);
-                div.add(btninvite);
-                $form.add(div);
-            }
+          
         }
     } else {
-        const btns = $('[name=max]')
+        const btns = $('[data-but-send]')
         if (btns.length != 0) {
             btns.remove();
         }

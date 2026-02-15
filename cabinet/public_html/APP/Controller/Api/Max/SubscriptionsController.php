@@ -130,7 +130,7 @@ class SubscriptionsController extends Controller {
         $contact->set('step_authorization', TypeAutorization::CODE);
         $contact->set('phone', $phone);
         $r = (new Sms())->send($phone, "Код авторизации бота в Mаx: $code");
-        self::dd("Responce SMSC: " . $r);
+        //self::dd("Responce SMSC: " . $r);
     }
 
 

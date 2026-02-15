@@ -33,22 +33,22 @@ class MaxTest extends TestCase {
         Console::print($this->max->getResult(), Console::GREEN);
     }
 
-    public function testLoadFile(){
-        // $testUrl = 'https://wa1.altamedplus.ru/view/uploads/sample/690b575b47585.jpg';
-        // $token = $this->max->load($testUrl, 'image');
-        // Console::print($this->max->getResult(), Console::GREEN);
+    // public function testLoadFile(){
+    //     // $testUrl = 'https://wa1.altamedplus.ru/view/uploads/sample/690b575b47585.jpg';
+    //     // $token = $this->max->load($testUrl, 'image');
+    //     // Console::print($this->max->getResult(), Console::GREEN);
 
-        // Console::log($token);
-    }
-    public function testGetUrlLoad()
-    {
-        // $data = $this->max->getUrlLoad();
-        // Console::print($data, Console::GREEN);
-    }
+    //     // Console::log($token);
+    // }
+    // public function testGetUrlLoad()
+    // {
+    //     // $data = $this->max->getUrlLoad();
+    //     // Console::print($data, Console::GREEN);
+    // }
 
-    public function testLongPuling()
-    {
-        // $pulling = $this->max->longPollingUpdate(['message_created', 'message_edit', 'message_callback']);
-        // Console::print($pulling, Console::GREEN);
-    }
+    // public function testLongPuling()
+    // {
+    //     // $pulling = $this->max->longPollingUpdate(['message_created', 'message_edit', 'message_callback']);
+    //     // Console::print($pulling, Console::GREEN);
+    // }
 }

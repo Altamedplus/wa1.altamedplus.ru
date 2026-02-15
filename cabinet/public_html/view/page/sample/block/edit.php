@@ -115,7 +115,10 @@ use APP\Form\Form; ?>
             </div>
             <textarea name="text" placeholder="Текст шаблона"><?= ($formInfo['text'] ?? '') ?></textarea>
         </div>
-
+        <div class="flex-column ">
+            <label>Смс текст</label>
+            <textarea name="sms_text" placeholder="Коментарий к шаблону"><?=$formInfo['sms_text']?></textarea>
+        </div>
         <div class="flex-column ">
             <label>Комментарий</label>
             <textarea name="comment" placeholder="Коментарий к шаблону"><?=$formInfo['comment']?></textarea>

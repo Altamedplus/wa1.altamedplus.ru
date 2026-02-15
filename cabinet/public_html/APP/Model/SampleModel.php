@@ -3,6 +3,7 @@
 namespace APP\Model;
 
 use APP\Enum\ButtonType;
+use APP\Enum\HeaderType;
 use APP\Enum\VariableReserveType as VRT;
 use APP\Enum\VariableReserveType;
 use APP\Form\Form;
@@ -32,7 +33,7 @@ class SampleModel extends Model
         $text = preg_replace('/\r\n/', '<br/>', $text);
         return $text;
     }
-    private static function complect(int $id, $variables = [], $button = [], $clinicId = null): false | object
+    private static function complect(int $id, $variables = [], $button = [], $clinicId = null, $isSms = false): false | object
     {
         $result = (new self())->find(callback: function (Model $q) use ($id) {
             $q->select('sample_messange_wa.*',);
@@ -42,6 +43,7 @@ class SampleModel extends Model
         if (empty($result[0])) return false;
 
         $s = (object)$result[0];
+        $text = $isSms ? $s->sms_text : $s->text;
         foreach ($variables as $name => $values) {
             foreach ($values as $value) {
                 $var = new VariableModel(['name_uniq' => $name]);
@@ -50,21 +52,31 @@ class SampleModel extends Model
                     $value = date($var->format, strtotime($value));
                 }
 
-                $s->text = str_replace('{{' . $name . '}}', $value, $s->text);
+                $text = str_replace('{{' . $name . '}}', $value, $text);
             }
         }
         if (!empty($clinicId)) {
             $clinic = new ClinicModel(['id' => $clinicId]);
             foreach (VariableReserveType::data() as $key => $name) {
                 if ($key == VariableReserveType::CLINIC) {
-                    $s->text = str_replace('{{' . $key . '}}', $clinic->name, $s->text);
+                    $text = str_replace('{{' . $key . '}}', $clinic->name, $text);
                 }
                 if ($key == VariableReserveType::ADDRESS_CLINIC) {
-                    $s->text = str_replace('{{' . $key . '}}', $clinic->address, $s->text);
+                    $text = str_replace('{{' . $key . '}}', $clinic->address, $text);
                 }
             }
         }
+        $s->text = $text;
+        $s->sms_text = $text;
         return $s;
+    }
+
+    public static function complectSms(int $id, $variables = [], $button = [], $clinicId = null){
+        if (empty($s = self::complect($id, $variables, $button, $clinicId, true))) {
+            return [];
+        }
+
+        return ['text' => $s->sms_text];
     }
 
     public static function complectWhatsApp(int $id, $variables = [], $button = [], $clinicId = null): array
@@ -104,6 +116,8 @@ class SampleModel extends Model
 
         return $data;
     }
+
+  
 
     public static function complectButtons(Model $button, $id, $value, $field): array
     {
@@ -163,6 +177,53 @@ class SampleModel extends Model
         }
         return $data;
 
+    }
+
+    public static function complectTelegram(int $id, $variables = [], $button = [], $clinicId = null): array
+    {
+        if (empty($s = self::complect($id, $variables, $button, $clinicId))) {
+            return [];
+        }
+        $data = [
+            'parse_mode' => 'HTML',
+        ];
+        $data = array_merge((new HeaderSampleModel(['sample_id' => $s->id]))->headerTelegramComplect(), $data);
+        $data['text'] = $data['text'] . $s->text = preg_replace('/\*(.*?)\*/', '<b>$1</b>', $s->text) . "\n\r\n\r <i>" . ($s->footer ?? '') . '</i>';
+        $sampleButtons =  (new ButtonsSampleModel())->findM(['sample_id' => $s->id], callback: function (Model $m) {
+            $m->select('b.*');
+            $m->join('buttons b')->on(['b.id', 'buttons_sample.buttons_id']);
+        });
+        $dataButton = [];
+        foreach ($sampleButtons as $mBut) {
+            foreach ($button as $id => $value) {
+                if ((int)$id === (int)$mBut->id) {
+                    $dataButton[] =  self::complectButtonsTelegram($mBut, (int)$id, $value, $button);
+                }
+            }
+        }
+
+        if (!empty($dataButton)) {
+            $data['reply_markup'] = ['inline_keyboard' => [$dataButton]];
+        }
+        return $data;
+    }
+    public static function complectButtonsTelegram(Model $button, $id, $value, $field)
+    {
+        if ($button->type == ButtonType::PHONE)
+        {
+            $phone = Form::sanitazePhone($button->phone);
+            return  ['text' => $button->text, 'url' => "tel:+$phone"];
+        }
+        if ($button->type == ButtonType::URL) {
+            $url = $value;
+            if ($button->is_url_postfix == 1) {
+                $url = trim($field['postfix'][$id]);
+            }
+            return  ['text' => $button->text, 'url' => $url];
+        }
+        if ($button->type == ButtonType::QUICK_REPLY) {
+            return ['text' => $button->text, 'callback_data' => json_encode(['quick_reply' => $button->text], JSON_UNESCAPED_UNICODE)];
+        }
     }
 
     public static function complectButtonsMax(Model $button, $id, $value, $field): array

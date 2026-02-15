@@ -35,7 +35,8 @@ class Sms
     }
     public function send($phone, $text)
     {
-        return file_get_contents($this->url['send'] . "?login={$this->login}&psw={$this->psw}&phones=$phone&mes=$text");
+        $str = $this->url['send'] . "?login={$this->login}&psw={$this->psw}&phones=$phone&mes=$text&fmt=3";
+        return file_get_contents($str);
     }
 
     public function getBalance($format = self::FORMAT_JSON)

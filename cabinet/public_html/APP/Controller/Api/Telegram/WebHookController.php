@@ -114,7 +114,7 @@ class WebHookController extends Controller
     }
 
 
-    private function resenderJivo($data)
+    public function resenderJivo($data)
     {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_HTTPHEADER, [

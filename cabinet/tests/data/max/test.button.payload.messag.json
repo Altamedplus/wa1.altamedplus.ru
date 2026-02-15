@@ -14,9 +14,8 @@
                 "buttons": [
                     [
                         {
-                            "type": "link",
-                            "text": "Позвонить нам",
-                            "url": "https:\/\/www.altamedplus.ru\/contacts\/?phone=+74952129003"
+                            "type": "phone",
+                            "text": "Позвонить нам"
                         }
                     ]
                 ]

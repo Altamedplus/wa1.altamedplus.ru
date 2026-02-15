@@ -2,13 +2,20 @@
 
 namespace APP\Controller\Cron;
 
+use APP\Controller\Api\Max\SubscriptionsController;
+use APP\Controller\Api\Telegram\WebHookController;
 use APP\Enum\StatusMessage;
+use APP\Enum\TypeAutorization;
+use APP\Enum\TypeCannel;
 use APP\Model\Contact;
 use APP\Model\MessageModel;
 use APP\Module\Max\Messenger;
+use APP\Module\Sms;
+use APP\Module\Telegram;
 use APP\Module\WhatsApp;
 use Pet\Controller;
 use Pet\Router\Response;
+use PharIo\Manifest\Type;
 
 class MessageSend extends Controller
 {
@@ -31,27 +38,70 @@ class MessageSend extends Controller
             $requestId = null;
             $status = StatusMessage::SEND_WA;
 
-            if ($m['type_send'] == 0) { //отправка в ватсам
+            if ($m['type_send'] == TypeCannel::WA) { //отправка в ватсам
                 $data = json_decode($m['data_request'], true);
                 $result = (new WhatsApp())->sendWhatsapp($phone, $data, $request);
                 $resultControl[] = [$request, $result];
                 $requestId = $result['response']['requestId'] ?? null;
             }
 
-            if ($m['type_send'] == 1) { //отправка в Макс
+            if ($m['type_send'] == TypeCannel::MAX) { //отправка в Макс
                 $max = new Messenger();
-                $contact = new Contact(['phone' => $phone]);
+                $contact = new Contact(['phone' => $phone, 'step_authorization' => TypeAutorization::AUTORIZATION]);
                 $userId = $contact->max_user_id;
                 if (!empty($userId)) {
                     $request = $m['data_request'];
                     $result =  $max->sendMessangeUser($m['data_request'], $userId);
                     $requestId = $result['response']['message']['body']['mid'] ?? null;
                     $resultControl[] = [$request, $result];
-                    if (empty($requestId)) {
+                    if (!empty($requestId)) {
+                        $status = StatusMessage::DELIVERED_WA;
+                        $resender = [
+                            'timestamp' => round(microtime(true) * 1000),
+                            'message' => $result['response']['message'],
+                            'update_type' => 'message_created'
+                        ];
+                        (new SubscriptionsController())->resenderJivo($resender);
+                    } else {
+                        $status = StatusMessage::UNDELIVERED_WA;
+                    }
+                } else {
+                    $status = StatusMessage::UNDELIVERED_WA;
+                    $result = ['description' => 'not auth in max for table Contact'];
+                }
+
+            }
+
+            if ($m['type_send'] ==  TypeCannel::SMS) {
+                $smsText = json_decode($m['data_request'], true) ?  (json_decode($m['data_request'], true)['text'] ?? '') : $result;
+                $result = (new Sms())->send($phone, $smsText);
+                $result = json_decode($result, true) ?  json_decode($result, true) : $result;
+                if (isset($request['error']) && !empty($result['error'])) {
+                    $status = StatusMessage::UNDELIVERED_WA;
+                } else {
+                    $status = StatusMessage::DELIVERED_WA;
+                }
+            }
+
+            if ($m['type_send'] == TypeCannel::TELEGRAM) {
+                $tg = new Telegram();
+                $contact = new Contact(['phone' => $phone, 'tg_step_auth' => TypeAutorization::AUTORIZATION]);
+                $userId = $contact->tg_user_id;
+                if (!empty($userId)) {
+                    $result = $tg->send($userId, $m['data_request']);
+                    if ($result['ok']) {
+                        $resend = [
+                            'update_id' => random_int(637853450, 9999999999),
+                            'message' => $result['result']
+                        ];
+                        $resend = (new WebHookController())->resenderJivo($resend);
                         $status = StatusMessage::DELIVERED_WA;
                     } else {
                         $status = StatusMessage::UNDELIVERED_WA;
                     }
+                } else {
+                    $status = StatusMessage::UNDELIVERED_WA;
+                    $result = ['description' => 'not auth in tg for table Contact'];
                 }
             }
 

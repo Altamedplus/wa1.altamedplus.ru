@@ -203,6 +203,12 @@
       background-position-x: 8px;
       background-position-y: 10px;
     }
+    &-tg{
+      background-image: url("./img/icons/tg.svg");
+      background-repeat: no-repeat;
+      background-size: 33px 51px;
+      background-position: right 11% top -6px !important;
+    }
     &-invite{
       background-image: url("./img/icons/invite.svg");
       background-repeat: no-repeat;
@@ -234,6 +240,13 @@
       background-size: 21px 29px;
       background-position-x: 10px;
       background-position-y: 5px;
+    }
+     &-wab {
+      //background-image: url("./img/icons/wa.svg");
+      background-image: url("./img/icons/whatsapp.svg");
+      background-repeat: no-repeat;
+      background-size: 21px 29px;
+      background-position: right 11% top 3px !important;
     }
   }
 
