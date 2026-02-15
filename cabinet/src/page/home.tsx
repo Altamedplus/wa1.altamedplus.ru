@@ -187,6 +187,9 @@ window['callbackSubmit'] = function (data:any) {
             alert('API буфера обмена не поддерживается в этом браузере.');
         }
     }
+    if (data.status != 'error') { 
+        $('[data-but-send]').remove();
+    }
 }
 
 window['initResendModal'] = function (data: any) { 
