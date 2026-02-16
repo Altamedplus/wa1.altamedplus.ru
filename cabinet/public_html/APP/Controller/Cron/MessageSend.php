@@ -39,10 +39,15 @@ class MessageSend extends Controller
             $status = StatusMessage::SEND_WA;
 
             if ($m['type_send'] == TypeCannel::WA) { //отправка в ватсам
+                $request = [];
                 $data = json_decode($m['data_request'], true);
-                $result = (new WhatsApp())->sendWhatsapp($phone, $data, $request);
-                $resultControl[] = [$request, $result];
-                $requestId = $result['response']['requestId'] ?? null;
+                if (is_array($data)) {
+                    $result = (new WhatsApp())->sendWhatsapp($phone, $data, $request);
+                    $resultControl[] = [$request, $result];
+                    $requestId = $result['response']['requestId'] ?? null;
+                } else {
+                    $status = StatusMessage::UNDELIVERED_WA;
+                }
             }
 
             if ($m['type_send'] == TypeCannel::MAX) { //отправка в Макс
@@ -61,7 +66,7 @@ class MessageSend extends Controller
                             'message' => $result['response']['message'],
                             'update_type' => 'message_created'
                         ];
-                        (new SubscriptionsController())->resenderJivo($resender);
+                        // (new SubscriptionsController())->resenderJivo($resender);
                     } else {
                         $status = StatusMessage::UNDELIVERED_WA;
                     }
@@ -76,7 +81,7 @@ class MessageSend extends Controller
                 $smsText = json_decode($m['data_request'], true) ?  (json_decode($m['data_request'], true)['text'] ?? '') : $result;
                 $result = (new Sms())->send($phone, $smsText);
                 $result = json_decode($result, true) ?  json_decode($result, true) : $result;
-                if (isset($request['error']) && !empty($result['error'])) {
+                if (isset($result['error']) && !empty($result['error'])) {
                     $status = StatusMessage::UNDELIVERED_WA;
                 } else {
                     $status = StatusMessage::DELIVERED_WA;
@@ -94,7 +99,7 @@ class MessageSend extends Controller
                             'update_id' => random_int(637853450, 9999999999),
                             'message' => $result['result']
                         ];
-                        $resend = (new WebHookController())->resenderJivo($resend);
+                        // $resend = (new WebHookController())->resenderJivo($resend);
                         $status = StatusMessage::DELIVERED_WA;
                     } else {
                         $status = StatusMessage::UNDELIVERED_WA;
