@@ -62,7 +62,7 @@ class WebHookController extends Controller
                  return;
             }
         }
-        $this->resenderJivo($data);
+        // $this->resenderJivo($data);
     }
 
     public function setwebHook()
