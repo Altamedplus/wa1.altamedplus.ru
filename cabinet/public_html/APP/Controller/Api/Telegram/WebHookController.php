@@ -20,9 +20,10 @@ class WebHookController extends Controller
 
         $data = attr();
         //self::dd($data);
+
         $userId = $data['message']['from']['id'] ?? null;
         if (!empty($userId)) {
-            $contact = new Contact(['tg_user_id' => $userId]);
+            $contact = (new Contact())->findM(['tg_user_id' => $userId])[0] ?? new Contact();
             if (!$contact->exist() || empty($contact->get('tg_step_auth'))) {
                 $this->started($userId);
                 return;
@@ -34,6 +35,7 @@ class WebHookController extends Controller
                 } else {
                     $this->code($userId, $contact, $phone);
                 }
+                return;
             } elseif ($contact->tg_step_auth === TypeAutorization::CODE) {
                 $code = trim($data['message']['text']);
                 if ($code == $contact->code) {
@@ -49,19 +51,21 @@ class WebHookController extends Controller
                         ])
                     ]);
                 }
+                return;
             } else {
                 $this->resenderJivo($data);
+                sleep(1);
             }
         }
-
         $userId =  $data['callback_query']['from']['id'] ?? null;
         if (!empty($userId)) {
             if ('started' == $data['callback_query']['data']) {
-                 $this->tg->sendMessage($userId, 'Авторизация сброшена! Начните сначала');
-                 $this->started($userId);
-                 return;
+                $this->tg->sendMessage($userId, 'Авторизация сброшена! Начните сначала');
+                $this->started($userId);
+                return;
             }
         }
+
         // $this->resenderJivo($data);
     }
 
@@ -88,7 +92,7 @@ class WebHookController extends Controller
 
     private function started($userId)
     {
-        $contact = new Contact(['tg_user_id' => $userId], isNotExistCreate:true);
+        $contact = (new Contact())->findM(['tg_user_id' => $userId])[0] ?? new Contact(['tg_user_id' => $userId], isNotExistCreate:true);
         $contact->set(['tg_step_auth' => TypeAutorization::START]);
         $this->tg->sendMessage($userId, 'Для получения уведомлений от Альтамед+ требуется авторизация напишите номер телефона  в ответ на сообщение');
     }
