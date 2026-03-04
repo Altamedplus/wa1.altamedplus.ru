@@ -17,10 +17,10 @@ class MessageModel extends Model
             return '';
         }
         $messange = '';
-        if ($data?->header?->headerType == "TEXT") {
+        if (!empty($data?->header) && $data?->header->headerType == "TEXT") {
             $messange .= "<h4>{$data->header->text}</h4>";
         }
-        if ($data?->contentType == "TEXT") {
+        if (!empty($data?->contentType) && $data?->contentType == "TEXT") {
             $text = str_replace("\n\r", '<br/>', $data->text);
             $text = preg_replace('/\*(.*?)\*/', '<b>$1</b>', $text);
             $messange .= "<div class=\"body\">{$text}</div>";
