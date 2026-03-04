@@ -35,7 +35,6 @@ class WebHookController extends Controller
                 } else {
                     $this->code($userId, $contact, $phone);
                 }
-                return;
             } elseif ($contact->tg_step_auth === TypeAutorization::CODE) {
                 $code = trim($data['message']['text']);
                 if ($code == $contact->code) {
@@ -51,22 +50,25 @@ class WebHookController extends Controller
                         ])
                     ]);
                 }
-                return;
             } else {
                 $this->resenderJivo($data);
                 sleep(1);
             }
         }
-        $userId =  $data['callback_query']['from']['id'] ?? null;
-        if (!empty($userId)) {
+        $userCallbackId =  $data['callback_query']['from']['id'] ?? null;
+        if (!empty($userCallbackId)) {
             if ('started' == $data['callback_query']['data']) {
-                $this->tg->sendMessage($userId, 'Авторизация сброшена! Начните сначала');
-                $this->started($userId);
+                $this->tg->sendMessage($userCallbackId, 'Авторизация сброшена! Начните сначала');
+                $this->started($userCallbackId);
                 return;
+            } else {
+                $contact = (new Contact())->findM(['tg_user_id' => $userCallbackId, 'tg_step_auth' => TypeAutorization::AUTORIZATION])[0] ?? new Contact();
+                if ($contact->exist()) {
+                    $this->resenderJivo($data);
+                }
             }
         }
 
-        // $this->resenderJivo($data);
     }
 
     public function setwebHook()
