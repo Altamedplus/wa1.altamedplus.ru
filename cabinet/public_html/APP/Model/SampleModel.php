@@ -212,7 +212,7 @@ class SampleModel extends Model
         if ($button->type == ButtonType::PHONE)
         {
             $phone = Form::sanitazePhone($button->phone);
-            return  ['text' => $button->text, 'url' => "tel:+$phone"];
+            return  ['text' => $button->text, 'url' => "https://www.altamedplus.ru/contacts/?phone={$phone}"];
         }
         if ($button->type == ButtonType::URL) {
             $url = $value;
