@@ -116,7 +116,7 @@ class WebHookController extends Controller
             ],  JSON_UNESCAPED_UNICODE)
         ]);
         //self::dd($result);
-        (new Sms())->send($phone, "Код авторизации бота в Телеграмм: $code");
+        (new Sms())->send($phone, "Код авторизации бота в Телеграмм: $code altamedplus.ru");
     }
 
 
